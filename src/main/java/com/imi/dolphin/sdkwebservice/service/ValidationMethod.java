@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ValidationMethod {
 
-    private static final Logger log = LogManager.getLogger(ServiceImp.class);
+    private static final Logger log = LogManager.getLogger(ValidationMethod.class);
 
     public String valEmail(String email) {
         log.debug("valEmailKaryawan() dari user di tangkap BOT : {} ", email);
