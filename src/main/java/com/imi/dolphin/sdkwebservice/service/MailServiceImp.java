@@ -24,8 +24,6 @@ import org.springframework.stereotype.Service;
 import com.imi.dolphin.sdkwebservice.model.MailModel;
 import com.imi.dolphin.sdkwebservice.property.AppProperties;
 import com.imi.dolphin.sdkwebservice.util.MailUtil;
-import java.util.Properties;
-import javax.mail.Session;
 
 /**
  *
@@ -41,38 +39,17 @@ public class MailServiceImp implements IMailService {
     @Autowired
     AppProperties appProperties;
 
-    MimeMessage message;
-    Properties mailServerProperties;
-    Session getMailSession;
-
     @Override
     public String sendMail(MailModel mailModel) {
         try {
-//            MimeMessage message = new MimeMessage(mailUtil.getMailSession());
-//            message.setFrom(new InternetAddress(appProperties.getMailUsername()));
-//            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mailModel.getRecipient()));
-//            message.setSubject(mailModel.getSubject());
-//            message.setText(mailModel.getText());
-            System.out.println("\n 1st ===> setup Mail Server Properties..");
-            mailServerProperties = System.getProperties();
-            mailServerProperties.put("mail.smtp.port", "587");
-            mailServerProperties.put("mail.smtp.auth", "true");
-            mailServerProperties.put("mail.smtp.starttls.enable", "true");
-
-            System.out.println("\n 2st ===> setup Mail Session.. ");
-            getMailSession = Session.getDefaultInstance(mailServerProperties, null);
-            message = new MimeMessage(getMailSession);
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(mailModel.getRecipient()));
-//            message.addRecipient(Message.RecipientType.CC, new InternetAddress("test2@crunchify.com"));
+            MimeMessage message = new MimeMessage(mailUtil.getMailSession());
+            message.setFrom(new InternetAddress(appProperties.getMailUsername()));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mailModel.getRecipient()));
             message.setSubject(mailModel.getSubject());
-            message.setContent(mailModel.getText(), "text/html");
+            message.setText(mailModel.getText());
+//                        message.setContent(mailModel.getText(), "text/html; charset=utf-8");
+            Transport.send(message);
 
-            System.out.println("\n\n 3rd ===> Get Session and Send mail");
-            Transport transport = getMailSession.getTransport("smtp");
-            transport.connect(appProperties.getMailSmtpHost(), appProperties.getMailUsername(), appProperties.getMailPassword());
-            transport.sendMessage(message, message.getAllRecipients());
-            transport.close();
-            
             return "Sent message successfully....";
         } catch (MessagingException e) {
             System.out.println(e.getMessage());
@@ -80,5 +57,6 @@ public class MailServiceImp implements IMailService {
         return "Sent message failed...";
 
     }
-
+    
+    
 }

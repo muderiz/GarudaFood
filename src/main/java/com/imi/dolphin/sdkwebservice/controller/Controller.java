@@ -1,15 +1,15 @@
 /**
  * Copyright (c) 2014 InMotion Innovation Technology. All Rights Reserved. <BR>
  * <BR>
- * This software contains confidential and proprietary information of
- * InMotion Innovation Technology. ("Confidential Information").<BR>
+ * This software contains confidential and proprietary information of InMotion
+ * Innovation Technology. ("Confidential Information").<BR>
  * <BR>
- * Such Confidential Information shall not be disclosed and it shall
- * only be used in accordance with the terms of the license agreement
- * entered into with IMI; other than in accordance with the written
- * permission of IMI. <BR>
- * 
- **/
+ * Such Confidential Information shall not be disclosed and it shall only be
+ * used in accordance with the terms of the license agreement entered into with
+ * IMI; other than in accordance with the written permission of IMI. <BR>
+ *
+ *
+ */
 package com.imi.dolphin.sdkwebservice.controller;
 
 import org.apache.logging.log4j.LogManager;
@@ -27,117 +27,130 @@ import com.imi.dolphin.sdkwebservice.service.IMailService;
 import com.imi.dolphin.sdkwebservice.service.IService;
 
 /**
- * 
+ *
  * @author reja
- * 
+ *
  */
 @RestController
 public class Controller {
-	private static final Logger log = LogManager.getLogger(Controller.class);
 
-	@Autowired
-	private AppProperties appProperties;
+    private static final Logger log = LogManager.getLogger(Controller.class);
 
-	@Autowired
-	IService svcService;
-	
-	@Autowired
-	IMailService svcMailService;
+    @Autowired
+    private AppProperties appProperties;
 
-	@RequestMapping("/ping")
-	@PostMapping
-	public ExtensionResult doPingRequest(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.getDolphinResponse(extensionRequest);
-	}
-	
-	@RequestMapping("/pingAuth")
-	@PostMapping
-	public ExtensionResult doPingAuthRequest(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.getPingResponse(extensionRequest);
-	}
-	
-	@RequestMapping("/forms")
-	public String getStarted() {
-		log.debug("getStarted() service port: {}", appProperties.getServicePort());
-		return "Hello Form, service port: " + appProperties.getServicePort() + ", " + appProperties.getFormId();
-	}
+    @Autowired
+    IService svcService;
 
-	@RequestMapping("/status/")
-	@PostMapping
-	public ExtensionResult doGetSrnResult(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.getSrnResult(extensionRequest);
-	}
+    @Autowired
+    IMailService svcMailService;
 
-	@RequestMapping("/customers")
-	@PostMapping
-	public ExtensionResult doQueryCustomerInfo(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.getCustomerInfo(extensionRequest);
-	}
+    @RequestMapping("/ping")
+    @PostMapping
+    public ExtensionResult doPingRequest(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getDolphinResponse(extensionRequest);
+    }
 
-	@RequestMapping("/modifycustomername")
-	@PostMapping
-	public ExtensionResult doClearCustomerName(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.modifyCustomerName(extensionRequest);
-	}
-	
-	@RequestMapping("/productinfo")
-	@PostMapping
-	public ExtensionResult doQueryProductInfo(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.getProductInfo(extensionRequest);
-	}
+    @RequestMapping("/pingAuth")
+    @PostMapping
+    public ExtensionResult doPingAuthRequest(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getPingResponse(extensionRequest);
+    }
 
-	@RequestMapping("/messages")
-	@PostMapping
-	public ExtensionResult doGetMessages(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.getMessageBody(extensionRequest);
-	}
+    @RequestMapping("/forms")
+    public String getStarted() {
+        log.debug("getStarted() service port: {}", appProperties.getServicePort());
+        return "Hello Form, service port: " + appProperties.getServicePort() + ", " + appProperties.getFormId();
+    }
 
-	@RequestMapping("/quickreplies")
-	@PostMapping
-	public ExtensionResult doBuildQuickReplies(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.getQuickReplies(extensionRequest);
-	}
+    @RequestMapping("/status/")
+    @PostMapping
+    public ExtensionResult doGetSrnResult(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getSrnResult(extensionRequest);
+    }
 
-	@RequestMapping("/form")
-	@PostMapping
-	public ExtensionResult doBuildForm(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.getForms(extensionRequest);
-	}
+    @RequestMapping("/customers")
+    @PostMapping
+    public ExtensionResult doQueryCustomerInfo(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getCustomerInfo(extensionRequest);
+    }
 
-	@RequestMapping("/button")
-	@PostMapping
-	public ExtensionResult doBuildButton(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.getButtons(extensionRequest);
-	}
+    @RequestMapping("/modifycustomername")
+    @PostMapping
+    public ExtensionResult doClearCustomerName(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.modifyCustomerName(extensionRequest);
+    }
 
-	@RequestMapping("/carousel")
-	@PostMapping
-	public ExtensionResult doBuildCarousel(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.getCarousel(extensionRequest);
-	}
-	
-	@RequestMapping("/transferAgent")
-	@PostMapping
-	public ExtensionResult doTransferToAgent(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.doTransferToAgent(extensionRequest);
-	}
-	
-	@RequestMapping("/sendLocation")
-	@PostMapping
-	public ExtensionResult doBuildSendLocation(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.doSendLocation(extensionRequest);
-	}
-	
-	@RequestMapping("/image")
-	@PostMapping
-	public ExtensionResult doBuildImage(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.getImage(extensionRequest);
-	}
-	
-	@RequestMapping("/sendMail")
-	@PostMapping
-	public ExtensionResult doSendMail(@RequestBody ExtensionRequest extensionRequest) {
-		return svcService.doSendMail(extensionRequest);
-	}
+    @RequestMapping("/productinfo")
+    @PostMapping
+    public ExtensionResult doQueryProductInfo(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getProductInfo(extensionRequest);
+    }
+
+    @RequestMapping("/messages")
+    @PostMapping
+    public ExtensionResult doGetMessages(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getMessageBody(extensionRequest);
+    }
+
+    @RequestMapping("/quickreplies")
+    @PostMapping
+    public ExtensionResult doBuildQuickReplies(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getQuickReplies(extensionRequest);
+    }
+
+    @RequestMapping("/form")
+    @PostMapping
+    public ExtensionResult doBuildForm(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getForms(extensionRequest);
+    }
+
+    @RequestMapping("/button")
+    @PostMapping
+    public ExtensionResult doBuildButton(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getButtons(extensionRequest);
+    }
+
+    @RequestMapping("/carousel")
+    @PostMapping
+    public ExtensionResult doBuildCarousel(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getCarousel(extensionRequest);
+    }
+
+    @RequestMapping("/transferAgent")
+    @PostMapping
+    public ExtensionResult doTransferToAgent(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.doTransferToAgent(extensionRequest);
+    }
+
+    @RequestMapping("/sendLocation")
+    @PostMapping
+    public ExtensionResult doBuildSendLocation(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.doSendLocation(extensionRequest);
+    }
+
+    @RequestMapping("/image")
+    @PostMapping
+    public ExtensionResult doBuildImage(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getImage(extensionRequest);
+    }
+
+    @RequestMapping("/sendMail")
+    @PostMapping
+    public ExtensionResult doSendMail(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.doSendMail(extensionRequest);
+    }
+
+    @RequestMapping("/getReport")
+    @PostMapping
+    public ExtensionResult getReport(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getReport(extensionRequest);
+    }
+
+    @RequestMapping("/getSOP")
+    @PostMapping
+    public ExtensionResult getSOP(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getSOP(extensionRequest);
+    }
 
 }
