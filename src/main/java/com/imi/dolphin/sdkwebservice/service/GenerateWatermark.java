@@ -5,6 +5,7 @@
  */
 package com.imi.dolphin.sdkwebservice.service;
 
+import com.imi.dolphin.sdkwebservice.property.AppProperties;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Phrase;
@@ -19,15 +20,25 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.FileImageOutputStream;
+import javax.imageio.stream.ImageOutputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,6 +49,12 @@ import org.springframework.stereotype.Service;
 public class GenerateWatermark {
 
     private static final Logger log = LogManager.getLogger(GenerateWatermark.class);
+    private final String pathdir = System.getProperty("user.dir");
+
+    public static final String UNDERLINE = "_";
+
+    @Autowired
+    AppProperties appProperties;
 
     public String WatermarkPDF(String text, String pathPdfFrom) {
         log.debug("WatermarkPDF extension request : {} ", pathPdfFrom);
@@ -53,10 +70,6 @@ public class GenerateWatermark {
             Phrase p1 = new Phrase(text, FONT);
             Phrase p2 = new Phrase("DOKUMEN TIDAK TERKENDALI", FONT);
 
-            // image watermark
-//            Image img = Image.getInstance(getResource("/memorynotfound-logo.jpg"));
-//            float w = img.getScaledWidth();
-//            float h = img.getScaledHeight();
             // properties
             PdfContentByte over;
             Rectangle pagesize;
@@ -94,10 +107,15 @@ public class GenerateWatermark {
         return pathPdfTo;
     }
 
-    public String WatermarkImage(String text, File pathImageFrom) {
+    public String WatermarkImage(String text, URL pathImageFrom) {
         String pathPdfTo = "";
+        SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");
+        Date date = new Date();
+        String datenow = formatter.format(date);
         try {
             BufferedImage image = ImageIO.read(pathImageFrom);
+            String[] spliturlreport = pathImageFrom.toString().split("/GeneratedFiles/");
+            String reportname = spliturlreport[1];
             String text2 = "DOKUMEN TIDAK TERKENDALI";
             String type = "jpg";
             // determine image type and handle correct transparency
@@ -110,11 +128,10 @@ public class GenerateWatermark {
             AlphaComposite alphaChannel = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
             w.setComposite(alphaChannel);
             w.setColor(Color.GRAY);
-            w.setFont(new java.awt.Font(java.awt.Font.SANS_SERIF, java.awt.Font.BOLD, 60));
+            w.setFont(new java.awt.Font(java.awt.Font.SANS_SERIF, java.awt.Font.BOLD, 70));
             FontMetrics fontMetrics = w.getFontMetrics();
             Rectangle2D rect = fontMetrics.getStringBounds(text, w);
             Rectangle2D rect2 = fontMetrics.getStringBounds(text2, w);
-
             AffineTransform orig = w.getTransform();
             float width = image.getWidth() / 2;
             float height = image.getHeight() / 2;
@@ -125,17 +142,30 @@ public class GenerateWatermark {
             // Text 1
             float centerX = (image.getWidth() - (int) rect.getWidth()) / 2;
             float centerY = image.getHeight() / 2;
-            w.drawString(text, centerX, centerY - 30);
+            w.drawString(text, centerX, centerY - 35);
 
             // Text 2
             float centerX2 = (image.getWidth() - (int) rect2.getWidth()) / 2;
             float centerY2 = image.getHeight() / 2;
-            w.drawString(text2, centerX2, centerY2 + 30);
+            w.drawString(text2, centerX2, centerY2 + 35);
 
-//      String pathPdfTo =  <baseUrl>+"/report/"+<variable_namefile>;
-            pathPdfTo = "./percobaan/GarudaFood-Watermark-BySdk.jpg";
-            File output = new File(pathPdfTo);
-            ImageIO.write(watermarked, type, output);
+            String pathImageGenerate = appProperties.getGARUDAFOOD_PATH_GENERATEDFILES() + appProperties.getGARUDAFOOD_WATERMARK_REPORT()
+                    + datenow + UNDERLINE + reportname;
+
+            ImageIO.write(watermarked, type, new File(pathImageGenerate));
+//            ImageIO.write(image, type, new File(pathImageGenerate));
+//            ImageOutputStream imgout = ImageIO.createImageOutputStream(new File(pathImageGenerate));
+
+//            ImageWriter jpgWriter = ImageIO.getImageWritersByFormatName("jpg").next();
+//            ImageWriteParam jpgWriteParam = jpgWriter.getDefaultWriteParam();
+//            jpgWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+//            jpgWriteParam.setCompressionQuality(1f);
+//            jpgWriter.setOutput(imgout);
+//            //better to use ImageOutputStream
+//            jpgWriter.write(null, new IIOImage(watermarked, null, null), jpgWriteParam);
+            pathPdfTo = appProperties.getGARUDAFOOD_URL_GENERATEDFILES() + appProperties.getGARUDAFOOD_WATERMARK_REPORT()
+                    + datenow + UNDERLINE + reportname;
+            image.flush();
             w.dispose();
         } catch (IOException e) {
             log.debug("WatermarkImageEx() : {}", e.getMessage());

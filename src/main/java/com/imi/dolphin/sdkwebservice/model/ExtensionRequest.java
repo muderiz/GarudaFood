@@ -26,6 +26,8 @@ public class ExtensionRequest implements Serializable {
 	private String commandName;
 	private String promptVariable;
 	private String integrationType;
+        
+        
 
 	/**
 	 * @return Get the intent

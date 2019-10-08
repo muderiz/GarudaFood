@@ -12,6 +12,8 @@
  */
 package com.imi.dolphin.sdkwebservice.service;
 
+import com.google.gson.Gson;
+import com.imi.dolphin.sdkwebservice.GFmodel.Department;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,10 +33,23 @@ import com.imi.dolphin.sdkwebservice.builder.ImageBuilder;
 import com.imi.dolphin.sdkwebservice.builder.QuickReplyBuilder;
 import com.imi.dolphin.sdkwebservice.model.ButtonTemplate;
 import com.imi.dolphin.sdkwebservice.model.Contact;
+import com.imi.dolphin.sdkwebservice.GFmodel.Depo;
 import com.imi.dolphin.sdkwebservice.model.EasyMap;
+import com.imi.dolphin.sdkwebservice.GFmodel.EasyParam;
 import com.imi.dolphin.sdkwebservice.model.ExtensionRequest;
 import com.imi.dolphin.sdkwebservice.model.ExtensionResult;
+import com.imi.dolphin.sdkwebservice.GFmodel.Group;
+import com.imi.dolphin.sdkwebservice.GFmodel.InfoUser;
+import com.imi.dolphin.sdkwebservice.GFmodel.LdapConnection;
+import com.imi.dolphin.sdkwebservice.GFmodel.LdapModel;
+import com.imi.dolphin.sdkwebservice.GFmodel.LoopParam;
 import com.imi.dolphin.sdkwebservice.model.MailModel;
+import com.imi.dolphin.sdkwebservice.GFmodel.Region;
+import com.imi.dolphin.sdkwebservice.GFmodel.ReportRequest;
+import com.imi.dolphin.sdkwebservice.GFmodel.ReportResult;
+import com.imi.dolphin.sdkwebservice.GFmodel.Role;
+import com.imi.dolphin.sdkwebservice.GFmodel.Product;
+import com.imi.dolphin.sdkwebservice.builder.DocumentBuilder;
 import com.imi.dolphin.sdkwebservice.model.UserToken;
 import com.imi.dolphin.sdkwebservice.param.ParamSdk;
 import com.imi.dolphin.sdkwebservice.property.AppProperties;
@@ -53,11 +68,24 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.Hashtable;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
+import javax.naming.Context;
+import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
+import javax.naming.directory.*;
+import javax.naming.ldap.*;
+import javax.naming.ldap.LdapContext;
+import okhttp3.MediaType;
 
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import org.json.JSONException;
 
 /**
  *
@@ -70,10 +98,13 @@ public class ServiceImp implements IService {
     private static final Logger log = LogManager.getLogger(ServiceImp.class);
 
     public static final String OUTPUT = "output";
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private static final String SPLIT = "&split&";
+    private final String pathdir = System.getProperty("user.dir");
     private UserToken userToken;
 
     @Autowired
-    AppProperties appProperties;
+    AppProperties appProp;
 
     @Autowired
     IMailService svcMailService;
@@ -92,6 +123,13 @@ public class ServiceImp implements IService {
 
     @Autowired
     GenerateWatermark generateWatermark;
+
+    @Autowired
+    Gson gson;
+
+    @Autowired
+    private ParamJSON paramJSON;
+
 
     /*
 	 * Sample Srn status with static result
@@ -144,7 +182,7 @@ public class ServiceImp implements IService {
             respBuilder.append("Jatuh tempo berikutnya : 15 Agustus 2018");
         } else {
             respBuilder.append("Ticket Number : " + extensionRequest.getIntent().getTicket().getTicketNumber() + "\n");
-            respBuilder.append(appProperties.getFormId() + " Data Customer Account " + account + "\n");
+            respBuilder.append(appProp.getFormId() + " Data Customer Account " + account + "\n");
             respBuilder.append("Nama: " + name + "\n");
             respBuilder.append("Setoran tiap bulan : Rp. 1,000,000\n");
             respBuilder.append("Jatuh tempo berikutnya : 27 Agustus 2018");
@@ -300,7 +338,7 @@ public class ServiceImp implements IService {
     public ExtensionResult getForms(ExtensionRequest extensionRequest) {
         log.debug("getForms() extension request: {}", extensionRequest);
         Map<String, String> output = new HashMap<>();
-        FormBuilder formBuilder = new FormBuilder(appProperties.getFormId());
+        FormBuilder formBuilder = new FormBuilder(appProp.getFormId());
 
         ButtonTemplate button = new ButtonTemplate();
         button.setTitle("Title is here");
@@ -342,8 +380,8 @@ public class ServiceImp implements IService {
         ButtonTemplate button = new ButtonTemplate();
         button.setTitle(ParamSdk.SAMPLE_TITLE);
         button.setSubTitle(ParamSdk.SAMPLE_SUBTITLE);
-        button.setPictureLink(ParamSdk.SAMPLE_IMAGE_PATH);
-        button.setPicturePath(ParamSdk.SAMPLE_IMAGE_PATH);
+        button.setPictureLink(appProp.getGARUDAFOOD_URL_GENERATEDFILES() + appProp.getGARUDAFOOD_WATERMARK_REPORT() + "02102019_123610516.jpeg");
+        button.setPicturePath(appProp.getGARUDAFOOD_URL_GENERATEDFILES() + appProp.getGARUDAFOOD_WATERMARK_REPORT() + "02102019_123610516.jpeg");
         List<EasyMap> actions = new ArrayList<>();
         EasyMap bookAction = new EasyMap();
         bookAction.setName(ParamSdk.SAMPLE_LABEL);
@@ -351,8 +389,12 @@ public class ServiceImp implements IService {
         actions.add(bookAction);
         button.setButtonValues(actions);
 
-        ButtonBuilder buttonBuilder = new ButtonBuilder(button);
-        output.put(OUTPUT, buttonBuilder.build());
+//        ButtonBuilder buttonBuilder = new ButtonBuilder(button);
+        DocumentBuilder documentBuilder = new DocumentBuilder(button);
+
+//        output.put(OUTPUT, buttonBuilder.build());
+        output.put(OUTPUT, documentBuilder.build());
+        log.debug("getButtons2() extension request: {}", documentBuilder.build());
 
         ExtensionResult extensionResult = new ExtensionResult();
         extensionResult.setAgent(false);
@@ -382,8 +424,8 @@ public class ServiceImp implements IService {
         ButtonBuilder buttonBuilder;
         for (int i = 0; i < 6; i++) {
             button = new ButtonTemplate();
-            button.setPictureLink(ParamSdk.SAMPLE_IMAGE_PATH);
-            button.setPicturePath(ParamSdk.SAMPLE_IMAGE_PATH);
+            button.setPictureLink(appProp.getGARUDAFOOD_URL_GENERATEDFILES() + appProp.getGARUDAFOOD_WATERMARK_REPORT() + "graph1.jpeg");
+            button.setPicturePath(appProp.getGARUDAFOOD_URL_GENERATEDFILES() + appProp.getGARUDAFOOD_WATERMARK_REPORT() + "graph1.jpeg");
             button.setTitle(ParamSdk.SAMPLE_TITLE.concat(String.valueOf(i)));
             button.setSubTitle(ParamSdk.SAMPLE_SUBTITLE.concat(String.valueOf(i)));
             List<EasyMap> actions = new ArrayList<>();
@@ -464,13 +506,22 @@ public class ServiceImp implements IService {
     public ExtensionResult getImage(ExtensionRequest extensionRequest) {
         log.debug("getImage() extension request: {}", extensionRequest);
         Map<String, String> output = new HashMap<>();
+//        String imagemap = sdkUtil.getEasyMapValueByName(extensionRequest, "param");
 
         ButtonTemplate image = new ButtonTemplate();
-        image.setPictureLink(ParamSdk.SAMPLE_IMAGE_PATH);
-        image.setPicturePath(ParamSdk.SAMPLE_IMAGE_PATH);
+//        image.setPictureLink("https://github.com/muderiz/image/blob/master/Siloam%20Logo.png?raw=true");
+//        image.setPictureLink("manual.pdf");
+//        image.setPicturePath("manual.pdf");
+        image.setPictureLink("https://autobot.garudafood.co.id/GeneratedFiles/watermarkReport/manual.pdf");
+        image.setPicturePath("https://autobot.garudafood.co.id/GeneratedFiles/watermarkReport/manual.pdf");
 
-        ImageBuilder imageBuilder = new ImageBuilder(image);
-        output.put(OUTPUT, imageBuilder.build());
+//        image.setPicturePath(appProperties.getGARUDAFOOD_URL_GENERATEDFILES() + appProperties.getGARUDAFOOD_WATERMARK_REPORT() + "graph1.jpeg");
+        image.setTitle("Test");
+//        image.setSubTitle("Test");
+//        ImageBuilder imageBuilder = new ImageBuilder(image);
+//        output.put(OUTPUT, imageBuilder.build());
+        DocumentBuilder documentBuilder = new DocumentBuilder(image);
+        output.put(OUTPUT, documentBuilder.build());
 
         ExtensionResult extensionResult = new ExtensionResult();
         extensionResult.setAgent(false);
@@ -478,6 +529,7 @@ public class ServiceImp implements IService {
         extensionResult.setSuccess(true);
         extensionResult.setNext(true);
         extensionResult.setValue(output);
+        log.debug("Output Image() extension request: {}", output);
         return extensionResult;
     }
 
@@ -549,7 +601,7 @@ public class ServiceImp implements IService {
      */
     @Override
     public ExtensionResult getDolphinResponse(ExtensionRequest extensionRequest) {
-        userToken = svcDolphinService.getUserToken(userToken, extensionRequest);
+        userToken = svcDolphinService.getUserToken(userToken);
         log.debug("getDolphinResponse() extension request: {} user token: {}", extensionRequest, userToken);
         String contactId = extensionRequest.getIntent().getTicket().getContactId();
         Contact contact = svcDolphinService.getCustomer(userToken, contactId);
@@ -582,7 +634,7 @@ public class ServiceImp implements IService {
             extensionResult.setSuccess(false);
         } else {
             extensionResult.setSuccess(true);
-            userToken = svcDolphinService.getUserToken(userToken, extensionRequest);
+            userToken = svcDolphinService.getUserToken(userToken);
             log.debug("getPingResponse() extension request: {} user token: {}", extensionRequest, userToken);
             String result = svcDolphinService.getPingResponse(userToken);
             output.put(OUTPUT, result);
@@ -595,27 +647,635 @@ public class ServiceImp implements IService {
     }
 
     // -----------------------------------Method Start------------------------------------------------------ //
-    /**
-     *
-     * @param extensionRequest
-     * @return
-     */
+//    public ExtensionResult getUserInfo(ExtensionRequest extensionRequest) {
+//        log.debug("getUserInfo() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+//
+//        String contactId = extensionRequest.getIntent().getTicket().getContactId();
+//        userToken = svcDolphinService.getUserToken(userToken, extensionRequest);
+//        Contact contact = svcDolphinService.getCustomer(userToken, contactId);
+//        String b = contact.getAdditionalField().get(0);
+//        InfoUser infoUser = new Gson().fromJson(b, InfoUser.class);
+//        
+//    }
+    private SearchControls getSimpleSearchControls() {
+        SearchControls searchControls = new SearchControls();
+        searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+        searchControls.setTimeLimit(30000);
+        //String[] attrIDs = {"objectGUID"};
+        //searchControls.setReturningAttributes(attrIDs);
+        return searchControls;
+    }
+
+    private ExtensionResult getInfo(String keyValue, LdapModel ldap, ExtensionRequest extensionRequest) throws NamingException, ParseException {
+        log.debug("getInfo() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        ExtensionResult extensionResult = new ExtensionResult();
+//        Map<String, String> output = new HashMap<>();
+        final String ldapAdServer = ldap.getServerInfo();
+        final String ldapSearchBase = ldap.getSearchBase();
+        final String ldapUsername = ldap.getUsername();
+        final String ldapPassword = ldap.getPassword();
+        final String ldapLoginPrincipal = ldap.getLoginPrincipal();
+//
+//        Hashtable<String, Object> env = new Hashtable<String, Object>();
+//        env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+//        env.put(Context.SECURITY_AUTHENTICATION, "simple");
+//        env.put(Context.SECURITY_PRINCIPAL, ldapUsername);
+//        env.put(Context.SECURITY_CREDENTIALS, ldapPassword);
+//        env.put(Context.PROVIDER_URL, ldapAdServer);
+//
+//        //ensures that objectSID attribute values
+//        //will be returned as a byte[] instead of a String
+////        env.put("java.naming.ldap.attributes.binary", "objectSID");
+//        DirContext ldapContext = new InitialDirContext(env);
+//
+////        LdapContext ctxx = new InitialLdapContext(env, null);
+////        ldapContext.setRequestControls(null);
+////            ldapContext.setRequestControls(null);
+//        String filterBase = appProp.getGARUDAFOOD_LDAP_SEARCHATTRUSERNAME();
+//
+//        NamingEnumeration<?> namingEnum = ldapContext.search(ldapSearchBase, filterBase + "=" + keyValue, getSimpleSearchControls());
+//        SearchResult result = (SearchResult) namingEnum.next();
+//        Attributes attrs = result.getAttributes();
+//        String sAMAccountName = attrs.get("sAMAccountName").get().toString();
+        String sAMAccountName = keyValue;
+//        String mail = attrs.get("mail").get().toString();
+//        System.out.println(mail);
+//            mail = mail.toLowerCase();
+        if (sAMAccountName.equalsIgnoreCase(keyValue)) {
+//                String name = attrs.get("name").get().toString();
+//                String name = keyValue;
+//                System.out.println(name);
+//                name = name.toLowerCase();
+//                name = toTitleCase(name);
+//                dn = result.getName() + ",dc=development03,dc=co,dc=id";
+
+            // Set AdditionalField //
+            userToken = svcDolphinService.getUserToken(userToken);
+            log.debug("userToken() extension request: {}", userToken);
+            String contactId = extensionRequest.getIntent().getTicket().getContactId();
+            log.debug("getContactID() extension request: {}", contactId);
+
+            Contact contact = svcDolphinService.getCustomer(userToken, contactId);
+            log.debug("Contact() data contact: {}", new Gson().toJson(contact, Contact.class));
+            InfoUser infoUser = new InfoUser();
+            infoUser.setAccountName(sAMAccountName);
+            infoUser.setFullName(sAMAccountName);
+            infoUser.setMail("test@gmail.com");
+
+            List<String> listData = new ArrayList<>();
+            listData.add("" + new Gson().toJson(infoUser, InfoUser.class) + "");
+            contact.setAdditionalField(listData);
+            contact = svcDolphinService.updateCustomer(userToken, contact);
+            // ------------------ //
+
+//                extensionResult.setValue(output);
+        }
+//            namingEnum.close();
+//            extensionResult.setValue(output);
+        return extensionResult;
+    }
+
     @Override
-    public ExtensionResult getReport(ExtensionRequest extensionRequest) {
+    public ExtensionResult getUserLdap(ExtensionRequest extensionRequest) {
+        log.debug("getUserInfo() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        ExtensionResult extensionResult = new ExtensionResult();
+        Map<String, String> output = new HashMap<>();
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
+
+        String usernameUser = sdkUtil.getEasyMapValueByName(extensionRequest, "username");
+
+        LdapModel ldap = new LdapModel();
+        ldap.setUsername(appProp.getGARUDAFOOD_LDAP_USERNAME());
+        ldap.setPassword(appProp.getGARUDAFOOD_LDAP_PASSWORD());
+        ldap.setServerInfo(appProp.getGARUDAFOOD_LDAP_HOST());
+        ldap.setSearchBase(appProp.getGARUDAFOOD_LDAP_DIRECTORYPATH());
+        ldap.setLoginPrincipal(appProp.getGARUDAFOOD_LDAP_LOGINPRINCIPAL());
+        Map<String, String> clearEntities = new HashMap<>();
+
+//        Hashtable<String, Object> env = new Hashtable<String, Object>();
+//        env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+//        env.put(Context.SECURITY_AUTHENTICATION, "simple");
+//        env.put(Context.SECURITY_PRINCIPAL, appProp.getGARUDAFOOD_LDAP_USERNAME());
+//        env.put(Context.SECURITY_CREDENTIALS, appProp.getGARUDAFOOD_LDAP_PASSWORD());
+//        env.put(Context.PROVIDER_URL, appProp.getGARUDAFOOD_LDAP_HOST());
+        try {
+            extensionResult = getInfo(usernameUser, ldap, extensionRequest);
+//            Map<String, String> clearEntities = new HashMap<>();
+//            clearEntities.put("otp_kode", "12345");
+//            clearEntities.put("otp_kesempatan", "3");
+//            extensionResult.setEntities(clearEntities);
+            //ensures that objectSID attribute values
+            //will be returned as a byte[] instead of a String
+//        env.put("java.naming.ldap.attributes.binary", "objectSID");
+//            DirContext ldapContext = new InitialDirContext(env);
+
+//            LdapContext ctxx = new InitialLdapContext(env, null);
+//        ldapContext.setRequestControls(null);
+//            ldapContext.setRequestControls(null);
+//            String filterBase = appProp.getGARUDAFOOD_LDAP_SEARCHATTRUSERNAME();
+//
+//            NamingEnumeration<?> namingEnum = ldapContext.search(appProp.getGARUDAFOOD_LDAP_DIRECTORYPATH(), filterBase + "=" + usernameUser, getSimpleSearchControls());
+//            SearchResult result = (SearchResult) namingEnum.next();
+//            Attributes attrs = result.getAttributes();
+//            String sAMAccountName = attrs.get("sAMAccountName").get().toString();
+////            String sAMAccountName = keyValue;
+//            String mail = attrs.get("mail").get().toString();
+//            System.out.println(mail);
+//            System.out.println(sAMAccountName);
+        } catch (NamingException e) {
+
+        } catch (ParseException ex) {
+            java.util.logging.Logger.getLogger(ServiceImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//
+
+        clearEntities.put("otp_kode", "12345");
+        clearEntities.put("otp_kesempatan", "3");
+        extensionResult.setEntities(clearEntities);
+        String dialog = "Test";
+        output.put(OUTPUT, dialog);
+        extensionResult.setValue(output);
+        return extensionResult;
+    }
+
+    public ExtensionResult menuUtama(ExtensionRequest extensionRequest) {
+        log.debug("getUserInfo() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        Map<String, String> output = new HashMap<>();
+
+        QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Silahkan klik Menu berikut yang kamu inginkan.")
+                .add("Report", "report").add("SOP", "sop").add("Konsumsi Bahan Bakar", "fuel").build();
+        output.put(OUTPUT, quickReplyBuilder.string());
         ExtensionResult extensionResult = new ExtensionResult();
         extensionResult.setAgent(false);
         extensionResult.setRepeat(false);
-        extensionResult.setNext(true);
         extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
+        extensionResult.setValue(output);
+        return extensionResult;
+    }
 
-        String idKaryawan = sdkUtil.getEasyMapValueByName(extensionRequest, "idkaryawan");
-        String namaKaryawan = sdkUtil.getEasyMapValueByName(extensionRequest, "namakaryawan");
+    /**
+     * Method General Execute API
+     *
+     * Bertujuan untuk mendapatkan Body Message dari API
+     *
+     * @param link berisi URL API yang ingin di Cek Body Messagenya
+     * @return jsonobj : Return berupa JSon Object
+     */
+    private JSONObject GeneralExecuteAPI(String link) {
+        OkHttpUtil okHttpUtil = new OkHttpUtil();
+        okHttpUtil.init(true);
+        JSONObject jsonobj = null;
+        try {
 
-        String text = idKaryawan + " | " + namaKaryawan;
-        String pathFrom = "./percobaan/SCM01_Tier1_AJTFZ.jpg";
-        File input = new File(pathFrom);
-        String reportAfterWatermark = generateWatermark.WatermarkImage(text, input);
-        System.out.println(reportAfterWatermark);
+            Request request = new Request.Builder().url(link).get().build();
+            Response response = okHttpUtil.getClient().newCall(request).execute();
+            jsonobj = new JSONObject(response.body().string());
+        } catch (IOException ex) {
+        }
+
+        return jsonobj;
+    }
+
+    @Override
+    public ExtensionResult pertanyaanPertama(ExtensionRequest extensionRequest) {
+        Map<String, String> output = new HashMap<>();
+        ExtensionResult extensionResult = new ExtensionResult();
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
+        Map<String, String> clearEntities = new HashMap<>();
+
+        String usernameUser = sdkUtil.getEasyMapValueByName(extensionRequest, "username");
+
+        List<Role> listRole = paramJSON.getListRolefromFileJson("role.json");
+
+        String title = "";
+        String company = "";
+        String division = "";
+        String department = "";
+        int lengList = listRole.size();
+        for (int i = 0; i < lengList; i++) {
+            Role roleArray = listRole.get(i);
+            String roleUsername = roleArray.username;
+            if (roleUsername.equalsIgnoreCase(usernameUser)) {
+                title = roleArray.title;
+                company = roleArray.company;
+                division = roleArray.division;
+                department = roleArray.department;
+                break;
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        switch (title.toLowerCase()) {
+            case "top management":
+//                String ContCompany = "";
+                sb.append("{first_name} ingin melihat report dari Company apa?\n")
+                        .append("1. GPPJ");
+                clearEntities.put("role", title);
+                break;
+            case "management":
+                sb.append("{first_name} ingin melihat report dari Departemen apa?\n")
+                        .append("1. E2E");
+//                        .append("2. Inbound")
+//                        .append("3. Outbound");
+
+                clearEntities.put("role", title);
+                clearEntities.put("company", company);
+                clearEntities.put("divisi", division);
+                break;
+            case "staff":
+                sb.append("{custormer_name} ingin melihat report apa?\n");
+                sb.append(" \n\n");
+                sb.append("Silahkan pilih angka pada report yang anda inginkan.");
+                clearEntities.put("role", title);
+                clearEntities.put("company", company);
+                clearEntities.put("divisi", division);
+                clearEntities.put("departement", department);
+                break;
+        }
+
+        String dialog1 = "Baiklah, {first_name} sudah berada di menu report";
+
+        output.put(OUTPUT, dialog1 + SPLIT + sb.toString());
+        extensionResult.setValue(output);
+        extensionResult.setEntities(clearEntities);
+
+        return extensionResult;
+    }
+
+    @Override
+    public ExtensionResult tanyaReportName(ExtensionRequest extensionRequest) {
+        log.debug("tanyaReportName() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        Map<String, String> output = new HashMap<>();
+        ExtensionResult extensionResult = new ExtensionResult();
+        String role = sdkUtil.getEasyMapValueByName(extensionRequest, "role");
+        String departement = sdkUtil.getEasyMapValueByName(extensionRequest, "departement");
+        Map<String, String> clearEntities = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+
+        List<Department> listDepartment = paramJSON.getListDepartmentfromFileJson("department.json");
+        int lengList = listDepartment.size();
+        String urutan;
+        String valueUrutan;
+        String dialogmanagement;
+        if (departement.equalsIgnoreCase("1") || departement.equalsIgnoreCase("e2e")) {
+            if (role.equalsIgnoreCase("management")) {
+                if (departement.equalsIgnoreCase("1")) {
+                    departement = "e2e";
+                } else if (departement.equalsIgnoreCase("2")) {
+                    departement = "inbound";
+
+                } else if (departement.equalsIgnoreCase("3")) {
+                    departement = "outbound";
+                }
+                int j = 1;
+                for (int i = 0; i < lengList; i++) {
+                    Department departementArray = listDepartment.get(i);
+                    String departemenName = departementArray.department;
+                    String reportName = departementArray.report_name;
+                    if (departemenName.equalsIgnoreCase(departement)) {
+                        urutan = j + ". ";
+                        valueUrutan = reportName + "\n";
+
+                        sb.append(urutan).append(valueUrutan);
+                        j++;
+                    }
+                }
+            } else if (role.equalsIgnoreCase("staff")) {
+                int j = 1;
+                for (int i = 0; i < lengList; i++) {
+                    Department departementArray = listDepartment.get(i);
+                    String departemenName = departementArray.department;
+                    String reportName = departementArray.report_name;
+                    if (departemenName.equalsIgnoreCase(departement)) {
+                        urutan = j + ". ";
+                        valueUrutan = reportName + "\n";
+                        sb.append(urutan).append(valueUrutan);
+                        j++;
+                    }
+                }
+            }
+
+            String dialog1 = "{first_name} ingin melihat Report apa?\n";
+            String dialog2 = "Silahkan pilih angka yang anda inginkan";
+
+            output.put(OUTPUT, dialog1 + SPLIT + sb.toString() + SPLIT + dialog2);
+            clearEntities.put("departement", "e2e");
+        } else {
+            sb.append("Mohon maaf untuk saat ini Departemen tersebut belum tersedia.")
+                    .append("{first_name} ingin melihat report dari Departemen apa?\n")
+                    .append("- E2E");
+//                        .append("2. Inbound")
+//                        .append("3. Outbound");
+
+            clearEntities.put("departement", "");
+
+            output.put(OUTPUT, sb.toString());
+        }
+
+        extensionResult.setValue(output);
+        extensionResult.setEntities(clearEntities);
+
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
+        return extensionResult;
+    }
+
+    @Override
+    public ExtensionResult tanyaKategori(ExtensionRequest extensionRequest) {
+        log.debug("tanyaKategori() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        Map<String, String> output = new HashMap<>();
+        ExtensionResult extensionResult = new ExtensionResult();
+        Map<String, String> clearEntities = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        String role = sdkUtil.getEasyMapValueByName(extensionRequest, "role");
+        String company = sdkUtil.getEasyMapValueByName(extensionRequest, "company");
+        String departement = sdkUtil.getEasyMapValueByName(extensionRequest, "departement");
+        String namaReport = sdkUtil.getEasyMapValueByName(extensionRequest, "nama_report");
+
+        if (namaReport.equalsIgnoreCase("1") || namaReport.equalsIgnoreCase("daily production v sales")) {
+            if (namaReport.equalsIgnoreCase("1")) {
+                namaReport = "daily production v sales";
+//            case "2":
+//                namaReport = "daily";
+//            case "3":
+//                namaReport = "outbound";
+//                clearEntities.put("nama_report", "daily production v sales");
+
+            }
+            List<Product> listProduct = paramJSON.getListProductfromFileJson("product.json");
+            List<Product> listGPPJ = listProduct.stream()
+                    .filter(product -> product.principal.equalsIgnoreCase(company))
+                    .collect(Collectors.toList());
+            String urutan;
+            String valueUrutan;
+            int lengList = listGPPJ.size();
+            String addGroup = "";
+            int j = 1;
+
+            for (int i = 0; i < lengList; i++) {
+                Product productArray = listGPPJ.get(i);
+                String groupProduct = productArray.group_category;
+                if (!addGroup.equalsIgnoreCase(groupProduct)) {
+                    addGroup = groupProduct;
+                    urutan = j + ". ";
+                    valueUrutan = groupProduct + "\n";
+                    sb.append(urutan).append(valueUrutan);
+                    j++;
+                }
+            }
+            String dialog1 = "Ingin melihat group kategori apa?\n" + sb.toString();
+            String dialog2 = "Silahkan pilih angka yang anda inginkan.";
+            output.put(OUTPUT, dialog1 + SPLIT + dialog2);
+            clearEntities.put("nama_report", namaReport);
+        } else {
+            sb.append("Mohon maaf untuk saat ini Report tersebut belum tersedia.")
+                    .append("{customer_name} ingin melihat Report apa?\n")
+                    .append("1. Daily Production v Sales");
+//                        .append("2. Inbound")
+//                        .append("3. Outbound");
+
+            clearEntities.put("nama_report", "");
+
+            output.put(OUTPUT, sb.toString());
+        }
+        extensionResult.setEntities(clearEntities);
+
+        extensionResult.setValue(output);
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
+        return extensionResult;
+    }
+
+    @Override
+    public ExtensionResult tanyaGroup(ExtensionRequest extensionRequest) {
+        log.debug("tanyaGroup() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        Map<String, String> output = new HashMap<>();
+        ExtensionResult extensionResult = new ExtensionResult();
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Silahkan ketikan kode SKU/Product yang anda inginkan. Atau ketik \"All\" untuk semua SKU berdasarkan Group. ");
+        output.put(OUTPUT, sb.toString());
+        extensionResult.setValue(output);
+
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
+        return extensionResult;
+    }
+
+    @Override
+    public ExtensionResult konfirmasiGroup(ExtensionRequest extensionRequest) {
+        log.debug("konfirmasiGroup() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        Map<String, String> output = new HashMap<>();
+        ExtensionResult extensionResult = new ExtensionResult();
+        Map<String, String> clearEntities = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        String company = sdkUtil.getEasyMapValueByName(extensionRequest, "company");
+        String kategoriGroup = sdkUtil.getEasyMapValueByName(extensionRequest, "kategorigroup");
+        String NewGroup = "";
+        if (kategoriGroup.equalsIgnoreCase("1")) {
+            NewGroup = "Delist";
+        } else if (kategoriGroup.equalsIgnoreCase("2")) {
+            NewGroup = "Hero";
+
+        } else if (kategoriGroup.equalsIgnoreCase("3")) {
+            NewGroup = "NPL";
+
+        } else if (kategoriGroup.equalsIgnoreCase("4")) {
+            NewGroup = "Seasonal";
+
+        } else if (kategoriGroup.equalsIgnoreCase("5")) {
+            NewGroup = "Delist";
+
+        } else if (kategoriGroup.equalsIgnoreCase("6")) {
+            NewGroup = "Tier 2";
+
+        } else if (kategoriGroup.equalsIgnoreCase("7")) {
+            NewGroup = "Tier 3";
+        }
+        final String kategoriGroup2 = NewGroup;
+        System.out.println(kategoriGroup2);
+        clearEntities.put("kategorigroup", NewGroup);
+        String sku = sdkUtil.getEasyMapValueByName(extensionRequest, "group");
+        if (sku.equalsIgnoreCase("all")) {
+            clearEntities.put("before_final", "No");
+
+        } else {
+            List<Product> listProduct = paramJSON.getListProductfromFileJson("product.json");
+            List<Product> listGPPJ = listProduct.stream()
+                    .filter(product -> product.principal.equalsIgnoreCase(company))
+                    .collect(Collectors.toList());
+            List<Product> listByGroup = listGPPJ.stream()
+                    .filter(product -> product.group_category.equalsIgnoreCase(kategoriGroup2))
+                    .collect(Collectors.toList());
+            String statussku = "tidak";
+            String valueUrutan;
+            int lengList = listByGroup.size();
+            for (int i = 0; i < lengList; i++) {
+                Product productArray = listByGroup.get(i);
+                String skuProduct = productArray.sku;
+
+                if (skuProduct.equalsIgnoreCase(sku)) {
+                    statussku = "tepat";
+                    break;
+                } else if (skuProduct.contains(sku)) {
+                    valueUrutan = skuProduct + "\n";
+                    sb.append(valueUrutan);
+
+                }
+            }
+            if (statussku.equalsIgnoreCase("tepat")) {
+                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Apakah anda ingin me-looping SKU tersebut?")
+                        .add("Ya", "Yes").add("Tidak", "NO").build();
+
+                output.put(OUTPUT, quickReplyBuilder.string());
+            } else {
+                clearEntities.put("group", "");
+                String dialog1 = "Apakah Kode SKU berikut yang anda maksud?\n" + sb.toString();
+                String dialog2 = "Silahkan ketik SKU yang anda inginkan.";
+                output.put(OUTPUT, dialog1 + SPLIT + dialog2);
+            }
+
+        }
+
+        extensionResult.setValue(output);
+        extensionResult.setEntities(clearEntities);
+
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
+//        log.debug("konfirmasiGroup() extension result: {}", new Gson().toJson(extensionResult, ExtensionRequest.class));
+        return extensionResult;
+    }
+
+    public ExtensionResult JenisGroup(ExtensionRequest extensionRequest) {
+        Map<String, String> output = new HashMap<>();
+        ExtensionResult extensionResult = new ExtensionResult();
+        String jenis_group = sdkUtil.getEasyMapValueByName(extensionRequest, "jenis_group");
+
+        String dialog1 = "Baiklah, sekarang silahkan ketik " + jenis_group + " yang ingin di cari.";
+        output.put(OUTPUT, dialog1);
+        extensionResult.setValue(output);
+
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
+        return extensionResult;
+    }
+
+    @Override
+    public ExtensionResult validasiJenisGroup(ExtensionRequest extensionRequest) {
+        Map<String, String> output = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
+
+        ExtensionResult extensionResult = new ExtensionResult();
+        String kategori = sdkUtil.getEasyMapValueByName(extensionRequest, "kategori");
+        String jenis_group = sdkUtil.getEasyMapValueByName(extensionRequest, "jenis_group");
+        String konfirmasi_group = sdkUtil.getEasyMapValueByName(extensionRequest, "konfirmasi_group");
+        if (kategori.equalsIgnoreCase("sku")) {
+            kategori = kategori.toUpperCase();
+        }
+        String statusitem = "Tidak Ada";
+        List<Group> listGroup = paramJSON.getListGroupfromFileJson("group.json");
+        List<Product> listSKU = paramJSON.getListProductfromFileJson("sku.json");
+        List<Region> listRegion = paramJSON.getListRegionfromFileJson("sku.json");
+        List<Depo> listDepo = paramJSON.getListDepofromFileJson("sku.json");
+
+        switch (jenis_group.toLowerCase()) {
+            case "group":
+                int lengListGroup = listGroup.size();
+                for (int i = 0; i < lengListGroup; i++) {
+                    Group groupArray = listGroup.get(i);
+                    String sku = groupArray.SKU;
+                    String region = groupArray.Region;
+                    String depo = groupArray.Depo;
+                    switch (kategori) {
+                        case "SKU":
+                            if (konfirmasi_group.equalsIgnoreCase(sku)) {
+                                statusitem = "Ada";
+                                break;
+                            }
+                        case "Region":
+                            if (konfirmasi_group.equalsIgnoreCase(region)) {
+                                statusitem = "Ada";
+                                break;
+                            }
+                        case "Depo":
+                            if (konfirmasi_group.equalsIgnoreCase(depo)) {
+                                statusitem = "Ada";
+                                break;
+                            }
+                        default:
+                            statusitem = "Tidak Ada";
+                    }
+                }
+            case "nama":
+                switch (kategori) {
+                    case "SKU":
+                        int lengListSKU = listSKU.size();
+//                        for (int i = 0; i < lengListSKU; i++) {
+//                            Product skuArray = listSKU.get(i);
+//                            String id = skuArray.id;
+//                            String produk = skuArray.Produk;
+//                            String Group = skuArray.Group;
+//                            if (konfirmasi_group.equalsIgnoreCase(id)) {
+//                                statusitem = "Ada";
+//                                break;
+//                            }
+//                        }
+                    case "Region":
+                        int lengListRegion = listRegion.size();
+                        for (int i = 0; i < lengListRegion; i++) {
+                            Region regionArray = listRegion.get(i);
+                            String id = regionArray.id;
+                            String Region = regionArray.Region;
+                            String Group = regionArray.Group;
+                            if (konfirmasi_group.equalsIgnoreCase(id)) {
+                                statusitem = "Ada";
+                                break;
+                            }
+                        }
+                    case "Depo":
+                        int lengListDepo = listDepo.size();
+                        for (int i = 0; i < lengListDepo; i++) {
+                            Depo depoArray = listDepo.get(i);
+                            String id = depoArray.id;
+                            String Depo = depoArray.Depo;
+                            String Group = depoArray.Group;
+                            if (konfirmasi_group.equalsIgnoreCase(id)) {
+                                statusitem = "Ada";
+                                break;
+                            }
+                        }
+
+                    default:
+                        statusitem = "Tidak Ada";
+                }
+
+        }
+
+        QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("{customer_name} ingin mencari berdasarkan apa?").addAll(map).build();
+        output.put(OUTPUT, quickReplyBuilder.string());
+        extensionResult.setValue(output);
+
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
         return extensionResult;
     }
 
@@ -625,7 +1285,144 @@ public class ServiceImp implements IService {
      * @return
      */
     @Override
-    public ExtensionResult getSOP(ExtensionRequest extensionRequest) {
+    public ExtensionResult getReport(ExtensionRequest extensionRequest) {
+        log.debug("getReport() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        ExtensionResult extensionResult = new ExtensionResult();
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setNext(true);
+        extensionResult.setSuccess(true);
+
+        String username = sdkUtil.getEasyMapValueByName(extensionRequest, "username");
+        String company = sdkUtil.getEasyMapValueByName(extensionRequest, "company");
+        String namaReport = sdkUtil.getEasyMapValueByName(extensionRequest, "nama_report");
+        String kategorigroup = sdkUtil.getEasyMapValueByName(extensionRequest, "kategorigroup");
+        String sku = sdkUtil.getEasyMapValueByName(extensionRequest, "group");
+        String beforeFinal = sdkUtil.getEasyMapValueByName(extensionRequest, "before_final");
+
+        String text = username;
+        String parameterKey = "";
+        String parameterValue = "";
+        String reportname = "";
+        String summary = "";
+        if (namaReport.equalsIgnoreCase("daily production v sales")) {
+            parameterKey = "SKU";
+            reportname = "r1_m";
+        }
+        if (beforeFinal.equalsIgnoreCase("Yes")) {
+            summary = "No";
+        } else {
+            summary = "Yes";
+        }
+        if (sku.equalsIgnoreCase("all")) {
+            List<Product> listProduct = paramJSON.getListProductfromFileJson("product.json");
+            List<Product> listGPPJ = listProduct.stream()
+                    .filter(product -> product.principal.equalsIgnoreCase(company))
+                    .collect(Collectors.toList());
+            List<Product> listByGroup = listGPPJ.stream()
+                    .filter(product -> product.group_category.equalsIgnoreCase(kategorigroup))
+                    .collect(Collectors.toList());
+
+            int lengList = listByGroup.size();
+            for (int i = 0; i < lengList; i++) {
+                Product productArray = listByGroup.get(i);
+                String skuProduct = productArray.sku;
+                if (i < 1) {
+                    parameterValue = skuProduct;
+                } else {
+                    parameterValue = parameterValue + "|" + skuProduct;
+                }
+            }
+            summary = "Yes";
+
+        } else {
+            parameterValue = sku;
+        }
+
+        Map<String, String> output = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        ReportRequest reportRequest = new ReportRequest();
+        List<EasyParam> easyparam = new ArrayList<>();
+        List<LoopParam> loopparam = new ArrayList<>();
+        if (summary.equalsIgnoreCase("Yes")) {
+            // Easy Param
+            EasyParam easyParam = new EasyParam();
+            easyParam.setSzKey(parameterKey);
+            easyParam.setSzValue(parameterValue);
+            easyparam.add(easyParam);
+        } else {
+            // Loop Param
+            LoopParam loopParam = new LoopParam();
+            loopParam.setSzKey(parameterKey);
+            loopParam.setSzValue(parameterValue);
+            loopparam.add(loopParam);
+        }
+
+        // Set Param
+        reportRequest.setSzReportName(reportname);
+        reportRequest.setLoopParam(loopparam);
+        reportRequest.setSummary(summary);
+        reportRequest.setParam(easyparam);
+        JSONObject jsonReport = new JSONObject(reportRequest);
+        String report = jsonReport.toString();
+//        ReportResult reportResult = new ReportResult();
+        String dialog1 = "";
+
+        try {
+            OkHttpUtil okHttpUtil = new OkHttpUtil();
+            okHttpUtil.init(true);
+            String apiReport = appProp.getGARUDAFOOD_API_REPORT();
+            System.out.println(report);
+            RequestBody body = RequestBody.create(JSON, report);
+            Request request = new Request.Builder().url(apiReport).post(body).addHeader("Content-Type", "application/json").build();
+            Response response = okHttpUtil.getClient().newCall(request).execute();
+            JSONObject jsonobj = new JSONObject(response.body().string());
+
+            if (jsonobj.getString("error").equalsIgnoreCase("")) {
+                JSONArray arrayReport = jsonobj.getJSONArray("path");
+                int lengReport = arrayReport.length();
+                for (int i = 0; i < lengReport; i++) {
+                    JSONObject jObj = arrayReport.getJSONObject(i);
+                    String url = jObj.getString("url");
+//                   
+                    URL input = new URL(url);
+                    String reportAfterWatermark = generateWatermark.WatermarkImage(text, input);
+                    System.out.println(reportAfterWatermark);
+                    String[] spliturlreport = reportAfterWatermark.split(appProp.getGARUDAFOOD_WATERMARK_REPORT());
+                    String reportnameTitle = spliturlreport[1];
+                    ButtonTemplate image = new ButtonTemplate();
+
+                    image.setTitle(reportnameTitle);
+                    image.setPictureLink(reportAfterWatermark);
+                    image.setPicturePath(reportAfterWatermark);
+                    ImageBuilder imageBuilder = new ImageBuilder(image);
+                    String btnBuilder = imageBuilder.build();
+                    sb.append(btnBuilder).append(SPLIT);
+                }
+                dialog1 = "Berikut adalah Report yang {first_name} ingin lihat.";
+            } else {
+                dialog1 = "Maaf. File tidak ditemukan atau sedang terjadi kesalahan. Silahkan ketik \"Menu\" untuk melihat Menu Utama.";
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            log.debug("Response Exception() extension request : {} ", e);
+        }
+        output.put(OUTPUT, dialog1 + ParamSdk.SPLIT_CHAT + sb.toString());
+
+        extensionResult.setValue(output);
+        log.debug("String Builder Report() extension request : {} ", output);
+
+        return extensionResult;
+    }
+
+    /**
+     *
+     * @param extensionRequest
+     * @return
+     */
+    @Override
+    public ExtensionResult getSOP(ExtensionRequest extensionRequest
+    ) {
         ExtensionResult extensionResult = new ExtensionResult();
         extensionResult.setAgent(false);
         extensionResult.setRepeat(false);

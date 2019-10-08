@@ -141,6 +141,12 @@ public class Controller {
         return svcService.doSendMail(extensionRequest);
     }
 
+    @RequestMapping("/getUserLdap")
+    @PostMapping
+    public ExtensionResult getUserLdap(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.getUserLdap(extensionRequest);
+    }
+
     @RequestMapping("/getReport")
     @PostMapping
     public ExtensionResult getReport(@RequestBody ExtensionRequest extensionRequest) {
@@ -151,6 +157,36 @@ public class Controller {
     @PostMapping
     public ExtensionResult getSOP(@RequestBody ExtensionRequest extensionRequest) {
         return svcService.getSOP(extensionRequest);
+    }
+
+    @RequestMapping("/pertanyaanPertama")
+    @PostMapping
+    public ExtensionResult pertanyaanPertama(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.pertanyaanPertama(extensionRequest);
+    }
+
+    @RequestMapping("/tanyaReportName")
+    @PostMapping
+    public ExtensionResult tanyaReportName(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.tanyaReportName(extensionRequest);
+    }
+
+    @RequestMapping("/tanyaKategori")
+    @PostMapping
+    public ExtensionResult tanyaKategori(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.tanyaKategori(extensionRequest);
+    }
+
+    @RequestMapping("/tanyaGroup")
+    @PostMapping
+    public ExtensionResult tanyaGroup(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.tanyaGroup(extensionRequest);
+    }
+
+        @RequestMapping("/konfirmasiGroup")
+    @PostMapping
+    public ExtensionResult konfirmasiGroup(@RequestBody ExtensionRequest extensionRequest) {
+        return svcService.konfirmasiGroup(extensionRequest);
     }
 
 }

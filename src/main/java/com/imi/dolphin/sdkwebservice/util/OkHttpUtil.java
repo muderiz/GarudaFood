@@ -70,8 +70,8 @@ public class OkHttpUtil {
 		int connectTimeout = 15;
 		int readTimeout = 15;
 
-		String connectTimeoutText = appProperties.getSdkConnectTimeout();
-		String readTimeoutText = appProperties.getSdkReadTimeout();
+		String connectTimeoutText = "40";//appProperties.getSdkConnectTimeout();
+		String readTimeoutText = "40";//appProperties.getSdkReadTimeout();
 		if (StringUtils.isNumeric(connectTimeoutText)) {
 			connectTimeout = Integer.parseInt(connectTimeoutText);
 		}

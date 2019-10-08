@@ -1,0 +1,87 @@
+[
+ {
+   "SKU": "Hero",
+   "Region": "Area1",
+   "Depo": "BNS"
+ },
+ {
+   "SKU": "NPL",
+   "Region": "Area2",
+   "Depo": "JBB1"
+ },
+ {
+   "SKU": "Seasonal",
+   "Region": "Area3",
+   "Depo": "JBB2"
+ }, 
+ {
+   "SKU": "Super Hero",
+   "Region": "",
+   "Depo": "JBR1"
+ },
+ {
+   "SKU": "Tier 2",
+   "Region": "",
+   "Depo": "JBR2"
+ },
+ {
+   "SKU": "Tier 3",
+   "Region": "",
+   "Depo": "JTG1"
+ },
+ {
+   "SKU": "Beverage",
+   "Region": "",
+   "Depo": "JTG2"
+ },
+ {
+   "SKU": "",
+   "Region": "",
+   "Depo": "JTM1"
+ },
+ {
+   "SKU": "",
+   "Region": "",
+   "Depo": "JTM2"
+ },
+ {
+   "SKU": "",
+   "Region": "",
+   "Depo": "KAL1"
+ },
+ {
+   "SKU": "",
+   "Region": "",
+   "Depo": "KAL2"
+ },
+ {
+   "SKU": "",
+   "Region": "",
+   "Depo": "SBS1"
+ },
+ {
+   "SKU": "",
+   "Region": "",
+   "Depo": "SBS2"
+ },
+ {
+   "SKU": "",
+   "Region": "",
+   "Depo": "SBU1"
+ },
+ {
+   "SKU": "",
+   "Region": "",
+   "Depo": "SBU2"
+ },
+ {
+   "SKU": "",
+   "Region": "",
+   "Depo": "SUL1"
+ },
+ {
+   "SKU": "",
+   "Region": "",
+   "Depo": "SUL2"
+ }
+]

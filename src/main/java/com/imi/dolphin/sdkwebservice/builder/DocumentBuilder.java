@@ -23,7 +23,7 @@ import com.imi.dolphin.sdkwebservice.model.ButtonTemplate;
  *
  */
 public class DocumentBuilder {
-	private ButtonTemplate buttonTemplateEntity;
+	private ButtonTemplate buttonTemplateEntity;    
 	private static final String DOCUMENT_SYNTAX = "{file:";
 	private static final String DOCUMENT_SYNTAX_SUFFIX = "}";
 	

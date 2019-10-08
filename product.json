@@ -1,0 +1,1994 @@
+[
+    {
+        "group_category": "Beverage",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Drink",
+        "sku": "GMB450W",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "Beverage",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Drink",
+        "sku": "GML450W",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "Beverage",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Drink",
+        "sku": "GMO450W",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "Beverage",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Drink",
+        "sku": "GMS450W",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "Beverage",
+        "lob": "Beverage",
+        "product_category": "Flavor Drink",
+        "sub_product_category": "Flavor Concept",
+        "sku": "GMY450W",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "Beverage",
+        "lob": "Beverage",
+        "product_category": "Tea Based",
+        "sub_product_category": "Black Tea",
+        "sku": "MHO3PS",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "Beverage",
+        "lob": "Beverage",
+        "product_category": "Tea Based",
+        "sub_product_category": "Oolong Tea",
+        "sku": "OTP450W",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJBFB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJBFZ",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJBSD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJMFB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJMFZ",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJT1D",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJT2B3",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJT2Z2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJTFB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJTSI",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Cream",
+        "sku": "AVG8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Snack & Cereal",
+        "sku": "BIC8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "BPFB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "BPFD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "BPFZ",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "BPLD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Cracker",
+        "sku": "BRP2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Cracker",
+        "sku": "BRP3",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Cracker",
+        "sku": "BRP4",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Confect",
+        "sub_product_category": "Chocolate",
+        "sku": "BSAK",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Confect",
+        "sub_product_category": "Chocolate",
+        "sku": "BSCK8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "",
+        "product_category": "",
+        "sub_product_category": "",
+        "sku": "CSP5C",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Cream",
+        "sku": "CSP8C",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Cream",
+        "sku": "CSP8CR",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Cream",
+        "sku": "CSP8D",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Cream",
+        "sku": "CWW8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "EGG2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Snack & Cereal",
+        "sku": "ESB4",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Snack & Cereal",
+        "sku": "ESP4R",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "GF2B",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "GFSB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "GNC",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Cookies",
+        "sku": "JEJU8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Cookies",
+        "sku": "JRIB2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "KAPFB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Chips/Crisp",
+        "sku": "LCOD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Chips/Crisp",
+        "sku": "LPGD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Chips/Crisp",
+        "sku": "LPSD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Chips/Crisp",
+        "sku": "LSAD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Chips/Crisp",
+        "sku": "LSCD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MAGA5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MAGU5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MAJU5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Confect",
+        "sub_product_category": "Chocolate",
+        "sku": "MCP4K",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Confect",
+        "sub_product_category": "Chocolate",
+        "sku": "MCPO8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Confect",
+        "sub_product_category": "Chocolate",
+        "sku": "MCPO8R",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Confect",
+        "sub_product_category": "Chocolate",
+        "sku": "MKC8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "House & Home",
+        "product_category": "House Hold",
+        "sub_product_category": "Others",
+        "sku": "PB1",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PG7D",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGA2B",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGA7D",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGC2B",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGG2B",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGJU1B",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGJU1Z",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGJU7",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGMFB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGP2B",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGS2B",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGSFB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGSFZ",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "House & Home",
+        "product_category": "House Hold",
+        "sub_product_category": "Others",
+        "sku": "PK1",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Dairy & Dairy",
+        "product_category": "Liquid Milk",
+        "sub_product_category": "Sterillized",
+        "sku": "SBC05",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Beverage",
+        "product_category": "Functional Drink",
+        "sub_product_category": "Sport Drink",
+        "sku": "SO240",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Beverage",
+        "product_category": "Functional Drink",
+        "sub_product_category": "Sport Drink",
+        "sku": "SO240K",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Beverage",
+        "product_category": "Functional Drink",
+        "sub_product_category": "Sport Drink",
+        "sku": "SO260",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Dairy & Dairy",
+        "product_category": "Liquid Milk",
+        "sub_product_category": "Sterillized",
+        "sku": "SOM01",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Dairy & Dairy",
+        "product_category": "Liquid Milk",
+        "sub_product_category": "Sterillized",
+        "sku": "SOM02",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Dairy & Dairy",
+        "product_category": "Liquid Milk",
+        "sub_product_category": "Sterillized",
+        "sku": "SUC03",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Dairy & Dairy",
+        "product_category": "Liquid Milk",
+        "sub_product_category": "Sterillized",
+        "sku": "SUM01",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Dairy & Dairy",
+        "product_category": "Liquid Milk",
+        "sub_product_category": "Sterillized",
+        "sku": "SUM02",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "TGFB1",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "TGFD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "TGPEB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "TGPEZ",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCC2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCC25",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCD4R",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCG1",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCG25",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCG5R",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "",
+        "product_category": "",
+        "sub_product_category": "",
+        "sku": "WCH5MY",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WPC2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WPC4",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Delist",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WPK4",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJTM",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Snack & Cereal",
+        "sku": "BIC7",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "BPD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "GF2Z",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MACO5N",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MADA8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "ORP1",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGS7D",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Snack & Cereal",
+        "sku": "PILO5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Snack & Cereal",
+        "sku": "PILOX5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Dairy & Dairy",
+        "product_category": "Liquid Milk",
+        "sub_product_category": "Sterillized",
+        "sku": "SUC01",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Dairy & Dairy",
+        "product_category": "Liquid Milk",
+        "sub_product_category": "Sterillized",
+        "sku": "SUC02",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "TGC",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "TGD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCG4",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCG4F",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Flavoured Drink",
+        "sku": "FDO1",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Flavoured Drink",
+        "sku": "FDO2",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "",
+        "product_category": "",
+        "sub_product_category": "",
+        "sku": "GMBC450W",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Drink",
+        "sku": "GML500",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Drink",
+        "sku": "GMO500",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "",
+        "product_category": "",
+        "sub_product_category": "",
+        "sku": "GMSC450W",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Food",
+        "product_category": "Basic Food",
+        "sub_product_category": "Oil & Fats",
+        "sku": "GR18LJ",
+        "principal": "Incasi"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Food",
+        "product_category": "Basic Food",
+        "sub_product_category": "Oil & Fats",
+        "sku": "GR1LS",
+        "principal": "Incasi"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Food",
+        "product_category": "Basic Food",
+        "sub_product_category": "Oil & Fats",
+        "sku": "GR2LS",
+        "principal": "Incasi"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Food",
+        "product_category": "Basic Food",
+        "sub_product_category": "Oil & Fats",
+        "sku": "GR5LJ",
+        "principal": "Incasi"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Drink",
+        "sku": "JBC4",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Drink",
+        "sku": "JBC7",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Drink",
+        "sku": "JBC8",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Drink",
+        "sku": "JBC9",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Jelly Drink",
+        "sku": "JDB1",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Jelly Drink",
+        "sku": "JDB3",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Jelly Drink",
+        "sku": "JDB7",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Jelly Drink",
+        "sku": "JDO1",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Jelly Drink",
+        "sku": "JDO2",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Jelly Drink",
+        "sku": "JDO3",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Jelly Drink",
+        "sku": "JDO5",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Jelly Drink",
+        "sku": "JDO7",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Jelly Drink",
+        "sku": "JDO9",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Juice & Fruit Flavour",
+        "sub_product_category": "Fruit Drink",
+        "sku": "KBC2",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Tea Based",
+        "sub_product_category": "Black Tea",
+        "sku": "MCL3",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "",
+        "product_category": "",
+        "sub_product_category": "",
+        "sku": "MCL3PF",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Tea Based",
+        "sub_product_category": "Black Tea",
+        "sku": "MCL3PS",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Tea Based",
+        "sub_product_category": "Black Tea",
+        "sku": "MHO3",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "",
+        "product_category": "",
+        "sub_product_category": "",
+        "sku": "MHO3PF",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Tea Based",
+        "sub_product_category": "Black Tea",
+        "sku": "MTA1",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Tea Based",
+        "sub_product_category": "Black Tea",
+        "sku": "MTB1",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Tea Based",
+        "sub_product_category": "Black Tea",
+        "sku": "MTE1",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Tea Based",
+        "sub_product_category": "Black Tea",
+        "sku": "MTG1",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Tea Based",
+        "sub_product_category": "Black Tea",
+        "sku": "OJJ350",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Tea Based",
+        "sub_product_category": "Black Tea",
+        "sku": "OJJ450",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NA",
+        "lob": "Beverage",
+        "product_category": "Tea Based",
+        "sub_product_category": "Oolong Tea",
+        "sku": "OTT450",
+        "principal": "SGBI"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "BGD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Drink",
+        "sub_product_category": "RTD",
+        "sku": "BRINK2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Cracker",
+        "sku": "BRP10",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Cookies",
+        "sku": "COCO2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Drink",
+        "sub_product_category": "RTS Powder",
+        "sku": "DCAFE2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Drink",
+        "sub_product_category": "RTS Powder",
+        "sku": "DCAFE5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Drink",
+        "sub_product_category": "RTS Powder",
+        "sku": "DCAFE7",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Drink",
+        "sub_product_category": "RTS Powder",
+        "sku": "DMOCA5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Drink",
+        "sub_product_category": "RTS Powder",
+        "sku": "DRINK1",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MACA2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MACA8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MACC2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MACC8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MAGU2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MAGU8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "ORC1",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "ORCM",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "ORCS",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGM7D",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Snack & Cereal",
+        "sku": "RING5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "",
+        "product_category": "",
+        "sub_product_category": "",
+        "sku": "RINGX5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Dairy & Dairy",
+        "product_category": "Liquid Milk",
+        "sub_product_category": "Sterillized",
+        "sku": "SUC05",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Bread & Cake",
+        "sub_product_category": "Waffle",
+        "sku": "WALS5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCH5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WJU5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "NPL",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WJU8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Seasonal",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Cookies",
+        "sku": "HBCK",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Seasonal",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Cookies",
+        "sku": "HBCK2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Seasonal",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Cream",
+        "sku": "HOFER",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Seasonal",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MALKAS",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Seasonal",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Cookies",
+        "sku": "TBUTER",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Seasonal",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "TEGROL",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Seasonal",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Cream",
+        "sku": "TWAFR",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Seasonal",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCCP",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Seasonal",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCGP2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Seasonal",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WLCKB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJTFZ",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Drink",
+        "sub_product_category": "RTS Powder",
+        "sku": "DRINK2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Drink",
+        "sub_product_category": "RTS Powder",
+        "sku": "DRINK5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Drink",
+        "sub_product_category": "RTS Powder",
+        "sku": "DRINK7",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "GC",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MACO2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MAJU2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MAJU8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MALS2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "ORB1",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "ORBM",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCC5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCC7",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Super Hero",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCC8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Snack & Cereal",
+        "sku": "BIC4",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Snack & Cereal",
+        "sku": "BIC8R",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Cream",
+        "sku": "CSCO5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Cream",
+        "sku": "CSP4HZ",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Cream",
+        "sku": "CSP4O",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Drink",
+        "sub_product_category": "RTS Powder",
+        "sku": "DACA5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "GC2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Malkist",
+        "sku": "MALS4",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Confect",
+        "sub_product_category": "Chocolate",
+        "sku": "MCC4R",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGA2Z",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGC2Z",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGG2Z",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGMFZ",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGS2Z",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Snack & Cereal",
+        "sku": "PIJU5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Snack & Cereal",
+        "sku": "PIJUX5",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 2",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCH8",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AG1",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AGB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AJTSZ",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AKD1D",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "AKS1D",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "APC",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "APD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "BGB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "BGC",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "BPC",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "BPG",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Confect",
+        "sub_product_category": "Chocolate",
+        "sku": "BSC4",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Drink",
+        "sub_product_category": "RTS Powder",
+        "sku": "DACA2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Drink",
+        "sub_product_category": "RTS Powder",
+        "sku": "DACA7",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Confect",
+        "sub_product_category": "Ting-Ting",
+        "sku": "ETG4",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "GA",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "GB",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "GD1",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "GD3",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Roasted",
+        "sku": "GFSZ",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Cookies",
+        "sku": "JATOP4",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Chips/Crisp",
+        "sku": "LPAD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Chips/Crisp",
+        "sku": "LPAF",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Chips/Crisp",
+        "sku": "LPBD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Chips/Crisp",
+        "sku": "LPBF",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Chips/Crisp",
+        "sku": "LPGF",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Confect",
+        "sub_product_category": "Chocolate",
+        "sku": "MCP4R",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "ORBS",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "ORPD",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "ORPS",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGC7",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Pellet",
+        "sku": "PGP2Z",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Popcorn",
+        "sku": "POC1",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Popcorn",
+        "sku": "POF2",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Snack Food",
+        "sub_product_category": "Coated",
+        "sku": "TGFD1",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WCG8R",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WES4R",
+        "principal": "GPPJ"
+    },
+    {
+        "group_category": "Tier 3",
+        "lob": "Food",
+        "product_category": "Biscuit",
+        "sub_product_category": "Wafer Stick",
+        "sku": "WESH8",
+        "principal": "GPPJ"
+    }
+]

@@ -28,7 +28,7 @@ public interface IDolphinService {
 	
 	public String getPingResponse(UserToken userToken);
 	
-	public UserToken getUserToken(UserToken userToken, ExtensionRequest extensionRequest);
+	public UserToken getUserToken(UserToken userToken);
 	
 	public Contact getCustomer(UserToken userToken, String contactId);
 	

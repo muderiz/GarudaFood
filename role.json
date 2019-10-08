@@ -1,0 +1,23 @@
+[
+ {
+   "username": "hardianto",
+   "title": "Top Management",
+   "company": "All",
+   "division": "All",
+   "department": "All"
+ },
+ {
+   "username": "aries.soelistyo",
+   "title": "Management",
+   "company": "GPPJ",
+   "division": "SCM",
+   "department": "All"
+ },
+ {
+   "username": "hariyanto.widjaja",
+   "title": "Staff",
+   "company": "GPPJ",
+   "division": "SCM",
+   "department": "Outbound"
+ }
+]

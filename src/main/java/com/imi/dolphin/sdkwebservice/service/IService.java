@@ -56,8 +56,22 @@ public interface IService {
 
     ExtensionResult getPingResponse(ExtensionRequest extensionRequest);
 
+    ExtensionResult tanyaReportName(ExtensionRequest extensionRequest);
+
+    ExtensionResult tanyaKategori(ExtensionRequest extensionRequest);
+
+    ExtensionResult tanyaGroup(ExtensionRequest extensionRequest);
+
+    ExtensionResult konfirmasiGroup(ExtensionRequest extensionRequest);
+
+    ExtensionResult validasiJenisGroup(ExtensionRequest extensionRequest);
+
+    ExtensionResult getUserLdap(ExtensionRequest extensionRequest);
+
     ExtensionResult getReport(ExtensionRequest extensionRequest);
 
     ExtensionResult getSOP(ExtensionRequest extensionRequest);
+
+    ExtensionResult pertanyaanPertama(ExtensionRequest extensionRequest);
 
 }
