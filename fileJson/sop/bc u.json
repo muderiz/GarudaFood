@@ -1,0 +1,1330 @@
+[
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "EPRD",
+    "nama_doc": "Alternative Bom Rev.0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "EPRD",
+    "nama_doc": "Trial Skala Lab Scale Up Dan Produksi Rev.0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "EPRD",
+    "nama_doc": "Pengembangan Produk Dan Pengadaan Kemasan Rev. 2.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "EPRD",
+    "nama_doc": "Pengecekan Dan Pengkodean Bahan Baku Baru Rev.1.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Asset Under Construction Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Permintaan Perubahan Master Data Selected Set Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Incoming Payment Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Permintaan Perubahan Material Master Spare Part Set Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Intracompany Transaction Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Permintaan Perubahan Master Data Production Version Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Permintaan Perubahan Master Data Plant Maintenance Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Proses Impor Barang Rev. 1.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Pencatatan Dan Penerimaan Piutang Usaha (Ar) Rev. 0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Bank And Cash Management Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Permintaan Perubahan Master Data Material Master Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Maintenance Server Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Permintaan Perubahan Master Inspection Charcteristic Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Permintaan Perubahan Master Data Work Center Dan Routing Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Maintenance Perangkat It Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Memorial Journal Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Permintaan Perubahan Master Data Batch Characteristic & Classification Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Suppoting Perbaikan Atau Penggantian Perangkat Teknologi Informasi Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Pencatatan Dan Pembayaran Hutang Usaha (Ar) Rev. 0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Taxation Rev. 1.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Permintaan Perubahan Master Data Quality Management Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Acquisition Asset Non Mm Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Invoice Pembelian Non Material Management Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "FA",
+    "nama_doc": "Outgoing Payment Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Perbaikan Maintenance Fasilitas Umum Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Komunikasi Rev. 0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Tanggap Darurat Pengelolaan Air Limbah Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Pengendalian Plester Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Instalasi Pengolahan Limbah Cair Rev.0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Pengendalian Limbah B3 Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Ijin Meninggalkan Pekerjaan Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Identifikasi Situasi Tanggap Darurat Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Incident - Accident Management System (Sistem Penanganan Insiden Kerja) Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Proses Pembayaran Gaji Karyawan Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Identifikasi Bahaya Dan Analisa Resiko Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Tamu Masuk - Keluar Area Perusahaan Rev. 0.4",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Tanggap Darurat Huru - Hara Demonstrasi Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Pengajuan Komplain Gaji Karyawan Rev. 0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Proses Training Rev. 0.4",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Permintaan Poduk Csr Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Proses Pemutusan Hubungan Kerja Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Pengelolaan Waste Rev. 1.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Tanggap Darurat Tumpahan Cairan B3 Dan Polutan Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Identifikasi Dan Pemenuhan Terhadap Peraturan Perundangan Serta Persyaratan Lain Dalam She Rev. 0.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Assessment Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Penilaian Prestasi Kerjat Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Order Kendaraan Dinas Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Identifikasi Aspek Dan Dampak Lingkungan Rev. 0.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Tanggap Darurat Media Komunikasi Tidak Befungsi Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Proses Permintaan Karyawan Outsource Rev. 0.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Pencucian Perlengkapan Kerja Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Proses Penggantian Karyawan Outsource Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Work Safety Permit (Pekerjaan Dengan Surat Ijin Keselamatan) Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Pemantauan Dan Pengukuran Lingkungan Kerja & Lingkungan Sekitar Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Proses Pengunduran Diri Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Tanggap Darurat Banjir Rev. 0.4",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Pengendalian Operasional Rev. 0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Promosi Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Tanggap Darurat Gempa Bumi Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Tata Cara Dan Penggunaan Kupon Makan Di Kantin Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Penanganan Darurat Kebakaran Rev. 0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Rekrutmen Rev. 0.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Penanganan Karyawan Sakit Rev. 0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Penanganan Kecelakaan Kerja Rev. 0.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Mutasi Karyawan Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Karyawan Masuk - Keluar Area Perusahaan Rev. 0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Sop Seleksi & Evaluasi Vendor Kantin",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "HCS",
+    "nama_doc": "Sop Pengembangan Kompetensi Teknis",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PDCA",
+    "nama_doc": "Sistem Pemutakhiran Rev. 0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PDCA",
+    "nama_doc": "Pengendalian Dokumen Rev. 2.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PDCA",
+    "nama_doc": "Verifikasi Dan Validasi Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PDCA",
+    "nama_doc": "Small Group Activity Rev. 0.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PDCA",
+    "nama_doc": "Internal Audit Rev.0.4",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PDCA",
+    "nama_doc": "Tinjauan Managemen Rev. 1.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PDCA",
+    "nama_doc": "Pengendalian Rekaman Rev 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PDCA",
+    "nama_doc": "Suggestion System Rev. 0.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PDCA",
+    "nama_doc": "Cross Function Team Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PDCA",
+    "nama_doc": "Pengukuran Kepuasan Pelanggan Rev. 0.4",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PDCA",
+    "nama_doc": "Pelaksanaan Tindakan Preventif Rev. 0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PDCA",
+    "nama_doc": "Pelaksanaan Tindakan Korektif Rev. 0.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Pembuatan Rencana Produksi 3 Bulanan Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Evaluasi Supplier Rev. 1.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Pembuatan Mrp 3 Bulanan Rev. 0.4",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Complain Dan Retur Bahan Rev. 0.",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Request For Quotation Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Unplanned Production Order Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Pembelian Rev. 0.4",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Pemenuhan Order Eksport Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Pembuatan Dan Review Rencana Produksi Dan Mrp Bulanan Rev. 1.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Purchase Requisition Rev. 0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Rework Production Order Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Normal Production Order Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PPIC PEMBELIAN",
+    "nama_doc": "Pembuatan Rencana Dan Pengendalian Produksi Mingguan Untuk Pemenuhan Order Rev. 1.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Proses Pembuatan Cream Rev.1.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Permintaan Dan Penerimaan Bahan Baku Penunjang Rev. 0.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Proses Produksi Lini Butter Cookies Rev.1.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Serah Terima Produk Setelah Reproses Rev.0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Proses Serah Terima Waste Rev.0.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Production Order Closing Rev.0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Proses Produksi Lini Wafer Cream Rev. 1.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Proses Produksi Lini Pasta Rev.1.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Proses Produksi Wafer Roll Rev. 1.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Proses Pembuatan Adonan Rev.1.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Goods Receipts From Production Order Rev.0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Proses Persiapan Bahan Kemas Rev.0.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Proses Pembuatan Caramel Rev.0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Goods Issue To Production Order Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Proses Produksi Lini Crackers Rev.1.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Proses Pembuatan Selai Rev.0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Proses Produksi Cookies Rev.1.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Production Inspection Rev.0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Retur Bahan Formula Bahan Kemas Bahan Baku Penunjang Rev. 0.4",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "PRODUKSI",
+    "nama_doc": "Production Order Confirmation Rev.0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QA",
+    "nama_doc": "Seleksi Dan Evaluasi Supplier Pest Control Rev.0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QA",
+    "nama_doc": "Seleksi Dan Evaluasi Transporter Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QA",
+    "nama_doc": "Prodk Integrity & Tanggap Darurat Sabotase Produk Rev.0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QA",
+    "nama_doc": "Identifikasi Dan Pengananan Bahan Alergen Rev.0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QA",
+    "nama_doc": "Retur Produk Dari Distributor Rev.0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QA",
+    "nama_doc": "Pengendalian Kerami Di Area Proses Produksi Rev.0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QA",
+    "nama_doc": "Tanggap Darurat Gangguan Transporter Rev.0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QA",
+    "nama_doc": "Pengendalian Kaca Dan Benda Sejenisnya Di Area Proses Produksi Rev.0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QA",
+    "nama_doc": "Sop Pelaksanaan Fumigasi",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Retain Sampel Produk Rev. 1.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Tanggap Darurat X-Ray Mati Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Penanganan Barang Yang Diuji Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Perbaikan Alat Ukur Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Pelayanan Kepada Pelanggan Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Pengujian Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Penarikan Produk Rev.1.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Pemilihan Dan Pemakaian Bahan Kimia Rev. 0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Tidak Standar Rev. 1.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Deadline Monitoring Rev.0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Penanganan Penyimpanan Analisa Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Penanganan Peralatan Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Pelaksanaan Tera Ulang Kalibrasi Rev. 1.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Tanggap Darurat X-Ray Mati Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Penanganan Keluhan Pelanggan Rev.1.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Quality Notification Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "QC",
+    "nama_doc": "Inspection Lot Manual Rev.0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "Penanganan Gas Drop Rev. 0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "Instalasi Mesin Rev.0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "Refurbishment Maintenance Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "Preventive Maintenance Rev. 0.4",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "Pemindahani Mesin Rev.0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "Modifikasi & Improvement Mesin Rev.0.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "Penanganan Pln Padam Dan Pln Open Rev. 0.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "Tanggap Darurat Supply Air Mati Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "External Service Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "Pengambilan Spare Part Khusus Rev.0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "Breakdown Dan Corrective Maintenance Rev. 1.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "Spare Part Management Rev.0.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "TEKNIK",
+    "nama_doc": "Pengolahan Air Rev. 1.3",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "WAREHOUSE FML",
+    "nama_doc": "Penjualan Sf Ke Bu Lain Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "WAREHOUSE FML",
+    "nama_doc": "Proses Mayor 3 (Crack) Rev. 2.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "WAREHOUSE FML",
+    "nama_doc": "Proses Mayor 1 (Persiapan Bahan Mayor Adonan Dan Cream Untuk Internal Dan Eksternal) Rev. 2.2",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "WAREHOUSE FML",
+    "nama_doc": "Proses Permintaan Dan Pengiriman Bahan Ke Produksi Internal Dan Eksternal Rev. 1.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "WAREHOUSE FML",
+    "nama_doc": "Penjualan Rm Pm Ke Internal - Eksternal Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "WAREHOUSE FML",
+    "nama_doc": "Pengeluaran Bahan Dan Pengiriman Bahan Rev. 1.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "WAREHOUSE FML",
+    "nama_doc": "Proses Serah Terima Bahan Baku Dari Gudang Bahan Baku Ke Formulasi Rev. 0.5",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "WAREHOUSE FML",
+    "nama_doc": "Material Staging Rev. 0.0",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "WAREHOUSE FML",
+    "nama_doc": "Proses Mayor 2 (Penyiapan Sf Gula Halus Untuk Internal Dan Eksternal) Rev. 2.1",
+    "link": "",
+    "file_name": ""
+  },
+  {
+    "company": "BU C",
+    "denis_dokumen": "SOP",
+    "divisi": "WAREHOUSE FML",
+    "nama_doc": "P Penerimaan Dan Penyimpanan Bahan",
+    "link": "",
+    "file_name": ""
+  }
+]

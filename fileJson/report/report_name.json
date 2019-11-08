@@ -1,0 +1,52 @@
+[
+  {
+    "department": "All",
+    "report_name": "Daily Stock By SKU",
+    "report_code": "R1_M"
+  },
+  {
+    "department": "All",
+    "report_name": "Daily Stock By LOC",
+    "report_code": "R2_M"
+  },
+  {
+    "department": "All",
+    "report_name": "Daily Production VS Sales",
+    "report_code": "R3_M"
+  },
+  {
+    "department": "All",
+    "report_name": "OTD1-OFR1 By Week( Periode Shipment)",
+    "report_code": "R4_M"
+  },
+  {
+    "department": "All",
+    "report_name": "OTD1-OFR1 By Week( Periode Arrival)",
+    "report_code": "R5_M"
+  },
+  {
+    "department": "All",
+    "report_name": "OTIF1-OFR1 By Week( Periode Shipment)",
+    "report_code": "R6_M"
+  },
+  {
+    "department": "All",
+    "report_name": "OTIF1-OFR1 By Week( Periode Arrival)",
+    "report_code": "R7_M"
+  },
+  {
+    "department": "All",
+    "report_name": "Warehouse Utilization",
+    "report_code": "R8_M"
+  },
+  {
+    "department": "All",
+    "report_name": "Sellout-Sellin-Production-Stock",
+    "report_code": "R9_M"
+  },
+  {
+    "department": "All",
+    "report_name": "Daliy Trend 3M (Demand-Stock-Supply-Production)",
+    "report_code": "R_10"
+  }
+]

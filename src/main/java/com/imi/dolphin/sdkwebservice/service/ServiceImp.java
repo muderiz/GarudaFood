@@ -12,8 +12,9 @@
  */
 package com.imi.dolphin.sdkwebservice.service;
 
+import com.imi.dolphin.sdkwebservice.param.ParamJSONReport;
 import com.google.gson.Gson;
-import com.imi.dolphin.sdkwebservice.GFmodel.Department;
+import com.imi.dolphin.sdkwebservice.GFmodel.ReportName;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +44,8 @@ import com.imi.dolphin.sdkwebservice.GFmodel.InfoUser;
 import com.imi.dolphin.sdkwebservice.GFmodel.LdapConnection;
 import com.imi.dolphin.sdkwebservice.GFmodel.LdapModel;
 import com.imi.dolphin.sdkwebservice.GFmodel.LoopParam;
+import com.imi.dolphin.sdkwebservice.GFmodel.MasterDepartment;
+import com.imi.dolphin.sdkwebservice.GFmodel.MasterGroupProduct;
 import com.imi.dolphin.sdkwebservice.model.MailModel;
 import com.imi.dolphin.sdkwebservice.GFmodel.Region;
 import com.imi.dolphin.sdkwebservice.GFmodel.ReportRequest;
@@ -53,6 +56,7 @@ import com.imi.dolphin.sdkwebservice.builder.DocumentBuilder;
 import com.imi.dolphin.sdkwebservice.model.UserToken;
 import com.imi.dolphin.sdkwebservice.param.ParamSdk;
 import com.imi.dolphin.sdkwebservice.property.AppProperties;
+import com.imi.dolphin.sdkwebservice.serviceSOP.ServiceImpSOP;
 import com.imi.dolphin.sdkwebservice.util.OkHttpUtil;
 import com.imi.dolphin.sdkwebservice.util.SdkUtil;
 import java.io.FileOutputStream;
@@ -102,6 +106,16 @@ public class ServiceImp implements IService {
     private static final String SPLIT = "&split&";
     private final String pathdir = System.getProperty("user.dir");
     private UserToken userToken;
+    public static final String roleJson = "fileJson/role.json";
+    public static final String reportnameJson = "fileJson/report_name.json";
+    public static final String departmentJson = "fileJson/masterdepartment.json";
+    public static final String grouproductJson = "fileJson/master_group_product.json";
+    public static final String productJson = "fileJson/product.json";
+    public static final String groupJson = "fileJson/group.json";
+    public static final String skuJson = "fileJson/sku.json";
+    private static final String QUICK_REPLY_SYNTAX = "{replies:title=";
+    private static final String QUICK_REPLY_SYNTAX_SUFFIX = "}";
+    private static final String COMMA = ",";
 
     @Autowired
     AppProperties appProp;
@@ -128,8 +142,7 @@ public class ServiceImp implements IService {
     Gson gson;
 
     @Autowired
-    private ParamJSON paramJSON;
-
+    private ParamJSONReport paramJSON;
 
     /*
 	 * Sample Srn status with static result
@@ -376,25 +389,33 @@ public class ServiceImp implements IService {
     public ExtensionResult getButtons(ExtensionRequest extensionRequest) {
         log.debug("getButtons() extension request: {}", extensionRequest);
         Map<String, String> output = new HashMap<>();
-
+        String dialog1 = "Berikut adalah nama-nama spesialisasi yang ada di RS Siloam. Silahkan menggeser menu dari kiri ke kanan untuk menampilkan semua opsi.  ";
         ButtonTemplate button = new ButtonTemplate();
-        button.setTitle(ParamSdk.SAMPLE_TITLE);
-        button.setSubTitle(ParamSdk.SAMPLE_SUBTITLE);
-        button.setPictureLink(appProp.getGARUDAFOOD_URL_GENERATEDFILES() + appProp.getGARUDAFOOD_WATERMARK_REPORT() + "02102019_123610516.jpeg");
-        button.setPicturePath(appProp.getGARUDAFOOD_URL_GENERATEDFILES() + appProp.getGARUDAFOOD_WATERMARK_REPORT() + "02102019_123610516.jpeg");
+        button.setTitle("");
+        button.setSubTitle(" ");
         List<EasyMap> actions = new ArrayList<>();
         EasyMap bookAction = new EasyMap();
-        bookAction.setName(ParamSdk.SAMPLE_LABEL);
-        bookAction.setValue(ParamSdk.SAMPLE_PAYLOAD);
+        bookAction.setName("List Spesialis");
+        bookAction.setValue("Test");
         actions.add(bookAction);
         button.setButtonValues(actions);
+        ButtonBuilder buttonBuilder = new ButtonBuilder(button);
+        String imagebuilder = buttonBuilder.build().toString();
 
-//        ButtonBuilder buttonBuilder = new ButtonBuilder(button);
-        DocumentBuilder documentBuilder = new DocumentBuilder(button);
-
-//        output.put(OUTPUT, buttonBuilder.build());
-        output.put(OUTPUT, documentBuilder.build());
-        log.debug("getButtons2() extension request: {}", documentBuilder.build());
+        ButtonTemplate button2 = new ButtonTemplate();
+        button2.setTitle("");
+        button2.setSubTitle(" ");
+        List<EasyMap> actions2 = new ArrayList<>();
+        EasyMap bookAction2 = new EasyMap();
+        bookAction2.setName("Menu Utama");
+        bookAction2.setValue("menu utama");
+        actions2.add(bookAction2);
+        button2.setButtonValues(actions2);
+        ButtonBuilder buttonBuilder2 = new ButtonBuilder(button2);
+        String imagebuilder2 = buttonBuilder2.build().toString();
+        // ----------//
+        output.put(OUTPUT, dialog1 + SPLIT + imagebuilder + SPLIT + imagebuilder2);
+//        log.debug("getButtons2() extension request: {}", documentBuilder.build());
 
         ExtensionResult extensionResult = new ExtensionResult();
         extensionResult.setAgent(false);
@@ -504,32 +525,52 @@ public class ServiceImp implements IService {
      */
     @Override
     public ExtensionResult getImage(ExtensionRequest extensionRequest) {
-        log.debug("getImage() extension request: {}", extensionRequest);
+        log.debug("getImage() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
         Map<String, String> output = new HashMap<>();
-//        String imagemap = sdkUtil.getEasyMapValueByName(extensionRequest, "param");
+        String url = "https://autobot.garudafood.co.id/GeneratedFiles/watermarkReport/10102019_174110629.jpeg";
+        ServiceImpSOP sOP = new ServiceImpSOP();
+        StringBuilder sb = new StringBuilder();
 
-        ButtonTemplate image = new ButtonTemplate();
-//        image.setPictureLink("https://github.com/muderiz/image/blob/master/Siloam%20Logo.png?raw=true");
-//        image.setPictureLink("manual.pdf");
-//        image.setPicturePath("manual.pdf");
-        image.setPictureLink("https://autobot.garudafood.co.id/GeneratedFiles/watermarkReport/manual.pdf");
-        image.setPicturePath("https://autobot.garudafood.co.id/GeneratedFiles/watermarkReport/manual.pdf");
+        ButtonTemplate button = new ButtonTemplate();
+        button.setTitle("");
+        button.setSubTitle(" ");
+        List<EasyMap> actions = sOP.actionEasyMaps();
+        int i = 0;
+        for (i = 0; i < 5; i++) {
+            EasyMap bookAction = new EasyMap();
+            bookAction.setName(i + 1 + "");
+            bookAction.setValue(i + 1 + "");
+            actions.add(bookAction);
+        }
+        if (i == 5) {
+            EasyMap bookAction = new EasyMap();
+            bookAction.setName("Next");
+            bookAction.setValue("next");
+            actions.add(bookAction);
 
-//        image.setPicturePath(appProperties.getGARUDAFOOD_URL_GENERATEDFILES() + appProperties.getGARUDAFOOD_WATERMARK_REPORT() + "graph1.jpeg");
-        image.setTitle("Test");
-//        image.setSubTitle("Test");
-//        ImageBuilder imageBuilder = new ImageBuilder(image);
-//        output.put(OUTPUT, imageBuilder.build());
-        DocumentBuilder documentBuilder = new DocumentBuilder(image);
-        output.put(OUTPUT, documentBuilder.build());
+            EasyMap bookAction2 = new EasyMap();
+            bookAction2.setName("Menu");
+            bookAction2.setValue("Menu");
+            actions.add(bookAction2);
 
+        }
+        button.setButtonValues(actions);
+        ButtonBuilder buttonBuilder = new ButtonBuilder(button);
+        sb.append(buttonBuilder.build()).append(SPLIT);
+
+        String dialog = "Test Button with 5 Action";
+        output.put(OUTPUT, dialog + SPLIT + sb.toString());
+//        String dialog = "Test Dialog";
+//        QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("")
+//                .add("Location", "test").add("Location", "test").add("Location", "test").build();
+//        output.put(OUTPUT, dialog + SPLIT + quickReplyBuilder.string());
+        System.out.println(output);
         ExtensionResult extensionResult = new ExtensionResult();
         extensionResult.setAgent(false);
         extensionResult.setRepeat(false);
         extensionResult.setSuccess(true);
         extensionResult.setNext(true);
         extensionResult.setValue(output);
-        log.debug("Output Image() extension request: {}", output);
         return extensionResult;
     }
 
@@ -571,7 +612,8 @@ public class ServiceImp implements IService {
     @Override
     public ExtensionResult doSendMail(ExtensionRequest extensionRequest) {
         log.debug("doSendMail() extension request: {}", extensionRequest);
-        String recipient = sdkUtil.getEasyMapValueByName(extensionRequest, "recipient");
+//        String recipient = sdkUtil.getEasyMapValueByName(extensionRequest, "recipient");
+        String recipient = "muhammad.rizky@mii.co.id";
 
         int max = 999999;
         int min = 111111;
@@ -579,7 +621,7 @@ public class ServiceImp implements IService {
         int randomNumber = random.nextInt(max + 1 - min) + min;
 
         System.out.println(randomNumber);
-        String Pesan = "Untuk mengkonfirmasi email Anda, silahkan gunakan kode verifikasi(OTP) berikut : \n" + randomNumber;
+        String Pesan = "Untuk mengkonfirmasi email Anda, silahkan gunakan kode verifikasi(OTP) berikut : \n\n" + randomNumber;
 
         MailModel mailModel = new MailModel(recipient, "Test Email", Pesan);
 //        String newResult = svcMailService.sendMail(mailModel);
@@ -602,14 +644,28 @@ public class ServiceImp implements IService {
     @Override
     public ExtensionResult getDolphinResponse(ExtensionRequest extensionRequest) {
         userToken = svcDolphinService.getUserToken(userToken);
-        log.debug("getDolphinResponse() extension request: {} user token: {}", extensionRequest, userToken);
+        log.debug("getDolphinResponse() extension request: {} user token: {}", extensionRequest, new Gson().toJson(userToken));
         String contactId = extensionRequest.getIntent().getTicket().getContactId();
+        log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, contactId);
         Contact contact = svcDolphinService.getCustomer(userToken, contactId);
-        contact.setContactFirstName("YOUR NAME");
-        contact = svcDolphinService.updateCustomer(userToken, contact);
+        log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, new Gson().toJson(contact));
+        String b = contact.getAdditionalField().get(0);
+        InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
+        String accName = dataInfoUser.getAccountName();
+        String fullName = dataInfoUser.getFullName();
+        String email = dataInfoUser.getMail();
+//        InfoUser infouser = new InfoUser();
+//        infouser.setAccountName("Test ACC Name");
+//        infouser.setFullName("Test Full Name");
+//        infouser.setMail("Test Mail");
+//        List<String> listData = new ArrayList<>();
+//        listData.add("" + new Gson().toJson(infouser, InfoUser.class) + "");
+//        contact.setContactFirstName("Deka");
+//        contact.setAdditionalField(listData);
+//        contact = svcDolphinService.updateCustomer(userToken, contact);
 
         Map<String, String> output = new HashMap<>();
-        output.put(OUTPUT, "PING " + contact.getContactFirstName());
+        output.put(OUTPUT, "PING " + contact.getContactFirstName() + "Additional :" + contact.getAdditionalField());
         ExtensionResult extensionResult = new ExtensionResult();
         extensionResult.setAgent(false);
         extensionResult.setRepeat(false);
@@ -619,7 +675,7 @@ public class ServiceImp implements IService {
         return extensionResult;
     }
 
-    /* 
+    /*  
 	 * SDK with Authorization example
 	 * 
 	 * (non-Javadoc)
@@ -646,96 +702,15 @@ public class ServiceImp implements IService {
         return extensionResult;
     }
 
-    // -----------------------------------Method Start------------------------------------------------------ //
-//    public ExtensionResult getUserInfo(ExtensionRequest extensionRequest) {
-//        log.debug("getUserInfo() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
-//
-//        String contactId = extensionRequest.getIntent().getTicket().getContactId();
-//        userToken = svcDolphinService.getUserToken(userToken, extensionRequest);
-//        Contact contact = svcDolphinService.getCustomer(userToken, contactId);
-//        String b = contact.getAdditionalField().get(0);
-//        InfoUser infoUser = new Gson().fromJson(b, InfoUser.class);
-//        
-//    }
     private SearchControls getSimpleSearchControls() {
         SearchControls searchControls = new SearchControls();
         searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
         searchControls.setTimeLimit(30000);
-        //String[] attrIDs = {"objectGUID"};
-        //searchControls.setReturningAttributes(attrIDs);
+//        String[] attrIDs = {"objectGUID"};
+//        searchControls.setReturningAttributes(attrIDs);
         return searchControls;
     }
 
-    private ExtensionResult getInfo(String keyValue, LdapModel ldap, ExtensionRequest extensionRequest) throws NamingException, ParseException {
-        log.debug("getInfo() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
-        ExtensionResult extensionResult = new ExtensionResult();
-//        Map<String, String> output = new HashMap<>();
-        final String ldapAdServer = ldap.getServerInfo();
-        final String ldapSearchBase = ldap.getSearchBase();
-        final String ldapUsername = ldap.getUsername();
-        final String ldapPassword = ldap.getPassword();
-        final String ldapLoginPrincipal = ldap.getLoginPrincipal();
-//
-//        Hashtable<String, Object> env = new Hashtable<String, Object>();
-//        env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-//        env.put(Context.SECURITY_AUTHENTICATION, "simple");
-//        env.put(Context.SECURITY_PRINCIPAL, ldapUsername);
-//        env.put(Context.SECURITY_CREDENTIALS, ldapPassword);
-//        env.put(Context.PROVIDER_URL, ldapAdServer);
-//
-//        //ensures that objectSID attribute values
-//        //will be returned as a byte[] instead of a String
-////        env.put("java.naming.ldap.attributes.binary", "objectSID");
-//        DirContext ldapContext = new InitialDirContext(env);
-//
-////        LdapContext ctxx = new InitialLdapContext(env, null);
-////        ldapContext.setRequestControls(null);
-////            ldapContext.setRequestControls(null);
-//        String filterBase = appProp.getGARUDAFOOD_LDAP_SEARCHATTRUSERNAME();
-//
-//        NamingEnumeration<?> namingEnum = ldapContext.search(ldapSearchBase, filterBase + "=" + keyValue, getSimpleSearchControls());
-//        SearchResult result = (SearchResult) namingEnum.next();
-//        Attributes attrs = result.getAttributes();
-//        String sAMAccountName = attrs.get("sAMAccountName").get().toString();
-        String sAMAccountName = keyValue;
-//        String mail = attrs.get("mail").get().toString();
-//        System.out.println(mail);
-//            mail = mail.toLowerCase();
-        if (sAMAccountName.equalsIgnoreCase(keyValue)) {
-//                String name = attrs.get("name").get().toString();
-//                String name = keyValue;
-//                System.out.println(name);
-//                name = name.toLowerCase();
-//                name = toTitleCase(name);
-//                dn = result.getName() + ",dc=development03,dc=co,dc=id";
-
-            // Set AdditionalField //
-            userToken = svcDolphinService.getUserToken(userToken);
-            log.debug("userToken() extension request: {}", userToken);
-            String contactId = extensionRequest.getIntent().getTicket().getContactId();
-            log.debug("getContactID() extension request: {}", contactId);
-
-            Contact contact = svcDolphinService.getCustomer(userToken, contactId);
-            log.debug("Contact() data contact: {}", new Gson().toJson(contact, Contact.class));
-            InfoUser infoUser = new InfoUser();
-            infoUser.setAccountName(sAMAccountName);
-            infoUser.setFullName(sAMAccountName);
-            infoUser.setMail("test@gmail.com");
-
-            List<String> listData = new ArrayList<>();
-            listData.add("" + new Gson().toJson(infoUser, InfoUser.class) + "");
-            contact.setAdditionalField(listData);
-            contact = svcDolphinService.updateCustomer(userToken, contact);
-            // ------------------ //
-
-//                extensionResult.setValue(output);
-        }
-//            namingEnum.close();
-//            extensionResult.setValue(output);
-        return extensionResult;
-    }
-
-    @Override
     public ExtensionResult getUserLdap(ExtensionRequest extensionRequest) {
         log.debug("getUserInfo() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
         ExtensionResult extensionResult = new ExtensionResult();
@@ -746,66 +721,228 @@ public class ServiceImp implements IService {
         extensionResult.setNext(true);
 
         String usernameUser = sdkUtil.getEasyMapValueByName(extensionRequest, "username");
+        int randomNumber = 0;
+        Map<String, String> clearEntities = new HashMap<>();
+        LdapContext ctxx = null;
+        try {
+//            extensionResult = getInfo(usernameUser, ldap, extensionRequest);
+            Hashtable<String, Object> env = new Hashtable<String, Object>();
+            env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+            env.put(Context.SECURITY_AUTHENTICATION, "simple");
+            env.put(Context.SECURITY_PRINCIPAL, appProp.getGARUDAFOOD_LDAP_LOGINPRINCIPAL());
+            env.put(Context.SECURITY_CREDENTIALS, appProp.getGARUDAFOOD_LDAP_PASSWORD());
+            env.put(Context.PROVIDER_URL, appProp.getGARUDAFOOD_LDAP_HOST());
+            log.debug("getEnvLDAP() extension request: {}", new Gson().toJson(env));
 
-        LdapModel ldap = new LdapModel();
-        ldap.setUsername(appProp.getGARUDAFOOD_LDAP_USERNAME());
-        ldap.setPassword(appProp.getGARUDAFOOD_LDAP_PASSWORD());
-        ldap.setServerInfo(appProp.getGARUDAFOOD_LDAP_HOST());
-        ldap.setSearchBase(appProp.getGARUDAFOOD_LDAP_DIRECTORYPATH());
-        ldap.setLoginPrincipal(appProp.getGARUDAFOOD_LDAP_LOGINPRINCIPAL());
+            ctxx = new InitialLdapContext(env, null);
+            log.debug("============== LDAP Connection: COMPLETE ============");
+            ctxx.setRequestControls(null);
+//            log.debug("ctxxLdap() extension request: {}", new Gson().toJson(ctxx));
+
+            String filterBase = appProp.getGARUDAFOOD_LDAP_SEARCHATTRUSERNAME();
+
+            NamingEnumeration<?> namingEnum = ctxx.search(appProp.getGARUDAFOOD_LDAP_DIRECTORYPATH(), filterBase + "=" + usernameUser, getSimpleSearchControls());
+            SearchResult result = (SearchResult) namingEnum.next();
+            Attributes attrs = result.getAttributes();
+            String sAMAccountName = attrs.get("sAMAccountName").get().toString();
+            String name = attrs.get("name").get().toString();
+            String mail = attrs.get("mail").get().toString();
+//            String mail = "m.dekarizky@gmail.com";
+            mail = mail.toLowerCase();
+
+            if (sAMAccountName.equalsIgnoreCase(usernameUser)) {
+                // ============== Send OTP to Mail ============ //
+                log.debug("============== Send OTP to Mail ============");
+                int max = 999999;
+                int min = 111111;
+                Random random = new Random();
+                randomNumber = random.nextInt(max + 1 - min) + min;
+
+                System.out.println(randomNumber);
+                String subject = "Chatbot OTP Konfirmasi Akun";
+                String pesan = "Untuk mengkonfirmasi email Anda, silahkan gunakan kode verifikasi(OTP) berikut : \n\n" + randomNumber;
+//
+//                MailModel mailModel = new MailModel(mail, subject, pesan);
+//                String sendMailResult = svcMailService.sendMail(mailModel);
+//                log.debug("============== Status Send Email : ", sendMailResult);
+
+                String dialog1 = "Baiklah " + name + ". Silahkan cek email kantor anda untuk melihat OTP yang sudah dikirimkan.\n"
+                        + "Ketikan OTP yang sudah dikirimkan ke Email Anda dengan benar.";
+                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Atau klik di bawah ini jika kamu tidak mendapatkan OTP tersebut.")
+                        .add("Kirim OTP", "otp ulang").build();
+                output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
+                MailModel mailModel = new MailModel(mail, subject, pesan);
+                String sendMailResult = svcMailService.sendMail(mailModel);
+            }
+        } catch (NamingException nex) {
+            log.debug("============== LDAP Connection: FAILED ============", new Gson().toJson(nex));
+        }
+        clearEntities.put("otp_kesempatan", "3");
+        clearEntities.put("otp", randomNumber + "");
+        extensionResult.setEntities(clearEntities);
+        extensionResult.setValue(output);
+        return extensionResult;
+    }
+
+    public ExtensionResult validasiOtp(ExtensionRequest extensionRequest) {
+        log.debug("validasiOtp() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        ExtensionResult extensionResult = new ExtensionResult();
+        String otpKesempatan = sdkUtil.getEasyMapValueByName(extensionRequest, "otp_kesempatan");
+        String otp = sdkUtil.getEasyMapValueByName(extensionRequest, "otp");
+        String otpFromUser = sdkUtil.getEasyMapValueByName(extensionRequest, "otp_kode");
+        String usernameUser = sdkUtil.getEasyMapValueByName(extensionRequest, "username");
+
+        Map<String, String> output = new HashMap<>();
+        int randomNumber = 0;
+        int kesempatanotp = Integer.parseInt(otpKesempatan);
         Map<String, String> clearEntities = new HashMap<>();
 
-//        Hashtable<String, Object> env = new Hashtable<String, Object>();
-//        env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-//        env.put(Context.SECURITY_AUTHENTICATION, "simple");
-//        env.put(Context.SECURITY_PRINCIPAL, appProp.getGARUDAFOOD_LDAP_USERNAME());
-//        env.put(Context.SECURITY_CREDENTIALS, appProp.getGARUDAFOOD_LDAP_PASSWORD());
-//        env.put(Context.PROVIDER_URL, appProp.getGARUDAFOOD_LDAP_HOST());
-        try {
-            extensionResult = getInfo(usernameUser, ldap, extensionRequest);
-//            Map<String, String> clearEntities = new HashMap<>();
-//            clearEntities.put("otp_kode", "12345");
-//            clearEntities.put("otp_kesempatan", "3");
-//            extensionResult.setEntities(clearEntities);
-            //ensures that objectSID attribute values
-            //will be returned as a byte[] instead of a String
-//        env.put("java.naming.ldap.attributes.binary", "objectSID");
-//            DirContext ldapContext = new InitialDirContext(env);
+        if (kesempatanotp == 0) {
+            userToken = svcDolphinService.getUserToken(userToken);
+            String contactId = extensionRequest.getIntent().getTicket().getContactId();
+            Contact contact = svcDolphinService.getCustomer(userToken, contactId);
+            log.debug("getDolphinResponse() extension request: {} user token: {}", extensionRequest, new Gson().toJson(userToken));
+            log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, contactId);
+            log.debug("getDolphinResponse() extension request: {} Contact: {}", extensionRequest, new Gson().toJson(contact));
+            // ============== Get AdditionalField ============ //
+            String b = contact.getAdditionalField().get(0);
+            InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
+            String mail = dataInfoUser.getMail();
+//            String mail = "muhammad.rizky@mii.co.id";
 
-//            LdapContext ctxx = new InitialLdapContext(env, null);
-//        ldapContext.setRequestControls(null);
-//            ldapContext.setRequestControls(null);
-//            String filterBase = appProp.getGARUDAFOOD_LDAP_SEARCHATTRUSERNAME();
-//
-//            NamingEnumeration<?> namingEnum = ldapContext.search(appProp.getGARUDAFOOD_LDAP_DIRECTORYPATH(), filterBase + "=" + usernameUser, getSimpleSearchControls());
-//            SearchResult result = (SearchResult) namingEnum.next();
-//            Attributes attrs = result.getAttributes();
-//            String sAMAccountName = attrs.get("sAMAccountName").get().toString();
-////            String sAMAccountName = keyValue;
-//            String mail = attrs.get("mail").get().toString();
-//            System.out.println(mail);
-//            System.out.println(sAMAccountName);
-        } catch (NamingException e) {
+            int max = 999999;
+            int min = 111111;
+            Random random = new Random();
+            randomNumber = random.nextInt(max + 1 - min) + min;
 
-        } catch (ParseException ex) {
-            java.util.logging.Logger.getLogger(ServiceImp.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(randomNumber);
+            String subject = "Chatbot OTP Konfirmasi Akun";
+            String pesan = "Untuk mengkonfirmasi email Anda, silahkan gunakan kode verifikasi(OTP) berikut : \n\n" + randomNumber;
+
+            MailModel mailModel = new MailModel(mail, subject, pesan);
+            String sendMailResult = svcMailService.sendMail(mailModel);
+            log.debug("============== Status Send Email :", new Gson().toJson(sendMailResult));
+            String dialog1 = "Anda sudah mencapai batas percobaan. Silahkan cek email kembali untuk melihat OTP terbaru.\n\n "
+                    + "Ketikan OTP yang sudah dikirimkan ke Email Anda dengan benar.";
+            QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Atau klik di bawah ini jika kamu tidak mendapatkan OTP tersebut.")
+                    .add("Kirim OTP", "otp ulang").build();
+            output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
+            kesempatanotp = 3;
+            clearEntities.put("otp_kode", "");
+
+        } else {
+            if (otpFromUser.equalsIgnoreCase(otp)) {
+                LdapContext ctxx = null;
+                try {
+                    Hashtable<String, Object> env = new Hashtable<String, Object>();
+                    env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+                    env.put(Context.SECURITY_AUTHENTICATION, "simple");
+                    env.put(Context.SECURITY_PRINCIPAL, appProp.getGARUDAFOOD_LDAP_LOGINPRINCIPAL());
+                    env.put(Context.SECURITY_CREDENTIALS, appProp.getGARUDAFOOD_LDAP_PASSWORD());
+                    env.put(Context.PROVIDER_URL, appProp.getGARUDAFOOD_LDAP_HOST());
+                    log.debug("getEnvLDAP() extension request: {}", new Gson().toJson(env));
+
+                    ctxx = new InitialLdapContext(env, null);
+                    log.debug("============== LDAP Connection: COMPLETE ============");
+                    ctxx.setRequestControls(null);
+//            log.debug("ctxxLdap() extension request: {}", new Gson().toJson(ctxx));
+
+                    String filterBase = appProp.getGARUDAFOOD_LDAP_SEARCHATTRUSERNAME();
+
+                    NamingEnumeration<?> namingEnum = ctxx.search(appProp.getGARUDAFOOD_LDAP_DIRECTORYPATH(), filterBase + "=" + usernameUser, getSimpleSearchControls());
+                    SearchResult result = (SearchResult) namingEnum.next();
+                    Attributes attrs = result.getAttributes();
+                    String sAMAccountName = attrs.get("sAMAccountName").get().toString();
+                    String name = attrs.get("name").get().toString();
+                    String mail = attrs.get("mail").get().toString();
+                    // String mail = "m.dekarizky@gmail.com";
+                    mail = mail.toLowerCase();
+
+                    log.debug("============== Set AdditionalField ============");
+                    userToken = svcDolphinService.getUserToken(userToken);
+                    String contactId = extensionRequest.getIntent().getTicket().getContactId();
+                    Contact contact = svcDolphinService.getCustomer(userToken, contactId);
+                    log.debug("getDolphinResponse() extension request: {} user token: {}", extensionRequest, new Gson().toJson(userToken));
+                    log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, contactId);
+                    log.debug("getDolphinResponse() extension request: {} Contact: {}", extensionRequest, new Gson().toJson(contact));
+
+                    // ============== Set AdditionalField ============ //
+                    InfoUser infouser = new InfoUser();
+                    infouser.setAccountName(sAMAccountName);
+                    infouser.setFullName(name);
+                    infouser.setMail(mail);
+                    infouser.setTitle("");
+                    infouser.setDepartment("");
+                    infouser.setCompany("");
+                    infouser.setDivision("");
+                    List<String> listData = new ArrayList<>();
+                    listData.add("" + new Gson().toJson(infouser, InfoUser.class) + "");
+                    contact.setAdditionalField(listData);
+                    contact = svcDolphinService.updateCustomer(userToken, contact);
+                } catch (NamingException nex) {
+                    log.debug("============== LDAP Connection: FAILED ============", new Gson().toJson(nex));
+                }
+                clearEntities.put("before_final", "yes");
+            } else {
+                kesempatanotp = kesempatanotp - 1;
+                String dialog1 = "OTP yang Anda masukan salah. \n\nSilahkan ketikan kembali dengan benar.";
+                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Atau klik di bawah ini jika kamu tidak mendapatkan OTP tersebut.")
+                        .add("Kirim OTP", "otp ulang").build();
+                output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
+                clearEntities.put("otp_kode", "");
+
+            }
         }
-//
 
-        clearEntities.put("otp_kode", "12345");
-        clearEntities.put("otp_kesempatan", "3");
+        clearEntities.put("otp_kesempatan", kesempatanotp + "");
         extensionResult.setEntities(clearEntities);
-        String dialog = "Test";
-        output.put(OUTPUT, dialog);
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
         extensionResult.setValue(output);
         return extensionResult;
     }
 
     public ExtensionResult menuUtama(ExtensionRequest extensionRequest) {
-        log.debug("getUserInfo() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        log.debug("menuUtama() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
         Map<String, String> output = new HashMap<>();
+        userToken = svcDolphinService.getUserToken(userToken);
+        String contactId = extensionRequest.getIntent().getTicket().getContactId();
+        Contact contact = svcDolphinService.getCustomer(userToken, contactId);
+        log.debug("getDolphinResponse() extension request: {} user token: {}", extensionRequest, new Gson().toJson(userToken));
+        log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, contactId);
+        log.debug("getDolphinResponse() extension request: {} Contact: {}", extensionRequest, new Gson().toJson(contact));
+        // ============== Get AdditionalField ============ //
+        String b = contact.getAdditionalField().get(0);
+        InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
+        String fullName = dataInfoUser.getFullName();
+        String dialog1 = "Hai " + fullName + ". Anda sudah berhasil melakukan konfirmasi akun.";
+        QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Sekarang silahkan pilih Menu berikut yang kamu inginkan.")
+                .add("Report", "report").add("SOP", "sop").add("Konsumsi Bahan Bakar", "fuel").build();
+        output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
+        ExtensionResult extensionResult = new ExtensionResult();
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
+        extensionResult.setValue(output);
+        return extensionResult;
+    }
 
-        QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Silahkan klik Menu berikut yang kamu inginkan.")
+    public ExtensionResult menuUtamaGeneral(ExtensionRequest extensionRequest) {
+        log.debug("menuUtama() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        Map<String, String> output = new HashMap<>();
+//        userToken = svcDolphinService.getUserToken(userToken);
+//        String contactId = extensionRequest.getIntent().getTicket().getContactId();
+//        Contact contact = svcDolphinService.getCustomer(userToken, contactId);
+//        log.debug("getDolphinResponse() extension request: {} user token: {}", extensionRequest, new Gson().toJson(userToken));
+//        log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, contactId);
+//        log.debug("getDolphinResponse() extension request: {} Contact: {}", extensionRequest, new Gson().toJson(contact));
+//        // ============== Get AdditionalField ============ //
+//        String b = contact.getAdditionalField().get(0);
+//        InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
+        QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Sekarang silahkan pilih Menu berikut yang kamu inginkan.")
                 .add("Report", "report").add("SOP", "sop").add("Konsumsi Bahan Bakar", "fuel").build();
         output.put(OUTPUT, quickReplyBuilder.string());
         ExtensionResult extensionResult = new ExtensionResult();
@@ -816,627 +953,4 @@ public class ServiceImp implements IService {
         extensionResult.setValue(output);
         return extensionResult;
     }
-
-    /**
-     * Method General Execute API
-     *
-     * Bertujuan untuk mendapatkan Body Message dari API
-     *
-     * @param link berisi URL API yang ingin di Cek Body Messagenya
-     * @return jsonobj : Return berupa JSon Object
-     */
-    private JSONObject GeneralExecuteAPI(String link) {
-        OkHttpUtil okHttpUtil = new OkHttpUtil();
-        okHttpUtil.init(true);
-        JSONObject jsonobj = null;
-        try {
-
-            Request request = new Request.Builder().url(link).get().build();
-            Response response = okHttpUtil.getClient().newCall(request).execute();
-            jsonobj = new JSONObject(response.body().string());
-        } catch (IOException ex) {
-        }
-
-        return jsonobj;
-    }
-
-    @Override
-    public ExtensionResult pertanyaanPertama(ExtensionRequest extensionRequest) {
-        Map<String, String> output = new HashMap<>();
-        ExtensionResult extensionResult = new ExtensionResult();
-        extensionResult.setAgent(false);
-        extensionResult.setRepeat(false);
-        extensionResult.setSuccess(true);
-        extensionResult.setNext(true);
-        Map<String, String> clearEntities = new HashMap<>();
-
-        String usernameUser = sdkUtil.getEasyMapValueByName(extensionRequest, "username");
-
-        List<Role> listRole = paramJSON.getListRolefromFileJson("role.json");
-
-        String title = "";
-        String company = "";
-        String division = "";
-        String department = "";
-        int lengList = listRole.size();
-        for (int i = 0; i < lengList; i++) {
-            Role roleArray = listRole.get(i);
-            String roleUsername = roleArray.username;
-            if (roleUsername.equalsIgnoreCase(usernameUser)) {
-                title = roleArray.title;
-                company = roleArray.company;
-                division = roleArray.division;
-                department = roleArray.department;
-                break;
-            }
-        }
-
-        StringBuilder sb = new StringBuilder();
-        switch (title.toLowerCase()) {
-            case "top management":
-//                String ContCompany = "";
-                sb.append("{first_name} ingin melihat report dari Company apa?\n")
-                        .append("1. GPPJ");
-                clearEntities.put("role", title);
-                break;
-            case "management":
-                sb.append("{first_name} ingin melihat report dari Departemen apa?\n")
-                        .append("1. E2E");
-//                        .append("2. Inbound")
-//                        .append("3. Outbound");
-
-                clearEntities.put("role", title);
-                clearEntities.put("company", company);
-                clearEntities.put("divisi", division);
-                break;
-            case "staff":
-                sb.append("{custormer_name} ingin melihat report apa?\n");
-                sb.append(" \n\n");
-                sb.append("Silahkan pilih angka pada report yang anda inginkan.");
-                clearEntities.put("role", title);
-                clearEntities.put("company", company);
-                clearEntities.put("divisi", division);
-                clearEntities.put("departement", department);
-                break;
-        }
-
-        String dialog1 = "Baiklah, {first_name} sudah berada di menu report";
-
-        output.put(OUTPUT, dialog1 + SPLIT + sb.toString());
-        extensionResult.setValue(output);
-        extensionResult.setEntities(clearEntities);
-
-        return extensionResult;
-    }
-
-    @Override
-    public ExtensionResult tanyaReportName(ExtensionRequest extensionRequest) {
-        log.debug("tanyaReportName() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
-        Map<String, String> output = new HashMap<>();
-        ExtensionResult extensionResult = new ExtensionResult();
-        String role = sdkUtil.getEasyMapValueByName(extensionRequest, "role");
-        String departement = sdkUtil.getEasyMapValueByName(extensionRequest, "departement");
-        Map<String, String> clearEntities = new HashMap<>();
-        StringBuilder sb = new StringBuilder();
-
-        List<Department> listDepartment = paramJSON.getListDepartmentfromFileJson("department.json");
-        int lengList = listDepartment.size();
-        String urutan;
-        String valueUrutan;
-        String dialogmanagement;
-        if (departement.equalsIgnoreCase("1") || departement.equalsIgnoreCase("e2e")) {
-            if (role.equalsIgnoreCase("management")) {
-                if (departement.equalsIgnoreCase("1")) {
-                    departement = "e2e";
-                } else if (departement.equalsIgnoreCase("2")) {
-                    departement = "inbound";
-
-                } else if (departement.equalsIgnoreCase("3")) {
-                    departement = "outbound";
-                }
-                int j = 1;
-                for (int i = 0; i < lengList; i++) {
-                    Department departementArray = listDepartment.get(i);
-                    String departemenName = departementArray.department;
-                    String reportName = departementArray.report_name;
-                    if (departemenName.equalsIgnoreCase(departement)) {
-                        urutan = j + ". ";
-                        valueUrutan = reportName + "\n";
-
-                        sb.append(urutan).append(valueUrutan);
-                        j++;
-                    }
-                }
-            } else if (role.equalsIgnoreCase("staff")) {
-                int j = 1;
-                for (int i = 0; i < lengList; i++) {
-                    Department departementArray = listDepartment.get(i);
-                    String departemenName = departementArray.department;
-                    String reportName = departementArray.report_name;
-                    if (departemenName.equalsIgnoreCase(departement)) {
-                        urutan = j + ". ";
-                        valueUrutan = reportName + "\n";
-                        sb.append(urutan).append(valueUrutan);
-                        j++;
-                    }
-                }
-            }
-
-            String dialog1 = "{first_name} ingin melihat Report apa?\n";
-            String dialog2 = "Silahkan pilih angka yang anda inginkan";
-
-            output.put(OUTPUT, dialog1 + SPLIT + sb.toString() + SPLIT + dialog2);
-            clearEntities.put("departement", "e2e");
-        } else {
-            sb.append("Mohon maaf untuk saat ini Departemen tersebut belum tersedia.")
-                    .append("{first_name} ingin melihat report dari Departemen apa?\n")
-                    .append("- E2E");
-//                        .append("2. Inbound")
-//                        .append("3. Outbound");
-
-            clearEntities.put("departement", "");
-
-            output.put(OUTPUT, sb.toString());
-        }
-
-        extensionResult.setValue(output);
-        extensionResult.setEntities(clearEntities);
-
-        extensionResult.setAgent(false);
-        extensionResult.setRepeat(false);
-        extensionResult.setSuccess(true);
-        extensionResult.setNext(true);
-        return extensionResult;
-    }
-
-    @Override
-    public ExtensionResult tanyaKategori(ExtensionRequest extensionRequest) {
-        log.debug("tanyaKategori() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
-        Map<String, String> output = new HashMap<>();
-        ExtensionResult extensionResult = new ExtensionResult();
-        Map<String, String> clearEntities = new HashMap<>();
-        StringBuilder sb = new StringBuilder();
-        String role = sdkUtil.getEasyMapValueByName(extensionRequest, "role");
-        String company = sdkUtil.getEasyMapValueByName(extensionRequest, "company");
-        String departement = sdkUtil.getEasyMapValueByName(extensionRequest, "departement");
-        String namaReport = sdkUtil.getEasyMapValueByName(extensionRequest, "nama_report");
-
-        if (namaReport.equalsIgnoreCase("1") || namaReport.equalsIgnoreCase("daily production v sales")) {
-            if (namaReport.equalsIgnoreCase("1")) {
-                namaReport = "daily production v sales";
-//            case "2":
-//                namaReport = "daily";
-//            case "3":
-//                namaReport = "outbound";
-//                clearEntities.put("nama_report", "daily production v sales");
-
-            }
-            List<Product> listProduct = paramJSON.getListProductfromFileJson("product.json");
-            List<Product> listGPPJ = listProduct.stream()
-                    .filter(product -> product.principal.equalsIgnoreCase(company))
-                    .collect(Collectors.toList());
-            String urutan;
-            String valueUrutan;
-            int lengList = listGPPJ.size();
-            String addGroup = "";
-            int j = 1;
-
-            for (int i = 0; i < lengList; i++) {
-                Product productArray = listGPPJ.get(i);
-                String groupProduct = productArray.group_category;
-                if (!addGroup.equalsIgnoreCase(groupProduct)) {
-                    addGroup = groupProduct;
-                    urutan = j + ". ";
-                    valueUrutan = groupProduct + "\n";
-                    sb.append(urutan).append(valueUrutan);
-                    j++;
-                }
-            }
-            String dialog1 = "Ingin melihat group kategori apa?\n" + sb.toString();
-            String dialog2 = "Silahkan pilih angka yang anda inginkan.";
-            output.put(OUTPUT, dialog1 + SPLIT + dialog2);
-            clearEntities.put("nama_report", namaReport);
-        } else {
-            sb.append("Mohon maaf untuk saat ini Report tersebut belum tersedia.")
-                    .append("{customer_name} ingin melihat Report apa?\n")
-                    .append("1. Daily Production v Sales");
-//                        .append("2. Inbound")
-//                        .append("3. Outbound");
-
-            clearEntities.put("nama_report", "");
-
-            output.put(OUTPUT, sb.toString());
-        }
-        extensionResult.setEntities(clearEntities);
-
-        extensionResult.setValue(output);
-        extensionResult.setAgent(false);
-        extensionResult.setRepeat(false);
-        extensionResult.setSuccess(true);
-        extensionResult.setNext(true);
-        return extensionResult;
-    }
-
-    @Override
-    public ExtensionResult tanyaGroup(ExtensionRequest extensionRequest) {
-        log.debug("tanyaGroup() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
-        Map<String, String> output = new HashMap<>();
-        ExtensionResult extensionResult = new ExtensionResult();
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Silahkan ketikan kode SKU/Product yang anda inginkan. Atau ketik \"All\" untuk semua SKU berdasarkan Group. ");
-        output.put(OUTPUT, sb.toString());
-        extensionResult.setValue(output);
-
-        extensionResult.setAgent(false);
-        extensionResult.setRepeat(false);
-        extensionResult.setSuccess(true);
-        extensionResult.setNext(true);
-        return extensionResult;
-    }
-
-    @Override
-    public ExtensionResult konfirmasiGroup(ExtensionRequest extensionRequest) {
-        log.debug("konfirmasiGroup() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
-        Map<String, String> output = new HashMap<>();
-        ExtensionResult extensionResult = new ExtensionResult();
-        Map<String, String> clearEntities = new HashMap<>();
-        StringBuilder sb = new StringBuilder();
-        String company = sdkUtil.getEasyMapValueByName(extensionRequest, "company");
-        String kategoriGroup = sdkUtil.getEasyMapValueByName(extensionRequest, "kategorigroup");
-        String NewGroup = "";
-        if (kategoriGroup.equalsIgnoreCase("1")) {
-            NewGroup = "Delist";
-        } else if (kategoriGroup.equalsIgnoreCase("2")) {
-            NewGroup = "Hero";
-
-        } else if (kategoriGroup.equalsIgnoreCase("3")) {
-            NewGroup = "NPL";
-
-        } else if (kategoriGroup.equalsIgnoreCase("4")) {
-            NewGroup = "Seasonal";
-
-        } else if (kategoriGroup.equalsIgnoreCase("5")) {
-            NewGroup = "Delist";
-
-        } else if (kategoriGroup.equalsIgnoreCase("6")) {
-            NewGroup = "Tier 2";
-
-        } else if (kategoriGroup.equalsIgnoreCase("7")) {
-            NewGroup = "Tier 3";
-        }
-        final String kategoriGroup2 = NewGroup;
-        System.out.println(kategoriGroup2);
-        clearEntities.put("kategorigroup", NewGroup);
-        String sku = sdkUtil.getEasyMapValueByName(extensionRequest, "group");
-        if (sku.equalsIgnoreCase("all")) {
-            clearEntities.put("before_final", "No");
-
-        } else {
-            List<Product> listProduct = paramJSON.getListProductfromFileJson("product.json");
-            List<Product> listGPPJ = listProduct.stream()
-                    .filter(product -> product.principal.equalsIgnoreCase(company))
-                    .collect(Collectors.toList());
-            List<Product> listByGroup = listGPPJ.stream()
-                    .filter(product -> product.group_category.equalsIgnoreCase(kategoriGroup2))
-                    .collect(Collectors.toList());
-            String statussku = "tidak";
-            String valueUrutan;
-            int lengList = listByGroup.size();
-            for (int i = 0; i < lengList; i++) {
-                Product productArray = listByGroup.get(i);
-                String skuProduct = productArray.sku;
-
-                if (skuProduct.equalsIgnoreCase(sku)) {
-                    statussku = "tepat";
-                    break;
-                } else if (skuProduct.contains(sku)) {
-                    valueUrutan = skuProduct + "\n";
-                    sb.append(valueUrutan);
-
-                }
-            }
-            if (statussku.equalsIgnoreCase("tepat")) {
-                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Apakah anda ingin me-looping SKU tersebut?")
-                        .add("Ya", "Yes").add("Tidak", "NO").build();
-
-                output.put(OUTPUT, quickReplyBuilder.string());
-            } else {
-                clearEntities.put("group", "");
-                String dialog1 = "Apakah Kode SKU berikut yang anda maksud?\n" + sb.toString();
-                String dialog2 = "Silahkan ketik SKU yang anda inginkan.";
-                output.put(OUTPUT, dialog1 + SPLIT + dialog2);
-            }
-
-        }
-
-        extensionResult.setValue(output);
-        extensionResult.setEntities(clearEntities);
-
-        extensionResult.setAgent(false);
-        extensionResult.setRepeat(false);
-        extensionResult.setSuccess(true);
-        extensionResult.setNext(true);
-//        log.debug("konfirmasiGroup() extension result: {}", new Gson().toJson(extensionResult, ExtensionRequest.class));
-        return extensionResult;
-    }
-
-    public ExtensionResult JenisGroup(ExtensionRequest extensionRequest) {
-        Map<String, String> output = new HashMap<>();
-        ExtensionResult extensionResult = new ExtensionResult();
-        String jenis_group = sdkUtil.getEasyMapValueByName(extensionRequest, "jenis_group");
-
-        String dialog1 = "Baiklah, sekarang silahkan ketik " + jenis_group + " yang ingin di cari.";
-        output.put(OUTPUT, dialog1);
-        extensionResult.setValue(output);
-
-        extensionResult.setAgent(false);
-        extensionResult.setRepeat(false);
-        extensionResult.setSuccess(true);
-        extensionResult.setNext(true);
-        return extensionResult;
-    }
-
-    @Override
-    public ExtensionResult validasiJenisGroup(ExtensionRequest extensionRequest) {
-        Map<String, String> output = new HashMap<>();
-        Map<String, String> map = new HashMap<>();
-
-        ExtensionResult extensionResult = new ExtensionResult();
-        String kategori = sdkUtil.getEasyMapValueByName(extensionRequest, "kategori");
-        String jenis_group = sdkUtil.getEasyMapValueByName(extensionRequest, "jenis_group");
-        String konfirmasi_group = sdkUtil.getEasyMapValueByName(extensionRequest, "konfirmasi_group");
-        if (kategori.equalsIgnoreCase("sku")) {
-            kategori = kategori.toUpperCase();
-        }
-        String statusitem = "Tidak Ada";
-        List<Group> listGroup = paramJSON.getListGroupfromFileJson("group.json");
-        List<Product> listSKU = paramJSON.getListProductfromFileJson("sku.json");
-        List<Region> listRegion = paramJSON.getListRegionfromFileJson("sku.json");
-        List<Depo> listDepo = paramJSON.getListDepofromFileJson("sku.json");
-
-        switch (jenis_group.toLowerCase()) {
-            case "group":
-                int lengListGroup = listGroup.size();
-                for (int i = 0; i < lengListGroup; i++) {
-                    Group groupArray = listGroup.get(i);
-                    String sku = groupArray.SKU;
-                    String region = groupArray.Region;
-                    String depo = groupArray.Depo;
-                    switch (kategori) {
-                        case "SKU":
-                            if (konfirmasi_group.equalsIgnoreCase(sku)) {
-                                statusitem = "Ada";
-                                break;
-                            }
-                        case "Region":
-                            if (konfirmasi_group.equalsIgnoreCase(region)) {
-                                statusitem = "Ada";
-                                break;
-                            }
-                        case "Depo":
-                            if (konfirmasi_group.equalsIgnoreCase(depo)) {
-                                statusitem = "Ada";
-                                break;
-                            }
-                        default:
-                            statusitem = "Tidak Ada";
-                    }
-                }
-            case "nama":
-                switch (kategori) {
-                    case "SKU":
-                        int lengListSKU = listSKU.size();
-//                        for (int i = 0; i < lengListSKU; i++) {
-//                            Product skuArray = listSKU.get(i);
-//                            String id = skuArray.id;
-//                            String produk = skuArray.Produk;
-//                            String Group = skuArray.Group;
-//                            if (konfirmasi_group.equalsIgnoreCase(id)) {
-//                                statusitem = "Ada";
-//                                break;
-//                            }
-//                        }
-                    case "Region":
-                        int lengListRegion = listRegion.size();
-                        for (int i = 0; i < lengListRegion; i++) {
-                            Region regionArray = listRegion.get(i);
-                            String id = regionArray.id;
-                            String Region = regionArray.Region;
-                            String Group = regionArray.Group;
-                            if (konfirmasi_group.equalsIgnoreCase(id)) {
-                                statusitem = "Ada";
-                                break;
-                            }
-                        }
-                    case "Depo":
-                        int lengListDepo = listDepo.size();
-                        for (int i = 0; i < lengListDepo; i++) {
-                            Depo depoArray = listDepo.get(i);
-                            String id = depoArray.id;
-                            String Depo = depoArray.Depo;
-                            String Group = depoArray.Group;
-                            if (konfirmasi_group.equalsIgnoreCase(id)) {
-                                statusitem = "Ada";
-                                break;
-                            }
-                        }
-
-                    default:
-                        statusitem = "Tidak Ada";
-                }
-
-        }
-
-        QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("{customer_name} ingin mencari berdasarkan apa?").addAll(map).build();
-        output.put(OUTPUT, quickReplyBuilder.string());
-        extensionResult.setValue(output);
-
-        extensionResult.setAgent(false);
-        extensionResult.setRepeat(false);
-        extensionResult.setSuccess(true);
-        extensionResult.setNext(true);
-        return extensionResult;
-    }
-
-    /**
-     *
-     * @param extensionRequest
-     * @return
-     */
-    @Override
-    public ExtensionResult getReport(ExtensionRequest extensionRequest) {
-        log.debug("getReport() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
-        ExtensionResult extensionResult = new ExtensionResult();
-        extensionResult.setAgent(false);
-        extensionResult.setRepeat(false);
-        extensionResult.setNext(true);
-        extensionResult.setSuccess(true);
-
-        String username = sdkUtil.getEasyMapValueByName(extensionRequest, "username");
-        String company = sdkUtil.getEasyMapValueByName(extensionRequest, "company");
-        String namaReport = sdkUtil.getEasyMapValueByName(extensionRequest, "nama_report");
-        String kategorigroup = sdkUtil.getEasyMapValueByName(extensionRequest, "kategorigroup");
-        String sku = sdkUtil.getEasyMapValueByName(extensionRequest, "group");
-        String beforeFinal = sdkUtil.getEasyMapValueByName(extensionRequest, "before_final");
-
-        String text = username;
-        String parameterKey = "";
-        String parameterValue = "";
-        String reportname = "";
-        String summary = "";
-        if (namaReport.equalsIgnoreCase("daily production v sales")) {
-            parameterKey = "SKU";
-            reportname = "r1_m";
-        }
-        if (beforeFinal.equalsIgnoreCase("Yes")) {
-            summary = "No";
-        } else {
-            summary = "Yes";
-        }
-        if (sku.equalsIgnoreCase("all")) {
-            List<Product> listProduct = paramJSON.getListProductfromFileJson("product.json");
-            List<Product> listGPPJ = listProduct.stream()
-                    .filter(product -> product.principal.equalsIgnoreCase(company))
-                    .collect(Collectors.toList());
-            List<Product> listByGroup = listGPPJ.stream()
-                    .filter(product -> product.group_category.equalsIgnoreCase(kategorigroup))
-                    .collect(Collectors.toList());
-
-            int lengList = listByGroup.size();
-            for (int i = 0; i < lengList; i++) {
-                Product productArray = listByGroup.get(i);
-                String skuProduct = productArray.sku;
-                if (i < 1) {
-                    parameterValue = skuProduct;
-                } else {
-                    parameterValue = parameterValue + "|" + skuProduct;
-                }
-            }
-            summary = "Yes";
-
-        } else {
-            parameterValue = sku;
-        }
-
-        Map<String, String> output = new HashMap<>();
-        StringBuilder sb = new StringBuilder();
-        ReportRequest reportRequest = new ReportRequest();
-        List<EasyParam> easyparam = new ArrayList<>();
-        List<LoopParam> loopparam = new ArrayList<>();
-        if (summary.equalsIgnoreCase("Yes")) {
-            // Easy Param
-            EasyParam easyParam = new EasyParam();
-            easyParam.setSzKey(parameterKey);
-            easyParam.setSzValue(parameterValue);
-            easyparam.add(easyParam);
-        } else {
-            // Loop Param
-            LoopParam loopParam = new LoopParam();
-            loopParam.setSzKey(parameterKey);
-            loopParam.setSzValue(parameterValue);
-            loopparam.add(loopParam);
-        }
-
-        // Set Param
-        reportRequest.setSzReportName(reportname);
-        reportRequest.setLoopParam(loopparam);
-        reportRequest.setSummary(summary);
-        reportRequest.setParam(easyparam);
-        JSONObject jsonReport = new JSONObject(reportRequest);
-        String report = jsonReport.toString();
-//        ReportResult reportResult = new ReportResult();
-        String dialog1 = "";
-
-        try {
-            OkHttpUtil okHttpUtil = new OkHttpUtil();
-            okHttpUtil.init(true);
-            String apiReport = appProp.getGARUDAFOOD_API_REPORT();
-            System.out.println(report);
-            RequestBody body = RequestBody.create(JSON, report);
-            Request request = new Request.Builder().url(apiReport).post(body).addHeader("Content-Type", "application/json").build();
-            Response response = okHttpUtil.getClient().newCall(request).execute();
-            JSONObject jsonobj = new JSONObject(response.body().string());
-
-            if (jsonobj.getString("error").equalsIgnoreCase("")) {
-                JSONArray arrayReport = jsonobj.getJSONArray("path");
-                int lengReport = arrayReport.length();
-                for (int i = 0; i < lengReport; i++) {
-                    JSONObject jObj = arrayReport.getJSONObject(i);
-                    String url = jObj.getString("url");
-//                   
-                    URL input = new URL(url);
-                    String reportAfterWatermark = generateWatermark.WatermarkImage(text, input);
-                    System.out.println(reportAfterWatermark);
-                    String[] spliturlreport = reportAfterWatermark.split(appProp.getGARUDAFOOD_WATERMARK_REPORT());
-                    String reportnameTitle = spliturlreport[1];
-                    ButtonTemplate image = new ButtonTemplate();
-
-                    image.setTitle(reportnameTitle);
-                    image.setPictureLink(reportAfterWatermark);
-                    image.setPicturePath(reportAfterWatermark);
-                    ImageBuilder imageBuilder = new ImageBuilder(image);
-                    String btnBuilder = imageBuilder.build();
-                    sb.append(btnBuilder).append(SPLIT);
-                }
-                dialog1 = "Berikut adalah Report yang {first_name} ingin lihat.";
-            } else {
-                dialog1 = "Maaf. File tidak ditemukan atau sedang terjadi kesalahan. Silahkan ketik \"Menu\" untuk melihat Menu Utama.";
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-            log.debug("Response Exception() extension request : {} ", e);
-        }
-        output.put(OUTPUT, dialog1 + ParamSdk.SPLIT_CHAT + sb.toString());
-
-        extensionResult.setValue(output);
-        log.debug("String Builder Report() extension request : {} ", output);
-
-        return extensionResult;
-    }
-
-    /**
-     *
-     * @param extensionRequest
-     * @return
-     */
-    @Override
-    public ExtensionResult getSOP(ExtensionRequest extensionRequest
-    ) {
-        ExtensionResult extensionResult = new ExtensionResult();
-        extensionResult.setAgent(false);
-        extensionResult.setRepeat(false);
-        extensionResult.setNext(true);
-        extensionResult.setSuccess(true);
-        String idKaryawan = sdkUtil.getEasyMapValueByName(extensionRequest, "idkaryawan");
-        String namaKaryawan = sdkUtil.getEasyMapValueByName(extensionRequest, "namakaryawan");
-        String text = idKaryawan + " | " + namaKaryawan;
-        String pathFrom = "/example.pdf";
-//        String pathFrom = "https://github.com/muderiz/image/blob/master/example.pdf?raw=true";
-//        String pathFrom = "https://drive.google.com/uc?authuser=0&id=1CxAD3yGu8oaZTSxLGLoqaU6oPSLnYQYG&export=download";
-        String sopAfterWatermark = generateWatermark.WatermarkPDF(text, pathFrom);
-        System.out.println(sopAfterWatermark);
-        return extensionResult;
-    }
-
 }

@@ -87,6 +87,9 @@ public class AppProperties {
     @Value("${garudafood.watermark.sop}")
     String GARUDAFOOD_WATERMARK_SOP;
 
+    @Value("${garudafood.base.sop}")
+    String GARUDAFOOD_BASE_SOP;
+
     @Value("${garudafood.url.generatedfiles}")
     String GARUDAFOOD_URL_GENERATEDFILES;
 
@@ -117,6 +120,38 @@ public class AppProperties {
     @Value("${garudafood.ldap.searchAttrUsername}")
     String GARUDAFOOD_LDAP_SEARCHATTRUSERNAME;
 
+    // Kode Report Garudafood
+    @Value("${garudafood.reportcode.dailystockbysku}")
+    String GARUDAFOOD_REPORTCODE_dailystockbysku;
+
+    @Value("${garudafood.reportcode.dailystockbyloc}")
+    String GARUDAFOOD_REPORTCODE_dailystockbyloc;
+
+    @Value("${garudafood.reportcode.dailyproductionvssales}")
+    String GARUDAFOOD_REPORTCODE_dailyproductionvssales;
+
+    @Value("${garudafood.reportcode.otd1ofr1byweek.shipment}")
+    String GARUDAFOOD_REPORTCODE_otd1ofr1byweekshipment;
+
+    @Value("${garudafood.reportcode.otd1ofr1byweek.arrival}")
+    String GARUDAFOOD_REPORTCODE_otd1ofr1byweekarrival;
+
+    @Value("${garudafood.reportcode.otif1ofr1byweek.shipment}")
+    String GARUDAFOOD_REPORTCODE_otif1ofr1byweekshipment;
+
+    @Value("${garudafood.reportcode.otif1ofr1byweek.arrival}")
+    String GARUDAFOOD_REPORTCODE_otif1ofr1byweekarrival;
+
+    @Value("${garudafood.reportcode.warehouseutilization}")
+    String GARUDAFOOD_REPORTCODE_warehouseutilization;
+
+    @Value("${garudafood.reportcode.selloutsellinproductstock}")
+    String GARUDAFOOD_REPORTCODE_selloutsellinproductstock;
+
+    @Value("${garudafood.reportcode.dailytrend3m}")
+    String GARUDAFOOD_REPORTCODE_dailytrend3m;
+
+    //=======================//
     public String getGARUDAFOOD_BASE_URL() {
         return GARUDAFOOD_BASE_URL;
     }
@@ -155,6 +190,14 @@ public class AppProperties {
 
     public void setGARUDAFOOD_WATERMARK_SOP(String GARUDAFOOD_WATERMARK_SOP) {
         this.GARUDAFOOD_WATERMARK_SOP = GARUDAFOOD_WATERMARK_SOP;
+    }
+
+    public String getGARUDAFOOD_BASE_SOP() {
+        return GARUDAFOOD_BASE_SOP;
+    }
+
+    public void setGARUDAFOOD_BASE_SOP(String GARUDAFOOD_BASE_SOP) {
+        this.GARUDAFOOD_BASE_SOP = GARUDAFOOD_BASE_SOP;
     }
 
     public String getGARUDAFOOD_WATERMARK_REPORT() {
@@ -221,7 +264,85 @@ public class AppProperties {
         this.GARUDAFOOD_LDAP_SEARCHATTRUSERNAME = GARUDAFOOD_LDAP_SEARCHATTRUSERNAME;
     }
 
-    
+    public String getGARUDAFOOD_REPORTCODE_dailystockbysku() {
+        return GARUDAFOOD_REPORTCODE_dailystockbysku;
+    }
+
+    public void setGARUDAFOOD_REPORTCODE_dailystockbysku(String GARUDAFOOD_REPORTCODE_dailystockbysku) {
+        this.GARUDAFOOD_REPORTCODE_dailystockbysku = GARUDAFOOD_REPORTCODE_dailystockbysku;
+    }
+
+    public String getGARUDAFOOD_REPORTCODE_dailystockbyloc() {
+        return GARUDAFOOD_REPORTCODE_dailystockbyloc;
+    }
+
+    public void setGARUDAFOOD_REPORTCODE_dailystockbyloc(String GARUDAFOOD_REPORTCODE_dailystockbyloc) {
+        this.GARUDAFOOD_REPORTCODE_dailystockbyloc = GARUDAFOOD_REPORTCODE_dailystockbyloc;
+    }
+
+    public String getGARUDAFOOD_REPORTCODE_dailyproductionvssales() {
+        return GARUDAFOOD_REPORTCODE_dailyproductionvssales;
+    }
+
+    public void setGARUDAFOOD_REPORTCODE_dailyproductionvssales(String GARUDAFOOD_REPORTCODE_dailyproductionvssales) {
+        this.GARUDAFOOD_REPORTCODE_dailyproductionvssales = GARUDAFOOD_REPORTCODE_dailyproductionvssales;
+    }
+
+    public String getGARUDAFOOD_REPORTCODE_otd1ofr1byweekshipment() {
+        return GARUDAFOOD_REPORTCODE_otd1ofr1byweekshipment;
+    }
+
+    public void setGARUDAFOOD_REPORTCODE_otd1ofr1byweekshipment(String GARUDAFOOD_REPORTCODE_otd1ofr1byweekshipment) {
+        this.GARUDAFOOD_REPORTCODE_otd1ofr1byweekshipment = GARUDAFOOD_REPORTCODE_otd1ofr1byweekshipment;
+    }
+
+    public String getGARUDAFOOD_REPORTCODE_otd1ofr1byweekarrival() {
+        return GARUDAFOOD_REPORTCODE_otd1ofr1byweekarrival;
+    }
+
+    public void setGARUDAFOOD_REPORTCODE_otd1ofr1byweekarrival(String GARUDAFOOD_REPORTCODE_otd1ofr1byweekarrival) {
+        this.GARUDAFOOD_REPORTCODE_otd1ofr1byweekarrival = GARUDAFOOD_REPORTCODE_otd1ofr1byweekarrival;
+    }
+
+    public String getGARUDAFOOD_REPORTCODE_otif1ofr1byweekshipment() {
+        return GARUDAFOOD_REPORTCODE_otif1ofr1byweekshipment;
+    }
+
+    public void setGARUDAFOOD_REPORTCODE_otif1ofr1byweekshipment(String GARUDAFOOD_REPORTCODE_otif1ofr1byweekshipment) {
+        this.GARUDAFOOD_REPORTCODE_otif1ofr1byweekshipment = GARUDAFOOD_REPORTCODE_otif1ofr1byweekshipment;
+    }
+
+    public String getGARUDAFOOD_REPORTCODE_otif1ofr1byweekarrival() {
+        return GARUDAFOOD_REPORTCODE_otif1ofr1byweekarrival;
+    }
+
+    public void setGARUDAFOOD_REPORTCODE_otif1ofr1byweekarrival(String GARUDAFOOD_REPORTCODE_otif1ofr1byweekarrival) {
+        this.GARUDAFOOD_REPORTCODE_otif1ofr1byweekarrival = GARUDAFOOD_REPORTCODE_otif1ofr1byweekarrival;
+    }
+
+    public String getGARUDAFOOD_REPORTCODE_warehouseutilization() {
+        return GARUDAFOOD_REPORTCODE_warehouseutilization;
+    }
+
+    public void setGARUDAFOOD_REPORTCODE_warehouseutilization(String GARUDAFOOD_REPORTCODE_warehouseutilization) {
+        this.GARUDAFOOD_REPORTCODE_warehouseutilization = GARUDAFOOD_REPORTCODE_warehouseutilization;
+    }
+
+    public String getGARUDAFOOD_REPORTCODE_selloutsellinproductstock() {
+        return GARUDAFOOD_REPORTCODE_selloutsellinproductstock;
+    }
+
+    public void setGARUDAFOOD_REPORTCODE_selloutsellinproductstock(String GARUDAFOOD_REPORTCODE_selloutsellinproductstock) {
+        this.GARUDAFOOD_REPORTCODE_selloutsellinproductstock = GARUDAFOOD_REPORTCODE_selloutsellinproductstock;
+    }
+
+    public String getGARUDAFOOD_REPORTCODE_dailytrend3m() {
+        return GARUDAFOOD_REPORTCODE_dailytrend3m;
+    }
+
+    public void setGARUDAFOOD_REPORTCODE_dailytrend3m(String GARUDAFOOD_REPORTCODE_dailytrend3m) {
+        this.GARUDAFOOD_REPORTCODE_dailytrend3m = GARUDAFOOD_REPORTCODE_dailytrend3m;
+    }
 
     // --------- //
     public String getServicePort() {

@@ -14,6 +14,10 @@ public class InfoUser {
     public String accountName;
     public String fullName;
     public String mail;
+    public String title;
+    public String department;
+    public String company;
+    public String division;
 
     public String getAccountName() {
         return accountName;
@@ -37,6 +41,38 @@ public class InfoUser {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getDivision() {
+        return division;
+    }
+
+    public void setDivision(String division) {
+        this.division = division;
     }
 
 }

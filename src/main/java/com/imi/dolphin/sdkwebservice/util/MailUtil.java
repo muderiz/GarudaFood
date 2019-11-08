@@ -1,5 +1,6 @@
 package com.imi.dolphin.sdkwebservice.util;
 
+import com.google.gson.Gson;
 import java.util.Properties;
 
 import javax.mail.PasswordAuthentication;
@@ -14,32 +15,37 @@ import com.imi.dolphin.sdkwebservice.property.AppProperties;
 
 @Component
 public class MailUtil {
-	private static final Logger log = LoggerFactory.getLogger(MailUtil.class);
-	
-	Session mailSession;
-	
-	@Autowired
-	AppProperties appProperties;
-	
-	public Session getMailSession() {
-		log.debug("getMailSession() {}", "initialize mail session");
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", appProperties.getMailStmpAuth());
-		props.put("mail.smtp.starttls.enable", appProperties.getMailSmtpTls());
-		props.put("mail.smtp.host", appProperties.getMailSmtpHost());
-		props.put("mail.smtp.port", appProperties.getMailSmtpPort());
-		
-		mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
-			@Override
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(appProperties.getMailUsername(), appProperties.getMailPassword());
-			}
-		});
-		return mailSession;
-	}
 
-	public void setMailSession(Session mailSession) {
-		this.mailSession = mailSession;
-	}
-	
+    private static final Logger log = LoggerFactory.getLogger(MailUtil.class);
+
+    Session mailSession;
+
+    @Autowired
+    AppProperties appProperties;
+
+    public Session getMailSession() {
+        log.debug("getMailSession() {}", "initialize mail session");
+        Properties props = new Properties();
+//        props.put("mail.smtp.auth", appProperties.getMailStmpAuth());
+//        props.put("mail.smtp.starttls.enable", appProperties.getMailSmtpTls());
+        props.put("mail.smtp.host", appProperties.getMailSmtpHost());
+        props.put("mail.smtp.port", appProperties.getMailSmtpPort());
+        System.out.println(appProperties.getMailSmtpTls());
+        System.out.println(appProperties.getMailSmtpHost());
+        System.out.println(appProperties.getMailSmtpPort());
+        mailSession = Session.getInstance(props);
+//        log.debug("getMailSession() {}", "initialize mail session", new Gson().toJson(mailSession));
+//                new javax.mail.Authenticator() {
+//            @Override
+//            protected PasswordAuthentication getPasswordAuthentication() {
+//                return new PasswordAuthentication(appProperties.getMailUsername(), appProperties.getMailPassword());
+//            }
+//        });
+        return mailSession;
+    }
+
+    public void setMailSession(Session mailSession) {
+        this.mailSession = mailSession;
+    }
+
 }

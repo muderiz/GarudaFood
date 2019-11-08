@@ -1,0 +1,14 @@
+[
+    {
+        "department": "E2E",
+        "id_department": "1"
+    },
+    {
+        "department": "InBound",
+        "id_department": "2"
+    },
+    {
+        "department": "OutBound",
+        "id_department": "3"
+    }
+]

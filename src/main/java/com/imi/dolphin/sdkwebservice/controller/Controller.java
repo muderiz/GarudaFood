@@ -25,6 +25,7 @@ import com.imi.dolphin.sdkwebservice.model.ExtensionResult;
 import com.imi.dolphin.sdkwebservice.property.AppProperties;
 import com.imi.dolphin.sdkwebservice.service.IMailService;
 import com.imi.dolphin.sdkwebservice.service.IService;
+import com.imi.dolphin.sdkwebservice.service.ServiceImp;
 
 /**
  *
@@ -41,6 +42,9 @@ public class Controller {
 
     @Autowired
     IService svcService;
+
+    @Autowired
+    ServiceImp svcServiceGeneral;
 
     @Autowired
     IMailService svcMailService;
@@ -141,52 +145,29 @@ public class Controller {
         return svcService.doSendMail(extensionRequest);
     }
 
+    // Controller Service General
     @RequestMapping("/getUserLdap")
     @PostMapping
     public ExtensionResult getUserLdap(@RequestBody ExtensionRequest extensionRequest) {
-        return svcService.getUserLdap(extensionRequest);
+        return svcServiceGeneral.getUserLdap(extensionRequest);
     }
 
-    @RequestMapping("/getReport")
+    @RequestMapping("/validasiOtp")
     @PostMapping
-    public ExtensionResult getReport(@RequestBody ExtensionRequest extensionRequest) {
-        return svcService.getReport(extensionRequest);
+    public ExtensionResult validasiOtp(@RequestBody ExtensionRequest extensionRequest) {
+        return svcServiceGeneral.validasiOtp(extensionRequest);
     }
 
-    @RequestMapping("/getSOP")
+    @RequestMapping("/menuUtama")
     @PostMapping
-    public ExtensionResult getSOP(@RequestBody ExtensionRequest extensionRequest) {
-        return svcService.getSOP(extensionRequest);
+    public ExtensionResult menuUtama(@RequestBody ExtensionRequest extensionRequest) {
+        return svcServiceGeneral.menuUtama(extensionRequest);
     }
 
-    @RequestMapping("/pertanyaanPertama")
+    @RequestMapping("/menuUtamaGeneral")
     @PostMapping
-    public ExtensionResult pertanyaanPertama(@RequestBody ExtensionRequest extensionRequest) {
-        return svcService.pertanyaanPertama(extensionRequest);
-    }
-
-    @RequestMapping("/tanyaReportName")
-    @PostMapping
-    public ExtensionResult tanyaReportName(@RequestBody ExtensionRequest extensionRequest) {
-        return svcService.tanyaReportName(extensionRequest);
-    }
-
-    @RequestMapping("/tanyaKategori")
-    @PostMapping
-    public ExtensionResult tanyaKategori(@RequestBody ExtensionRequest extensionRequest) {
-        return svcService.tanyaKategori(extensionRequest);
-    }
-
-    @RequestMapping("/tanyaGroup")
-    @PostMapping
-    public ExtensionResult tanyaGroup(@RequestBody ExtensionRequest extensionRequest) {
-        return svcService.tanyaGroup(extensionRequest);
-    }
-
-        @RequestMapping("/konfirmasiGroup")
-    @PostMapping
-    public ExtensionResult konfirmasiGroup(@RequestBody ExtensionRequest extensionRequest) {
-        return svcService.konfirmasiGroup(extensionRequest);
+    public ExtensionResult menuUtamaGeneral(@RequestBody ExtensionRequest extensionRequest) {
+        return svcServiceGeneral.menuUtamaGeneral(extensionRequest);
     }
 
 }

@@ -67,11 +67,11 @@ public class OkHttpUtil {
 	public void init(boolean ignoreCertificate) {
 		log.debug("Initialising httpUtil with default configuration ignoreCertificate: {}", ignoreCertificate);
 
-		int connectTimeout = 15;
-		int readTimeout = 15;
+		int connectTimeout = 60;
+		int readTimeout = 60;
 
-		String connectTimeoutText = "40";//appProperties.getSdkConnectTimeout();
-		String readTimeoutText = "40";//appProperties.getSdkReadTimeout();
+		String connectTimeoutText = "120";//appProperties.getSdkConnectTimeout();
+		String readTimeoutText = "120";//appProperties.getSdkReadTimeout();
 		if (StringUtils.isNumeric(connectTimeoutText)) {
 			connectTimeout = Integer.parseInt(connectTimeoutText);
 		}

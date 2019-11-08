@@ -1,0 +1,38 @@
+[
+    {
+        "group_category": "Beverage",
+        "id_group": "1"
+    },
+    {
+        "group_category": "Delist",
+        "id_group": "2"
+    },
+    {
+        "group_category": "Hero",
+        "id_group": "3"
+    },
+    {
+        "group_category": "NA",
+        "id_group": "4"
+    },
+    {
+        "group_category": "NPL",
+        "id_group": "5"
+    },
+    {
+        "group_category": "Seasonal",
+        "id_group": "6"
+    },
+    {
+        "group_category": "Super Hero",
+        "id_group": "7"
+    },
+    {
+        "group_category": "Tier 2",
+        "id_group": "8"
+    },
+    {
+        "group_category": "Tier 3",
+        "id_group": "9"
+    }
+]

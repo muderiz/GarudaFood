@@ -12,6 +12,7 @@
  */
 package com.imi.dolphin.sdkwebservice.service;
 
+import com.google.gson.Gson;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
@@ -24,6 +25,9 @@ import org.springframework.stereotype.Service;
 import com.imi.dolphin.sdkwebservice.model.MailModel;
 import com.imi.dolphin.sdkwebservice.property.AppProperties;
 import com.imi.dolphin.sdkwebservice.util.MailUtil;
+import javax.mail.Address;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -33,6 +37,7 @@ import com.imi.dolphin.sdkwebservice.util.MailUtil;
 @Service
 public class MailServiceImp implements IMailService {
 
+    private static final Logger log = LoggerFactory.getLogger(MailUtil.class);
     @Autowired
     MailUtil mailUtil;
 
@@ -43,20 +48,21 @@ public class MailServiceImp implements IMailService {
     public String sendMail(MailModel mailModel) {
         try {
             MimeMessage message = new MimeMessage(mailUtil.getMailSession());
-            message.setFrom(new InternetAddress(appProperties.getMailUsername()));
+            message.setFrom(new InternetAddress("no-reply@garudafood.co.id"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mailModel.getRecipient()));
             message.setSubject(mailModel.getSubject());
             message.setText(mailModel.getText());
-//                        message.setContent(mailModel.getText(), "text/html; charset=utf-8");
+//            message.setContent(mailModel.getText(), "text/html; charset=utf-8");
             Transport.send(message);
+            log.debug("============== Send OTP to Mail : SUCCESS ============");
 
-            return "Sent message successfully....";
+            return "success";
         } catch (MessagingException e) {
             System.out.println(e.getMessage());
+            log.debug("============== Send OTP to Mail : FAILED ============", new Gson().toJson(e));
         }
-        return "Sent message failed...";
+        return "failed";
 
     }
-    
-    
+
 }
