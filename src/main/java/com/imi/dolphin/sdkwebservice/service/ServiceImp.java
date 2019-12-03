@@ -14,7 +14,7 @@ package com.imi.dolphin.sdkwebservice.service;
 
 import com.imi.dolphin.sdkwebservice.param.ParamJSONReport;
 import com.google.gson.Gson;
-import com.imi.dolphin.sdkwebservice.GFmodel.ReportName;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportName;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,24 +34,24 @@ import com.imi.dolphin.sdkwebservice.builder.ImageBuilder;
 import com.imi.dolphin.sdkwebservice.builder.QuickReplyBuilder;
 import com.imi.dolphin.sdkwebservice.model.ButtonTemplate;
 import com.imi.dolphin.sdkwebservice.model.Contact;
-import com.imi.dolphin.sdkwebservice.GFmodel.Depo;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Depo;
 import com.imi.dolphin.sdkwebservice.model.EasyMap;
-import com.imi.dolphin.sdkwebservice.GFmodel.EasyParam;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.EasyParam;
 import com.imi.dolphin.sdkwebservice.model.ExtensionRequest;
 import com.imi.dolphin.sdkwebservice.model.ExtensionResult;
-import com.imi.dolphin.sdkwebservice.GFmodel.Group;
-import com.imi.dolphin.sdkwebservice.GFmodel.InfoUser;
-import com.imi.dolphin.sdkwebservice.GFmodel.LdapConnection;
-import com.imi.dolphin.sdkwebservice.GFmodel.LdapModel;
-import com.imi.dolphin.sdkwebservice.GFmodel.LoopParam;
-import com.imi.dolphin.sdkwebservice.GFmodel.MasterDepartment;
-import com.imi.dolphin.sdkwebservice.GFmodel.MasterGroupProduct;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Group;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.InfoUser;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.LdapConnection;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.LdapModel;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.LoopParam;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.MasterDepartment;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.MasterGroupProduct;
 import com.imi.dolphin.sdkwebservice.model.MailModel;
-import com.imi.dolphin.sdkwebservice.GFmodel.Region;
-import com.imi.dolphin.sdkwebservice.GFmodel.ReportRequest;
-import com.imi.dolphin.sdkwebservice.GFmodel.ReportResult;
-import com.imi.dolphin.sdkwebservice.GFmodel.Role;
-import com.imi.dolphin.sdkwebservice.GFmodel.Product;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Region;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportRequest;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportResult;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Role;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Product;
 import com.imi.dolphin.sdkwebservice.builder.DocumentBuilder;
 import com.imi.dolphin.sdkwebservice.model.UserToken;
 import com.imi.dolphin.sdkwebservice.param.ParamSdk;
@@ -390,6 +390,7 @@ public class ServiceImp implements IService {
         log.debug("getButtons() extension request: {}", extensionRequest);
         Map<String, String> output = new HashMap<>();
         String dialog1 = "Berikut adalah nama-nama spesialisasi yang ada di RS Siloam. Silahkan menggeser menu dari kiri ke kanan untuk menampilkan semua opsi.  ";
+        
         ButtonTemplate button = new ButtonTemplate();
         button.setTitle("");
         button.setSubTitle(" ");
@@ -702,6 +703,24 @@ public class ServiceImp implements IService {
         return extensionResult;
     }
 
+    public ExtensionResult tanyaUsername(ExtensionRequest extensionRequest) {
+        log.debug("tanyaUsername() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        ExtensionResult extensionResult = new ExtensionResult();
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
+        Map<String, String> output = new HashMap<>();
+        Map<String, String> clearEntities = new HashMap<>();
+
+        String dialog = "Halo selamat datang di {bot_name}. Silahkan ketikan Username Anda terlebih dahulu ya.";
+        clearEntities.put("tanya_username", "SKIP");
+
+        output.put(OUTPUT, dialog);
+        extensionResult.setValue(output);
+        return extensionResult;
+    }
+
     private SearchControls getSimpleSearchControls() {
         SearchControls searchControls = new SearchControls();
         searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
@@ -724,6 +743,8 @@ public class ServiceImp implements IService {
         int randomNumber = 0;
         Map<String, String> clearEntities = new HashMap<>();
         LdapContext ctxx = null;
+        String sAMAccountName = "";
+        String name = "";
         try {
 //            extensionResult = getInfo(usernameUser, ldap, extensionRequest);
             Hashtable<String, Object> env = new Hashtable<String, Object>();
@@ -744,8 +765,8 @@ public class ServiceImp implements IService {
             NamingEnumeration<?> namingEnum = ctxx.search(appProp.getGARUDAFOOD_LDAP_DIRECTORYPATH(), filterBase + "=" + usernameUser, getSimpleSearchControls());
             SearchResult result = (SearchResult) namingEnum.next();
             Attributes attrs = result.getAttributes();
-            String sAMAccountName = attrs.get("sAMAccountName").get().toString();
-            String name = attrs.get("name").get().toString();
+            sAMAccountName = attrs.get("sAMAccountName").get().toString();
+            name = attrs.get("name").get().toString();
             String mail = attrs.get("mail").get().toString();
 //            String mail = "m.dekarizky@gmail.com";
             mail = mail.toLowerCase();
@@ -768,17 +789,24 @@ public class ServiceImp implements IService {
 
                 String dialog1 = "Baiklah " + name + ". Silahkan cek email kantor anda untuk melihat OTP yang sudah dikirimkan.\n"
                         + "Ketikan OTP yang sudah dikirimkan ke Email Anda dengan benar.";
-                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Atau klik di bawah ini jika kamu tidak mendapatkan OTP tersebut.")
+                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Atau klik di bawah ini jika Anda tidak mendapatkan OTP tersebut.")
                         .add("Kirim OTP", "otp ulang").build();
                 output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
+                clearEntities.put("otp_kesempatan", "3");
+                clearEntities.put("otp", randomNumber + "");
                 MailModel mailModel = new MailModel(mail, subject, pesan);
                 String sendMailResult = svcMailService.sendMail(mailModel);
             }
         } catch (NamingException nex) {
             log.debug("============== LDAP Connection: FAILED ============", new Gson().toJson(nex));
+            if (name.equals("")) {
+                log.debug("============== User Not Found ============");
+                String dialog = "Maaf Username Anda tidak ditemukan atau tidak terdaftar. Silahkan ketikan kembali Username Anda dengan benar.";
+                output.put(OUTPUT, dialog);
+                clearEntities.put("username", "");
+
+            }
         }
-        clearEntities.put("otp_kesempatan", "3");
-        clearEntities.put("otp", randomNumber + "");
         extensionResult.setEntities(clearEntities);
         extensionResult.setValue(output);
         return extensionResult;
@@ -824,7 +852,7 @@ public class ServiceImp implements IService {
             log.debug("============== Status Send Email :", new Gson().toJson(sendMailResult));
             String dialog1 = "Anda sudah mencapai batas percobaan. Silahkan cek email kembali untuk melihat OTP terbaru.\n\n "
                     + "Ketikan OTP yang sudah dikirimkan ke Email Anda dengan benar.";
-            QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Atau klik di bawah ini jika kamu tidak mendapatkan OTP tersebut.")
+            QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Atau klik di bawah ini jika Anda tidak mendapatkan OTP tersebut.")
                     .add("Kirim OTP", "otp ulang").build();
             output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
             kesempatanotp = 3;
@@ -833,6 +861,7 @@ public class ServiceImp implements IService {
         } else {
             if (otpFromUser.equalsIgnoreCase(otp)) {
                 LdapContext ctxx = null;
+                String name = "";
                 try {
                     Hashtable<String, Object> env = new Hashtable<String, Object>();
                     env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
@@ -853,11 +882,17 @@ public class ServiceImp implements IService {
                     SearchResult result = (SearchResult) namingEnum.next();
                     Attributes attrs = result.getAttributes();
                     String sAMAccountName = attrs.get("sAMAccountName").get().toString();
-                    String name = attrs.get("name").get().toString();
+                    name = attrs.get("name").get().toString();
                     String mail = attrs.get("mail").get().toString();
                     // String mail = "m.dekarizky@gmail.com";
                     mail = mail.toLowerCase();
 
+                    String dialog1 = "Hai " + name + ". Anda sudah berhasil melakukan konfirmasi akun.";
+                    QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Sekarang silahkan pilih Menu berikut yang Anda inginkan.")
+                            .add("Report", "report").add("SOP", "sop").add("Konsumsi Bahan Bakar", "fuel").build();
+                    output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
+
+                    // ============== Set AdditionalField ============ //
                     log.debug("============== Set AdditionalField ============");
                     userToken = svcDolphinService.getUserToken(userToken);
                     String contactId = extensionRequest.getIntent().getTicket().getContactId();
@@ -866,7 +901,6 @@ public class ServiceImp implements IService {
                     log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, contactId);
                     log.debug("getDolphinResponse() extension request: {} Contact: {}", extensionRequest, new Gson().toJson(contact));
 
-                    // ============== Set AdditionalField ============ //
                     InfoUser infouser = new InfoUser();
                     infouser.setAccountName(sAMAccountName);
                     infouser.setFullName(name);
@@ -879,14 +913,24 @@ public class ServiceImp implements IService {
                     listData.add("" + new Gson().toJson(infouser, InfoUser.class) + "");
                     contact.setAdditionalField(listData);
                     contact = svcDolphinService.updateCustomer(userToken, contact);
+                    clearEntities.put("before_final", "yes");
                 } catch (NamingException nex) {
                     log.debug("============== LDAP Connection: FAILED ============", new Gson().toJson(nex));
+                    if (name.equals("")) {
+                        log.debug("============== User Not Found ============");
+                        String dialog = "Maaf Username Anda tidak ditemukan atau tidak terdaftar. Silahkan ketikan kembali Username Anda dengan benar.";
+                        output.put(OUTPUT, dialog);
+                        clearEntities.put("username", "");
+                        clearEntities.put("otp_kesempatan", "");
+                        clearEntities.put("otp", "");
+                        clearEntities.put("otp_kode", "");
+
+                    }
                 }
-                clearEntities.put("before_final", "yes");
             } else {
                 kesempatanotp = kesempatanotp - 1;
                 String dialog1 = "OTP yang Anda masukan salah. \n\nSilahkan ketikan kembali dengan benar.";
-                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Atau klik di bawah ini jika kamu tidak mendapatkan OTP tersebut.")
+                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Atau klik di bawah ini jika Anda tidak mendapatkan OTP tersebut.")
                         .add("Kirim OTP", "otp ulang").build();
                 output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
                 clearEntities.put("otp_kode", "");
@@ -918,7 +962,7 @@ public class ServiceImp implements IService {
         InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
         String fullName = dataInfoUser.getFullName();
         String dialog1 = "Hai " + fullName + ". Anda sudah berhasil melakukan konfirmasi akun.";
-        QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Sekarang silahkan pilih Menu berikut yang kamu inginkan.")
+        QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Sekarang silahkan pilih Menu berikut yang Anda inginkan.")
                 .add("Report", "report").add("SOP", "sop").add("Konsumsi Bahan Bakar", "fuel").build();
         output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
         ExtensionResult extensionResult = new ExtensionResult();
@@ -933,18 +977,61 @@ public class ServiceImp implements IService {
     public ExtensionResult menuUtamaGeneral(ExtensionRequest extensionRequest) {
         log.debug("menuUtama() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
         Map<String, String> output = new HashMap<>();
-//        userToken = svcDolphinService.getUserToken(userToken);
-//        String contactId = extensionRequest.getIntent().getTicket().getContactId();
-//        Contact contact = svcDolphinService.getCustomer(userToken, contactId);
-//        log.debug("getDolphinResponse() extension request: {} user token: {}", extensionRequest, new Gson().toJson(userToken));
-//        log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, contactId);
-//        log.debug("getDolphinResponse() extension request: {} Contact: {}", extensionRequest, new Gson().toJson(contact));
-//        // ============== Get AdditionalField ============ //
-//        String b = contact.getAdditionalField().get(0);
-//        InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
-        QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Sekarang silahkan pilih Menu berikut yang kamu inginkan.")
-                .add("Report", "report").add("SOP", "sop").add("Konsumsi Bahan Bakar", "fuel").build();
-        output.put(OUTPUT, quickReplyBuilder.string());
+        userToken = svcDolphinService.getUserToken(userToken);
+        String contactId = extensionRequest.getIntent().getTicket().getContactId();
+        Contact contact = svcDolphinService.getCustomer(userToken, contactId);
+        log.debug("getDolphinResponse() extension request: {} user token: {}", extensionRequest, new Gson().toJson(userToken));
+        log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, contactId);
+        log.debug("getDolphinResponse() extension request: {} Contact: {}", extensionRequest, new Gson().toJson(contact));
+        // ============== Get AdditionalField ============ //
+        String b = contact.getAdditionalField().get(0);
+        try {
+            if (!b.equalsIgnoreCase("")) {
+
+                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Sekarang silahkan pilih Menu berikut yang Anda inginkan.")
+                        .add("Report", "report").add("SOP", "sop").add("Konsumsi Bahan Bakar", "fuel").build();
+                output.put(OUTPUT, quickReplyBuilder.string());
+                InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
+                String usernameUser = dataInfoUser.getAccountName();
+                String fullname = dataInfoUser.getFullName();
+                String mail = dataInfoUser.getMail();
+                String title = "";
+                String company = "";
+                String division = "";
+                String department = "";
+                // ============== Set AdditionalField ============ //
+                InfoUser infouser = new InfoUser();
+                infouser.setAccountName(usernameUser);
+                infouser.setFullName(fullname);
+                infouser.setMail(mail);
+                infouser.setTitle(title);
+                infouser.setDepartment(department);
+                infouser.setCompany(company);
+                infouser.setDivision(division);
+                List<String> listData = new ArrayList<>();
+
+                listData.add("" + new Gson().toJson(infouser, InfoUser.class) + "");
+                contact.setAdditionalField(listData);
+                contact = svcDolphinService.updateCustomer(userToken, contact);
+                // ============================================== //
+            } else {
+                String dialog1 = "Mohon maaf akun Anda belum terverifikasi.";
+                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Silakan klik di bawah ini untuk melakukan konfirmasi.")
+                        .add("Verifikasi Akun", "verifikasi").build();
+
+                output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
+
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+            String dialog1 = "Mohon maaf akun Anda belum terverifikasi.";
+            QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Silakan klik di bawah ini untuk melakukan konfirmasi.")
+                    .add("Verifikasi Akun", "verifikasi").build();
+
+            output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
+
+        }
+
         ExtensionResult extensionResult = new ExtensionResult();
         extensionResult.setAgent(false);
         extensionResult.setRepeat(false);

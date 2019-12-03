@@ -67,7 +67,7 @@ public class Controller {
         return "Hello Form, service port: " + appProperties.getServicePort() + ", " + appProperties.getFormId();
     }
 
-    @RequestMapping("/status/")
+    @RequestMapping("/status")
     @PostMapping
     public ExtensionResult doGetSrnResult(@RequestBody ExtensionRequest extensionRequest) {
         return svcService.getSrnResult(extensionRequest);
@@ -146,6 +146,12 @@ public class Controller {
     }
 
     // Controller Service General
+    @RequestMapping("/tanyaUsername")
+    @PostMapping
+    public ExtensionResult tanyaUsername(@RequestBody ExtensionRequest extensionRequest) {
+        return svcServiceGeneral.tanyaUsername(extensionRequest);
+    }
+
     @RequestMapping("/getUserLdap")
     @PostMapping
     public ExtensionResult getUserLdap(@RequestBody ExtensionRequest extensionRequest) {

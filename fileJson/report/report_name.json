@@ -16,22 +16,22 @@
   },
   {
     "department": "All",
-    "report_name": "OTD1-OFR1 By Week( Periode Shipment)",
+    "report_name": "OTD1-OFR1 By Week Periode Shipment",
     "report_code": "R4_M"
   },
   {
     "department": "All",
-    "report_name": "OTD1-OFR1 By Week( Periode Arrival)",
+    "report_name": "OTD1-OFR1 By Week Periode Arrival",
     "report_code": "R5_M"
   },
   {
     "department": "All",
-    "report_name": "OTIF1-OFR1 By Week( Periode Shipment)",
+    "report_name": "OTIF1-OFR1 By Week Periode Shipment",
     "report_code": "R6_M"
   },
   {
     "department": "All",
-    "report_name": "OTIF1-OFR1 By Week( Periode Arrival)",
+    "report_name": "OTIF1-OFR1 By Week Periode Arrival",
     "report_code": "R7_M"
   },
   {
@@ -41,12 +41,12 @@
   },
   {
     "department": "All",
-    "report_name": "Sellout-Sellin-Production-Stock",
+    "report_name": "Sellout Sellin Production Stock",
     "report_code": "R9_M"
   },
   {
     "department": "All",
-    "report_name": "Daliy Trend 3M (Demand-Stock-Supply-Production)",
+    "report_name": "Daily Trend 3M (Demand-Stock-Supply-Production)",
     "report_code": "R_10"
   }
 ]

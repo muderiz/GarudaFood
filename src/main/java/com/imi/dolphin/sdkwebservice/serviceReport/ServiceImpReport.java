@@ -15,7 +15,7 @@ package com.imi.dolphin.sdkwebservice.serviceReport;
 import com.imi.dolphin.sdkwebservice.service.*;
 import com.imi.dolphin.sdkwebservice.param.ParamJSONReport;
 import com.google.gson.Gson;
-import com.imi.dolphin.sdkwebservice.GFmodel.ReportName;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportName;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,24 +35,24 @@ import com.imi.dolphin.sdkwebservice.builder.ImageBuilder;
 import com.imi.dolphin.sdkwebservice.builder.QuickReplyBuilder;
 import com.imi.dolphin.sdkwebservice.model.ButtonTemplate;
 import com.imi.dolphin.sdkwebservice.model.Contact;
-import com.imi.dolphin.sdkwebservice.GFmodel.Depo;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Depo;
 import com.imi.dolphin.sdkwebservice.model.EasyMap;
-import com.imi.dolphin.sdkwebservice.GFmodel.EasyParam;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.EasyParam;
 import com.imi.dolphin.sdkwebservice.model.ExtensionRequest;
 import com.imi.dolphin.sdkwebservice.model.ExtensionResult;
-import com.imi.dolphin.sdkwebservice.GFmodel.Group;
-import com.imi.dolphin.sdkwebservice.GFmodel.InfoUser;
-import com.imi.dolphin.sdkwebservice.GFmodel.LdapConnection;
-import com.imi.dolphin.sdkwebservice.GFmodel.LdapModel;
-import com.imi.dolphin.sdkwebservice.GFmodel.LoopParam;
-import com.imi.dolphin.sdkwebservice.GFmodel.MasterDepartment;
-import com.imi.dolphin.sdkwebservice.GFmodel.MasterGroupProduct;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Group;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.InfoUser;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.LdapConnection;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.LdapModel;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.LoopParam;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.MasterDepartment;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.MasterGroupProduct;
 import com.imi.dolphin.sdkwebservice.model.MailModel;
-import com.imi.dolphin.sdkwebservice.GFmodel.Region;
-import com.imi.dolphin.sdkwebservice.GFmodel.ReportRequest;
-import com.imi.dolphin.sdkwebservice.GFmodel.ReportResult;
-import com.imi.dolphin.sdkwebservice.GFmodel.Role;
-import com.imi.dolphin.sdkwebservice.GFmodel.Product;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Region;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportRequest;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportResult;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Role;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Product;
 import com.imi.dolphin.sdkwebservice.builder.DocumentBuilder;
 import com.imi.dolphin.sdkwebservice.model.UserToken;
 import com.imi.dolphin.sdkwebservice.param.ParamSdk;
@@ -151,7 +151,7 @@ public class ServiceImpReport {
     }
 
     public ExtensionResult report_setFirstStatusCode(ExtensionRequest extensionRequest) {
-        log.debug("dailyStockByLOC_setFirstStatusCode() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        log.debug("report_setFirstStatusCode() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
         ExtensionResult extensionResult = new ExtensionResult();
         Map<String, String> clearEntities = new HashMap<>();
 
@@ -182,24 +182,35 @@ public class ServiceImpReport {
         userToken = svcDolphinService.getUserToken(userToken);
         String contactId = extensionRequest.getIntent().getTicket().getContactId();
         Contact contact = svcDolphinService.getCustomer(userToken, contactId);
-        log.debug("getDolphinResponse() extension request: {} user token: {}", extensionRequest, new Gson().toJson(userToken));
-        log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, contactId);
-        log.debug("getDolphinResponse() extension request: {} Contact: {}", extensionRequest, new Gson().toJson(contact));
+        log.debug("getUserToken() extension request: {} user token: {}", extensionRequest, new Gson().toJson(userToken));
+        log.debug("getContactId() extension request: {} contact id: {}", extensionRequest, contactId);
+        log.debug("getContact() extension request: {} Contact: {}", extensionRequest, new Gson().toJson(contact));
         // ============== Get AdditionalField ============ //
+        String b = "";
         switch (status_code) {
             case "0":
                 try {
-                    String b = contact.getAdditionalField().get(0);
-
+                    b = contact.getAdditionalField().get(0);
+                    System.out.println("Print AdditionalField Contact");
+                    System.out.println(b);
                     if (!b.equalsIgnoreCase("")) {
                         InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
                         String usernameUser = dataInfoUser.getAccountName();
                         String fullname = dataInfoUser.getFullName();
                         String mail = dataInfoUser.getMail();
-                        String company = dataInfoUser.getCompany();
-                        String title = dataInfoUser.getTitle();
-                        String division = dataInfoUser.getDivision();
-                        String department = dataInfoUser.getDepartment();
+                        String title = "";
+                        String company = "";
+                        String division = "";
+                        String department = "";
+                        if (!dataInfoUser.getCompany().equalsIgnoreCase("")
+                                || !dataInfoUser.getTitle().equalsIgnoreCase("")
+                                || !dataInfoUser.getDivision().equalsIgnoreCase("")
+                                || !dataInfoUser.getDepartment().equalsIgnoreCase("")) {
+                            company = dataInfoUser.getCompany();
+                            title = dataInfoUser.getTitle();
+                            division = dataInfoUser.getDivision();
+                            department = dataInfoUser.getDepartment();
+                        }
 
                         List<Role> listRole = paramJSON.getListRolefromFileJson(roleJson);
 
@@ -223,6 +234,8 @@ public class ServiceImpReport {
 
                         StringBuilder sb = new StringBuilder();
                         String dialog = "Baiklah, Bapak/Ibu " + fullname + " sudah berada di menu Report.";
+                        String dialogopsi = "Sekarang Bapak/Ibu " + fullname + " ingin melihat Report apa?\n";
+                        sb.append(dialogopsi);
                         String dialogButton = "";
 
                         List<String> listReportNamebyFilter = new ArrayList<>();
@@ -256,7 +269,7 @@ public class ServiceImpReport {
                             urutan++;
                         }
                         if (lengReportName > newlengReportName) {
-                            dialogButton = "Bapak/Ibu " + fullname + " ingin melihat Report apa?. Silakan pilih angka yang di inginkan. Atau klik \"Next\" untuk melihat Area lainnya";
+                            dialogButton = "Silakan pilih angka yang di inginkan. Atau klik \"Next\" untuk melihat Report lainnya";
 
                             EasyMap bookAction = new EasyMap();
                             bookAction.setName("Next");
@@ -266,7 +279,7 @@ public class ServiceImpReport {
                             clearEntities.put("index", i + "");
                             clearEntities.put("nomorurut", urutan + "");
                         } else {
-                            dialogButton = "Bapak/Ibu " + fullname + " ingin melihat Report apa?. Silakan pilih angka yang di inginkan.";
+                            dialogButton = "Silakan pilih angka yang di inginkan.";
                         }
 
                         button.setButtonValues(actions);
@@ -301,6 +314,7 @@ public class ServiceImpReport {
 
                     }
                 } catch (Exception ex) {
+                    System.out.println(ex);
                     String dialog1 = "Mohon maaf akun Anda belum terverifikasi.";
                     QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Silakan klik di bawah ini untuk melakukan konfirmasi.")
                             .add("Verifikasi Akun", "verifikasi").build();
@@ -313,12 +327,13 @@ public class ServiceImpReport {
             case "1":
                 String index = sdkUtil.getEasyMapValueByName(extensionRequest, "index");
                 String nomorurut = sdkUtil.getEasyMapValueByName(extensionRequest, "nomorurut");
-                String b = contact.getAdditionalField().get(0);
+                b = contact.getAdditionalField().get(0);
                 InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
                 String fullname = dataInfoUser.getFullName();
 
                 StringBuilder sb = new StringBuilder();
-
+                String dialogopsi = "Bapak/Ibu " + fullname + " ingin melihat Report apa?\n";
+                sb.append(dialogopsi);
                 String dialogButton = "";
                 List<String> listReportNamebyFilter = new ArrayList<>();
                 listReportNamebyFilter = getListJsonReport.reportNameGeneral();
@@ -351,7 +366,7 @@ public class ServiceImpReport {
                     urutan++;
                 }
                 if (lengReportName > newlengReportName) {
-                    dialogButton = "Bapak/Ibu " + fullname + " ingin melihat Report apa?. Silakan pilih angka yang di inginkan. Atau klik \"Next\" untuk melihat Area lainnya";
+                    dialogButton = "Silakan pilih angka yang di inginkan. Atau klik \"Next\" untuk melihat Report lainnya";
 
                     EasyMap bookAction = new EasyMap();
                     bookAction.setName("Next");
@@ -361,7 +376,7 @@ public class ServiceImpReport {
                     clearEntities.put("index", i + "");
                     clearEntities.put("nomorurut", urutan + "");
                 } else {
-                    dialogButton = "Bapak/Ibu " + fullname + " ingin melihat Report apa?. Silakan pilih angka yang di inginkan.";
+                    dialogButton = "Silakan pilih angka yang di inginkan.";
                 }
 
                 button.setButtonValues(actions);
@@ -377,6 +392,65 @@ public class ServiceImpReport {
                         .add("Verifikasi Akun", "verifikasi").build();
 
                 output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
+                break;
+            case "3":
+                b = contact.getAdditionalField().get(0);
+                dataInfoUser = new Gson().fromJson(b, InfoUser.class);
+                fullname = dataInfoUser.getFullName();
+                sb = new StringBuilder();
+                String dialog = "Baiklah, Bapak/Ibu " + fullname + " sudah berada di menu Report.";
+                dialogopsi = "Sekarang Bapak/Ibu " + fullname + " ingin melihat Report apa?\n";
+                sb.append(dialogopsi);
+                dialogButton = "";
+
+                listReportNamebyFilter = getListJsonReport.reportNameGeneral();
+
+                button = new ButtonTemplate();
+                actions = new ArrayList<>();
+
+                button.setTitle("");
+                button.setSubTitle("");
+                i = 0;
+                urutan = 1;
+                lengReportName = listReportNamebyFilter.size();
+                newlengReportName = 0;
+                if (lengReportName
+                        > 5) {
+                    newlengReportName = 5;
+                } else {
+                    newlengReportName = lengReportName;
+                }
+                for (i = 0; i < newlengReportName; i++) {
+                    String NameReport = listReportNamebyFilter.get(i);
+                    sb.append(urutan + ". " + NameReport + "\n");
+
+                    EasyMap bookAction = new EasyMap();
+                    bookAction.setName(urutan + "");
+                    bookAction.setValue(NameReport.toLowerCase());
+                    actions.add(bookAction);
+                    urutan++;
+                }
+                if (lengReportName > newlengReportName) {
+                    dialogButton = "Silakan pilih angka yang di inginkan. Atau klik \"Next\" untuk melihat Report lainnya";
+
+                    EasyMap bookAction = new EasyMap();
+                    bookAction.setName("Next");
+                    bookAction.setValue("next");
+                    actions.add(bookAction);
+
+                    clearEntities.put("index", i + "");
+                    clearEntities.put("nomorurut", urutan + "");
+                } else {
+                    dialogButton = "Silakan pilih angka yang di inginkan.";
+                }
+
+                button.setButtonValues(actions);
+                buttonBuilder = new ButtonBuilder(button);
+
+                sb.append(SPLIT).append(dialogButton).append(SPLIT).append(buttonBuilder.build());
+                output.put(OUTPUT, dialog + SPLIT + sb.toString());
+
+                clearEntities.put("status_code", "0");
                 break;
         }
 

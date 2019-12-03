@@ -5,9 +5,10 @@
  */
 package com.imi.dolphin.sdkwebservice.serviceReport;
 
-import com.imi.dolphin.sdkwebservice.GFmodel.Region;
-import com.imi.dolphin.sdkwebservice.GFmodel.ReportName;
-import com.imi.dolphin.sdkwebservice.GFmodel.SOP;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Product;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Region;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportName;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.SOP;
 import com.imi.dolphin.sdkwebservice.param.ParamJSONReport;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Service;
 public class GetListJsonReport {
 
     private static final String regionJson = "fileJson/report/region.json";
+    private static final String productJson = "fileJson/report/product.json";
     private static final String reportnameJson = "fileJson/report/report_name.json";
 
     @Autowired
@@ -33,7 +35,7 @@ public class GetListJsonReport {
     public List<String> reportNameGeneral() {
         List<ReportName> listReportName = paramJSON.getListReportNamefromFileJson(reportnameJson);
         List<ReportName> listReportNameSorted = listReportName.stream()
-                .sorted(Comparator.comparing(ReportName::getReport_name))
+                //                .sorted(Comparator.comparing(ReportName::getReport_name))
                 .collect(Collectors.toList());
 
         List<String> listNameReport = new ArrayList<>();
@@ -50,6 +52,46 @@ public class GetListJsonReport {
     }
 
     // ===============//
+    // Product Report //
+    public List<String> groupProductGeneral() {
+        List<Product> listProductJson = paramJSON.getListProductfromFileJson(productJson);
+        List<Product> listGroupbyFilter = listProductJson.stream()
+                .sorted(Comparator.comparing(Product::getGroup_category))
+                .collect(Collectors.toList());
+        List<String> listGroupProduct = new ArrayList<>();
+        int lengGroupProduct = listGroupbyFilter.size();
+        for (int i = 0; i < lengGroupProduct; i++) {
+            Product productArray = listGroupbyFilter.get(i);
+            String groupProduct = productArray.group_category;
+            if (listGroupProduct.contains(groupProduct)) {
+            } else {
+                listGroupProduct.add(groupProduct);
+            }
+        }
+        return listGroupProduct;
+    }
+
+    public List<String> SKUProductGeneral(String group) {
+        final String valueGroup = group;
+        List<Product> listProductJson = paramJSON.getListProductfromFileJson(productJson);
+        List<Product> listProductbyFilter = listProductJson.stream()
+                .filter(product -> product.getGroup_category().equalsIgnoreCase(valueGroup))
+                .sorted(Comparator.comparing(Product::getSku))
+                .collect(Collectors.toList());
+        List<String> listProduct = new ArrayList<>();
+        int lengProduct = listProductbyFilter.size();
+        for (int i = 0; i < lengProduct; i++) {
+            Product productArray = listProductbyFilter.get(i);
+            String skuProduct = productArray.sku;
+            if (listProduct.contains(skuProduct)) {
+            } else {
+                listProduct.add(skuProduct);
+            }
+        }
+        return listProduct;
+    }
+
+    // ============== //
     // Region Report //
     public List<String> areaGeneral() {
         List<Region> listRegionJson = paramJSON.getListRegionfromFileJson(regionJson);
@@ -89,7 +131,7 @@ public class GetListJsonReport {
         return listRegionCode;
     }
 
-    public List<String> SKUGeneral(String area, String regionCode) {
+    public List<String> SKURegionGeneral(String area, String regionCode) {
         final String valueArea = area;
         final String valueRegion = regionCode;
         List<Region> listRegionJson = paramJSON.getListRegionfromFileJson(regionJson);

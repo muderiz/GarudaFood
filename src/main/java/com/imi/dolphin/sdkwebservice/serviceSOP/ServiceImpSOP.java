@@ -6,9 +6,8 @@
 package com.imi.dolphin.sdkwebservice.serviceSOP;
 
 import com.google.gson.Gson;
-import com.imi.dolphin.sdkwebservice.GFmodel.InfoUser;
-
-import com.imi.dolphin.sdkwebservice.GFmodel.SOP;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.InfoUser;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.SOP;
 import com.imi.dolphin.sdkwebservice.builder.ButtonBuilder;
 import com.imi.dolphin.sdkwebservice.builder.DocumentBuilder;
 import com.imi.dolphin.sdkwebservice.builder.QuickReplyBuilder;
@@ -24,6 +23,7 @@ import com.imi.dolphin.sdkwebservice.service.AuthService;
 import com.imi.dolphin.sdkwebservice.service.GenerateWatermark;
 import com.imi.dolphin.sdkwebservice.service.IDolphinService;
 import com.imi.dolphin.sdkwebservice.service.IMailService;
+import static com.imi.dolphin.sdkwebservice.service.ServiceImp.OUTPUT;
 import com.imi.dolphin.sdkwebservice.serviceReport.ServiceImpReport;
 
 import com.imi.dolphin.sdkwebservice.util.OkHttpUtil;
@@ -101,6 +101,9 @@ public class ServiceImpSOP {
     public ExtensionResult sop_testGetList(ExtensionRequest extensionRequest) {
         ExtensionResult extensionResult = new ExtensionResult();
         Map<String, String> output = new HashMap<>();
+        Map<String, String> clearEntities = new HashMap<>();
+        String intention = sdkUtil.getEasyMapValueByName(extensionRequest, "intention");
+        System.out.println("Yang Bot Tangkap :" + intention);
         extensionResult.setAgent(false);
         extensionResult.setRepeat(false);
         extensionResult.setSuccess(true);
@@ -128,27 +131,36 @@ public class ServiceImpSOP {
 //                listJenisDokumen.add(jenisDoc);
 //            }
 //        }
-        String dir = "./percobaan/";
-        File f = new File(dir);
-
-        String[] daftar = f.list();
-        java.util.Arrays.sort(daftar);
-
-        System.out.println("File dan direktori dalam ./percobaan");
-        System.out.println();
-
-        for (int i = 0; i < daftar.length; i++) {
-            File fTemp = new File(dir + "/" + daftar[i]);
-//            if (fTemp.isDirectory()) {
-//                System.out.println(daftar[i] + "\t\t<DIR>");
-//            } else {
-            System.out.println(daftar[i]);
-//                String dir2 = dir + daftar[i];
-//                File hapus = new File(dir2);
-//                hapus.delete();
-//            }
-        }
+//        String dir = "./percobaan/";
+//        File f = new File(dir);
+//
+//        String[] daftar = f.list();
+//        java.util.Arrays.sort(daftar);
+//
+//        System.out.println("File dan direktori dalam ./percobaan");
+//        System.out.println();
+//
+//        for (int i = 0; i < daftar.length; i++) {
+//            File fTemp = new File(dir + "/" + daftar[i]);
+////            if (fTemp.isDirectory()) {
+////                System.out.println(daftar[i] + "\t\t<DIR>");
+////            } else {
+//            System.out.println(daftar[i]);
+////                String dir2 = dir + daftar[i];
+////                File hapus = new File(dir2);
+////                hapus.delete();
+////            }
+//        }
 //        System.out.println(listJenisDokumen);
+        String dialog1 = "~~Hai Anda sudah berhasil melakukan konfirmasi akun.~~";
+//        QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Sekarang silahkan pilih Menu berikut yang kamu inginkan.")
+//                .add("Report", "report").add("SOP", "sop").add("Konsumsi Bahan Bakar", "fuel").build();
+        output.put(OUTPUT, dialog1);
+//        clearEntities.put("param", "SKIP");
+
+        extensionResult.setValue(output);
+//        extensionResult.setEntities(clearEntities);
+
         return extensionResult;
     }
 
@@ -211,13 +223,14 @@ public class ServiceImpSOP {
         // ============== Get AdditionalField ============ //
         try {
             String b = contact.getAdditionalField().get(0);
-
+            InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
+            String fullName = dataInfoUser.getFullName();
             if (!b.equalsIgnoreCase("")) {
                 List<String> listCompany = new ArrayList<>();
                 listCompany = getListJsonSOP.companyGeneral();
 
                 StringBuilder sb = new StringBuilder();
-                String dialog = "Baiklah, {first_name} sudah berada di menu SOP\n";
+                String dialog = "Baiklah, Bapak/Ibu " + fullName + " sudah berada di menu SOP\n";
                 sb.append(dialog);
 
                 ButtonTemplate button = new ButtonTemplate();
@@ -240,7 +253,7 @@ public class ServiceImpSOP {
                 }
                 button.setButtonValues(actions);
                 ButtonBuilder buttonBuilder = new ButtonBuilder(button);
-                String title = "Sekarang {first_name} ingin melihat SOP dari Company apa?";
+                String title = "Sekarang Bapak/Ibu " + fullName + " ingin melihat SOP dari Company apa?";
                 sb.append(SPLIT).append(title).append(SPLIT).append(buttonBuilder.build());
                 output.put(OUTPUT, sb.toString());
                 clearEntities.put("tanya_company", "SKIP");
@@ -896,12 +909,12 @@ public class ServiceImpSOP {
         Map<String, String> output = new HashMap<>();
         ExtensionResult extensionResult = new ExtensionResult();
         Map<String, String> clearEntities = new HashMap<>();
-        String jenisdokumen = sdkUtil.getEasyMapValueByName(extensionRequest, "jenisdokumen");
-        String sop = sdkUtil.getEasyMapValueByName(extensionRequest, "sop");
+        final String jenisdokumen = sdkUtil.getEasyMapValueByName(extensionRequest, "jenisdokumen");
+        final String company = sdkUtil.getEasyMapValueByName(extensionRequest, "company");
+        final String divisi = sdkUtil.getEasyMapValueByName(extensionRequest, "divisi");
+        String sopbyUser = sdkUtil.getEasyMapValueByName(extensionRequest, "sop");
 
-        StringBuilder sb = new StringBuilder();
-
-        if (sop.equalsIgnoreCase("dokumen lain")) {
+        if (sopbyUser.equalsIgnoreCase("dokumen lain")) {
             String title = "Silakan ketik Dokumen " + jenisdokumen.toUpperCase() + " yang anda inginkan. Atau klik dibawah ini untuk melihat list Dokumen " + jenisdokumen.toUpperCase() + " yang ada di kategori ini.";
             QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder(title)
                     .add("View ALL", "view all").build();
@@ -914,6 +927,55 @@ public class ServiceImpSOP {
             clearEntities.put("konfirmasi_sop", "");
             clearEntities.put("sop", "");
             clearEntities.put("before_final", "");
+        } else {
+            String namadokumen = sdkUtil.getEasyMapValueByName(extensionRequest, "namadokumen");
+            List<String> listNamaDokumen = new ArrayList<>();
+            listNamaDokumen = getListJsonSOP.namaDokumenGeneral(company, jenisdokumen, divisi);
+            boolean cekAngka = CekNumber(namadokumen);
+            if (cekAngka == true) {
+                int i = Integer.parseInt(namadokumen) - 1;
+                namadokumen = listNamaDokumen.get(i);
+            } else {
+                int lengDokumen = listNamaDokumen.size();
+                for (int i = 0; i < lengDokumen; i++) {
+                    String dokumenname = listNamaDokumen.get(i);
+                    if (dokumenname.equalsIgnoreCase(namadokumen)) {
+                        namadokumen = dokumenname;
+                        break;
+                    }
+                }
+            }
+            List<SOP> listSopJson = paramJSON.getListSOPFromFileJson(sopJson);
+            List<SOP> listByFilter = listSopJson.stream()
+                    .filter(sop -> sop.company.equalsIgnoreCase(company)
+                    && sop.jenis_dokumen.equalsIgnoreCase(jenisdokumen)
+                    && sop.divisi.equalsIgnoreCase(divisi))
+                    .collect(Collectors.toList());
+
+            try {
+                int lengNamaDokumen = listByFilter.size();
+                String linkDoc = "";
+                String namaDoc = "";
+                for (int i = 0; i < lengNamaDokumen; i++) {
+                    SOP sopArray = listByFilter.get(i);
+                    namaDoc = sopArray.nama_doc;
+                    if (namaDoc.equalsIgnoreCase(namadokumen)) {
+                        linkDoc = sopArray.link;
+                        break;
+                    }
+                }
+                String title = "- Klik \"Detail\" jika membutuhkan " + jenisdokumen.toUpperCase() + " lebih detail\n"
+                        + "- Klik \"Dokumen Lain\" untuk melihat Dokumen " + jenisdokumen + " lainnya\n"
+                        + "- Klik \"Menu\" untuk melihat Menu yang ada.";
+                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("")
+                        .add("Detail", linkDoc).add("Dokumen Lain", "dokumen lain").add("Menu", "menu utama").build();
+
+                output.put(OUTPUT, title + SPLIT + quickReplyBuilder.string());
+                clearEntities.put("sop", "");
+                clearEntities.put("before_final", "");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
         extensionResult.setValue(output);
         extensionResult.setEntities(clearEntities);

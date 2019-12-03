@@ -7,9 +7,9 @@ package com.imi.dolphin.sdkwebservice.param;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.imi.dolphin.sdkwebservice.GFmodel.Group;
-import com.imi.dolphin.sdkwebservice.GFmodel.MasterSop;
-import com.imi.dolphin.sdkwebservice.GFmodel.SOP;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Group;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.MasterSop;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.SOP;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -170,6 +170,8 @@ public class GenerateWatermark {
 //        SimpleDateFormat formatter = new SimpleDateFormat("ddMMyy");
 //        Date date = new Date();
 //        String datenow = formatter.format(date);
+
+
         text2 = text2.toUpperCase();
         try {
             BufferedImage image = ImageIO.read(pathImageFrom);

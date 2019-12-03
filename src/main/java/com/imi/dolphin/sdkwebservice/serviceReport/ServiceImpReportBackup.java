@@ -6,15 +6,15 @@
 package com.imi.dolphin.sdkwebservice.serviceReport;
 
 import com.google.gson.Gson;
-import com.imi.dolphin.sdkwebservice.GFmodel.EasyParam;
-import com.imi.dolphin.sdkwebservice.GFmodel.InfoUser;
-import com.imi.dolphin.sdkwebservice.GFmodel.LoopParam;
-import com.imi.dolphin.sdkwebservice.GFmodel.MasterDepartment;
-import com.imi.dolphin.sdkwebservice.GFmodel.MasterGroupProduct;
-import com.imi.dolphin.sdkwebservice.GFmodel.Product;
-import com.imi.dolphin.sdkwebservice.GFmodel.ReportName;
-import com.imi.dolphin.sdkwebservice.GFmodel.ReportRequest;
-import com.imi.dolphin.sdkwebservice.GFmodel.Role;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.EasyParam;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.InfoUser;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.LoopParam;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.MasterDepartment;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.MasterGroupProduct;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Product;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportName;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportRequest;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Role;
 import com.imi.dolphin.sdkwebservice.builder.DocumentBuilder;
 import com.imi.dolphin.sdkwebservice.builder.QuickReplyBuilder;
 import com.imi.dolphin.sdkwebservice.model.ButtonTemplate;

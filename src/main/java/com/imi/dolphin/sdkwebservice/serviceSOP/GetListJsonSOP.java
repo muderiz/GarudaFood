@@ -5,7 +5,7 @@
  */
 package com.imi.dolphin.sdkwebservice.serviceSOP;
 
-import com.imi.dolphin.sdkwebservice.GFmodel.SOP;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.SOP;
 import com.imi.dolphin.sdkwebservice.param.ParamJSONSop;
 import java.util.ArrayList;
 import java.util.Comparator;

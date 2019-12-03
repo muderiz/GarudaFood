@@ -6,13 +6,12 @@
 package com.imi.dolphin.sdkwebservice.serviceReport;
 
 import com.google.gson.Gson;
-import com.imi.dolphin.sdkwebservice.GFmodel.EasyParam;
-import com.imi.dolphin.sdkwebservice.GFmodel.InfoUser;
-import com.imi.dolphin.sdkwebservice.GFmodel.LoopParam;
-import com.imi.dolphin.sdkwebservice.GFmodel.MasterGroupProduct;
-import com.imi.dolphin.sdkwebservice.GFmodel.Product;
-import com.imi.dolphin.sdkwebservice.GFmodel.Region;
-import com.imi.dolphin.sdkwebservice.GFmodel.ReportRequest;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.EasyParam;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.InfoUser;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.LoopParam;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Product;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.Region;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportRequest;
 import com.imi.dolphin.sdkwebservice.builder.ButtonBuilder;
 import com.imi.dolphin.sdkwebservice.builder.DocumentBuilder;
 import com.imi.dolphin.sdkwebservice.builder.QuickReplyBuilder;
@@ -155,9 +154,13 @@ public class ServiceDailyStockByLOC {
         int newlengArea;
         ButtonBuilder buttonBuilder;
         String title = "";
+        if (status_code.equals("")) {
+            status_code = "0";
+        }
         switch (status_code) {
             case "0":
-                dialog = "Baiklah Bapak/Ibu " + fullName + " ingin melihat report dari Area apa?\n";
+                String dialogsapa = "Baiklah, Bapak/Ibu " + fullName + " sudah berada di Report Daily Stock By LOC.";
+                dialog = "Bapak/Ibu " + fullName + " ingin melihat report dari Area apa?\n";
                 sb.append(dialog);
 
                 button.setTitle("");
@@ -198,7 +201,9 @@ public class ServiceDailyStockByLOC {
                 button.setButtonValues(actions);
                 buttonBuilder = new ButtonBuilder(button);
                 sb.append(SPLIT).append(title).append(SPLIT).append(buttonBuilder.build());
-                output.put(OUTPUT, sb.toString());
+                output.put(OUTPUT, dialogsapa + SPLIT + sb.toString());
+                clearEntities.put("status_code", "0");
+
                 break;
             case "1":
                 String index = sdkUtil.getEasyMapValueByName(extensionRequest, "index");
@@ -302,6 +307,7 @@ public class ServiceDailyStockByLOC {
         extensionResult.setRepeat(false);
         extensionResult.setSuccess(true);
         extensionResult.setNext(true);
+        log.debug("dailyStockByLOC_KategoriArea() extensionResult: {}", new Gson().toJson(extensionResult));
         return extensionResult;
     }
 
@@ -314,7 +320,7 @@ public class ServiceDailyStockByLOC {
 
         String status_code = sdkUtil.getEasyMapValueByName(extensionRequest, "status_code");
         String area = sdkUtil.getEasyMapValueByName(extensionRequest, "area");
-
+        System.out.println("Area di tangkep :" + area);
         // ============== Get AdditionalField ============ //
         userToken = svcDolphinService.getUserToken(userToken);
         String contactId = extensionRequest.getIntent().getTicket().getContactId();
@@ -357,16 +363,19 @@ public class ServiceDailyStockByLOC {
         int newlengRegion;
         ButtonBuilder buttonBuilder;
         String title = "";
+        if (status_code.equals("")) {
+            status_code = "0";
+        }
         switch (status_code) {
             case "0":
-                if (namearea.equalsIgnoreCase("next")) {
+                if (area.equalsIgnoreCase("next")) {
                     clearEntities.put("area", "");
                     clearEntities.put("status_code", "1");
                 } else if (namearea.equalsIgnoreCase("")) {
                     clearEntities.put("area", "");
                     clearEntities.put("status_code", "2");
                 } else {
-                    dialog = "Bapak/Ibu " + fullName + " telah memilih Area " + area + ". Selanjutnya ingin melihat report dari Region apa?\n";
+                    dialog = "Bapak/Ibu " + fullName + " telah memilih " + area + ". Selanjutnya ingin melihat report dari Region apa?\n";
                     sb.append(dialog);
 
                     button.setTitle("");
@@ -408,13 +417,15 @@ public class ServiceDailyStockByLOC {
                     sb.append(SPLIT).append(title).append(SPLIT).append(buttonBuilder.build());
                     output.put(OUTPUT, sb.toString());
                     clearEntities.put("area", namearea);
+                    clearEntities.put("status_code", "0");
+
                 }
                 break;
             case "1":
                 String index = sdkUtil.getEasyMapValueByName(extensionRequest, "index");
                 String nomorurut = sdkUtil.getEasyMapValueByName(extensionRequest, "nomorurut");
 
-                dialog = "Bapak/Ibu " + fullName + " telah memilih Area " + area + ". Selanjutnya ingin melihat report dari Region apa?\n";
+                dialog = "Bapak/Ibu " + fullName + " telah memilih " + area + ". Selanjutnya ingin melihat report dari Region apa?\n";
                 sb.append(dialog);
 
                 button.setTitle("");
@@ -512,6 +523,7 @@ public class ServiceDailyStockByLOC {
         extensionResult.setRepeat(false);
         extensionResult.setSuccess(true);
         extensionResult.setNext(true);
+        log.debug("dailyStockByLOC_KategoriRegion() extension request: {}", new Gson().toJson(extensionResult));
         return extensionResult;
     }
 
@@ -537,14 +549,31 @@ public class ServiceDailyStockByLOC {
         InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
         String fullName = dataInfoUser.getFullName();
         // =============================================== //
+        List<String> listArea = new ArrayList<>();
+        listArea = getListJsonReport.areaGeneral();
 
+        String namearea = "";
+        boolean cekAngkaArea = CekNumber(area);
+        if (cekAngkaArea == true) {
+            int i = Integer.parseInt(area) - 1;
+            namearea = listArea.get(i);
+        } else {
+            int lengArea = listArea.size();
+            for (int i = 0; i < lengArea; i++) {
+                String areaName = listArea.get(i);
+                if (areaName.equalsIgnoreCase(area)) {
+                    namearea = areaName;
+                    break;
+                }
+            }
+        }
         List<String> listRegionCode = new ArrayList<>();
-        listRegionCode = getListJsonReport.regionGeneral(area);
+        listRegionCode = getListJsonReport.regionGeneral(namearea);
 
         String nameregion = "";
-        boolean cekAngka = CekNumber(area);
+        boolean cekAngka = CekNumber(region);
         if (cekAngka == true) {
-            int i = Integer.parseInt(area) - 1;
+            int i = Integer.parseInt(region) - 1;
             nameregion = listRegionCode.get(i);
         } else {
             int lengRegion = listRegionCode.size();
@@ -556,30 +585,139 @@ public class ServiceDailyStockByLOC {
                 }
             }
         }
+        List<String> listSKU = new ArrayList<>();
+        listSKU = getListJsonReport.SKURegionGeneral(namearea, nameregion);
         String dialog = "";
+        ButtonTemplate button = new ButtonTemplate();
+        List<EasyMap> actions = new ArrayList<>();
+        int i;
+        int urutan;
+        int lengProduct;
+        int newlengProduct;
+        ButtonBuilder buttonBuilder;
+        String title = "";
+        if (status_code.equals("")) {
+            status_code = "0";
+        }
         switch (status_code) {
             case "0":
-                if (nameregion.equalsIgnoreCase("next")) {
+                if (region.equalsIgnoreCase("next")) {
                     clearEntities.put("region", "");
                     clearEntities.put("status_code", "1");
                 } else if (nameregion.equalsIgnoreCase("")) {
                     clearEntities.put("region", "");
                     clearEntities.put("status_code", "2");
                 } else {
-                    dialog = "Silakan ketikan kode LOC/SKU yang Bapak/Ibu " + fullName + " inginkan. Atau ketik \"All\" untuk semua LOC/SKU berdasarkan Region.";
+//                    dialog = "Silakan ketikan kode LOC yang Bapak/Ibu " + fullName + " inginkan. Atau ketik \"All\" untuk semua LOC berdasarkan Region.";
+//                    sb.append(dialog);
+//
+//                    output.put(OUTPUT, sb.toString());
+//                    clearEntities.put("region", nameregion);
+//                    clearEntities.put("area", namearea);
+//
+//                    clearEntities.put("status_code", "0");
+
+                    dialog = "Baiklah, Bapak/Ibu " + fullName + " telah memilih " + nameregion + ". Selanjutnya ingin melihat report dari LOC apa?\n";
                     sb.append(dialog);
 
+                    button.setTitle("");
+                    button.setSubTitle("");
+                    i = 0;
+                    urutan = 1;
+                    lengProduct = listSKU.size();
+                    newlengProduct = 0;
+                    if (lengProduct > 5) {
+                        newlengProduct = 5;
+                    } else {
+                        newlengProduct = lengProduct;
+                    }
+                    for (i = i; i < newlengProduct; i++) {
+                        String skuProduct = listSKU.get(i);
+                        sb.append(urutan + ". " + skuProduct + "\n");
+
+                        EasyMap bookAction = new EasyMap();
+                        bookAction.setName(urutan + "");
+                        bookAction.setValue(skuProduct);
+                        actions.add(bookAction);
+                        urutan++;
+                    }
+                    if (lengProduct > newlengProduct) {
+                        title = "Silakan pilih angka yang Anda inginkan. Atau ketik \"All\" untuk semua LOC berdasarkan Group.\n-Klik \"Next\" untuk melihat LOC lainnya.";
+
+                        EasyMap bookAction = new EasyMap();
+                        bookAction.setName("Next");
+                        bookAction.setValue("next");
+                        actions.add(bookAction);
+
+                        clearEntities.put("index", i + "");
+                        clearEntities.put("nomorurut", urutan + "");
+                    } else {
+                        title = "Silakan pilih angka yang Anda inginkan. Atau ketik \"All\" untuk semua LOC berdasarkan Group.";
+                    }
+
+                    button.setButtonValues(actions);
+                    buttonBuilder = new ButtonBuilder(button);
+                    sb.append(SPLIT).append(title).append(SPLIT).append(buttonBuilder.build());
                     output.put(OUTPUT, sb.toString());
                     clearEntities.put("region", nameregion);
+                    clearEntities.put("area", namearea);
+
+                    clearEntities.put("status_code", "0");
                 }
                 break;
             case "1":
+                String index = sdkUtil.getEasyMapValueByName(extensionRequest, "index");
+                String nomorurut = sdkUtil.getEasyMapValueByName(extensionRequest, "nomorurut");
+                dialog = "Bapak/Ibu " + fullName + " ingin melihat report dari LOC apa?\n";
+                sb.append(dialog);
+
+                button.setTitle("");
+                button.setSubTitle("");
+                i = Integer.parseInt(index);
+                urutan = Integer.parseInt(nomorurut);
+                lengProduct = listSKU.size();
+                newlengProduct = lengProduct - i;
+                if (newlengProduct > 5) {
+                    newlengProduct = 5;
+                    newlengProduct = i + newlengProduct;
+                } else {
+                    newlengProduct = lengProduct;
+                }
+                for (i = i; i < newlengProduct; i++) {
+                    String skuProduct = listSKU.get(i);
+                    sb.append(urutan + ". " + skuProduct + "\n");
+
+                    EasyMap bookAction = new EasyMap();
+                    bookAction.setName(urutan + "");
+                    bookAction.setValue(skuProduct);
+                    actions.add(bookAction);
+                    urutan++;
+                }
+                if (lengProduct > newlengProduct) {
+                    title = "Silakan pilih angka yang Anda inginkan. Atau ketik \"All\" untuk semua LOC berdasarkan Group.\n-Klik \"Next\" untuk melihat LOC lainnya.";
+
+                    EasyMap bookAction = new EasyMap();
+                    bookAction.setName("Next");
+                    bookAction.setValue("next");
+                    actions.add(bookAction);
+
+                    clearEntities.put("index", i + "");
+                    clearEntities.put("nomorurut", urutan + "");
+                } else {
+                    title = "Silakan pilih angka yang Anda inginkan. Atau ketik \"All\" untuk semua LOC berdasarkan Group.";
+                }
+                button.setButtonValues(actions);
+                buttonBuilder = new ButtonBuilder(button);
+                sb.append(SPLIT).append(title).append(SPLIT).append(buttonBuilder.build());
+                output.put(OUTPUT, sb.toString());
+                clearEntities.put("status_code", "0");
+                break;
+            case "2":
                 String sku = sdkUtil.getEasyMapValueByName(extensionRequest, "sku");
-                List<String> listSKU = new ArrayList<>();
-                listSKU = getListJsonReport.SKUGeneral(area, nameregion);
+
                 sku = sku.toUpperCase();
                 int lengList = listSKU.size();
-                for (int i = 0; i < lengList; i++) {
+                for (i = 0; i < lengList; i++) {
                     String skuCode = listSKU.get(i);
                     skuCode = skuCode.toUpperCase();
                     if (skuCode.equalsIgnoreCase(sku)) {
@@ -590,13 +728,13 @@ public class ServiceDailyStockByLOC {
                 }
 
                 if (sb.toString().equalsIgnoreCase("")) {
-                    String dialog1 = "Maaf, {bot_name} tidak dapat menemukan LOC/SKU tersebut.";
-                    String dialog2 = "Silakan ketikan kembali kode LOC/SKU yang Bapak/Ibu " + fullName + " inginkan. Atau ketik \"All\" untuk semua LOC/SKU berdasarkan Region.";
+                    String dialog1 = "Maaf, {bot_name} tidak dapat menemukan LOC tersebut.";
+                    String dialog2 = "Silakan ketikan kembali kode LOC yang Bapak/Ibu " + fullName + " inginkan. Atau ketik \"All\" untuk semua LOC berdasarkan Region.";
                     output.put(OUTPUT, dialog1 + SPLIT + dialog2);
 
                 } else {
-                    String dialog1 = "Apakah kode LOC/SKU berikut yang Anda maksud?\n";
-                    String dialog2 = "Silakan ketikan kode LOC/SKU yang Bapak/Ibu " + fullName + " inginkan.";
+                    String dialog1 = "Apakah kode LOC berikut yang Anda maksud?\n";
+                    String dialog2 = "Silakan ketikan kode LOC yang Bapak/Ibu " + fullName + " inginkan.";
                     output.put(OUTPUT, dialog1 + sb.toString() + SPLIT + dialog2);
                 }
 
@@ -609,6 +747,8 @@ public class ServiceDailyStockByLOC {
         extensionResult.setRepeat(false);
         extensionResult.setSuccess(true);
         extensionResult.setNext(true);
+        log.debug("dailyStockByLOC_tanyaSKU() extensionResult: {}", new Gson().toJson(extensionResult));
+
         return extensionResult;
     }
 
@@ -617,7 +757,6 @@ public class ServiceDailyStockByLOC {
         Map<String, String> output = new HashMap<>();
         ExtensionResult extensionResult = new ExtensionResult();
         Map<String, String> clearEntities = new HashMap<>();
-        StringBuilder sb = new StringBuilder();
 
         String status_code = sdkUtil.getEasyMapValueByName(extensionRequest, "status_code");
         String area = sdkUtil.getEasyMapValueByName(extensionRequest, "area");
@@ -635,19 +774,65 @@ public class ServiceDailyStockByLOC {
         InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
         String fullName = dataInfoUser.getFullName();
         // =============================================== //
+        List<String> listArea = new ArrayList<>();
+        listArea = getListJsonReport.areaGeneral();
 
+        String namearea = "";
+        boolean cekAngkaArea = CekNumber(area);
+        if (cekAngkaArea == true) {
+            int i = Integer.parseInt(area) - 1;
+            namearea = listArea.get(i);
+        } else {
+            int lengArea = listArea.size();
+            for (int i = 0; i < lengArea; i++) {
+                String areaName = listArea.get(i);
+                if (areaName.equalsIgnoreCase(area)) {
+                    namearea = areaName;
+                    break;
+                }
+            }
+        }
+        List<String> listRegionCode = new ArrayList<>();
+        listRegionCode = getListJsonReport.regionGeneral(namearea);
+
+        String nameregion = "";
+        boolean cekAngka = CekNumber(region);
+        if (cekAngka == true) {
+            int i = Integer.parseInt(region) - 1;
+            nameregion = listRegionCode.get(i);
+        } else {
+            int lengRegion = listRegionCode.size();
+            for (int i = 0; i < lengRegion; i++) {
+                String regionCode = listRegionCode.get(i);
+                if (regionCode.equalsIgnoreCase(region)) {
+                    nameregion = regionCode;
+                    break;
+                }
+            }
+        }
+        if (status_code.equals("")) {
+            status_code = "0";
+        }
         switch (status_code) {
             case "0":
-                if (tanya_sku.equalsIgnoreCase("all")) {
+                if (tanya_sku.equalsIgnoreCase("next")) {
+                    clearEntities.put("tanya_sku", "");
+                    clearEntities.put("status_code", "1");
+                } else if (tanya_sku.equalsIgnoreCase("all")) {
                     QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Apakah Bapak/Ibu " + fullName + " ingin report dalam bentuk summary?")
                             .add("Ya", "Yes").add("Tidak", "NO").build();
 
                     output.put(OUTPUT, quickReplyBuilder.string());
                     clearEntities.put("sku", tanya_sku);
+                    clearEntities.put("status_code", "0");
+                    clearEntities.put("area", namearea);
+                    clearEntities.put("region", nameregion);
+                    clearEntities.put("index", "0");
+                    clearEntities.put("nomorurut", "1");
 
                 } else {
                     List<String> listSKU = new ArrayList<>();
-                    listSKU = getListJsonReport.SKUGeneral(area, region);
+                    listSKU = getListJsonReport.SKURegionGeneral(namearea, nameregion);
                     String statussku = "";
                     int lengList = listSKU.size();
                     for (int i = 0; i < lengList; i++) {
@@ -663,9 +848,12 @@ public class ServiceDailyStockByLOC {
                     if (statussku.equalsIgnoreCase("tepat")) {
                         clearEntities.put("summary", "yes");
                         clearEntities.put("sku", tanya_sku);
+                        clearEntities.put("status_code", "0");
+                        clearEntities.put("index", "0");
+                        clearEntities.put("nomorurut", "1");
                     } else {
                         clearEntities.put("tanya_sku", "");
-                        clearEntities.put("status_code", "1");
+                        clearEntities.put("status_code", "2");
                         clearEntities.put("sku", tanya_sku);
                     }
                 }
@@ -678,6 +866,8 @@ public class ServiceDailyStockByLOC {
         extensionResult.setRepeat(false);
         extensionResult.setSuccess(true);
         extensionResult.setNext(true);
+        log.debug("dailyStockByLOC_Summary() extensionResult: {}", new Gson().toJson(extensionResult));
+
         return extensionResult;
     }
 
@@ -694,6 +884,8 @@ public class ServiceDailyStockByLOC {
 //        String tanya_sku = sdkUtil.getEasyMapValueByName(extensionRequest, "tanya_sku");
         String summary = sdkUtil.getEasyMapValueByName(extensionRequest, "summary");
         String sku = sdkUtil.getEasyMapValueByName(extensionRequest, "sku");
+        String intention = sdkUtil.getEasyMapValueByName(extensionRequest, "intention");
+
         String indexReport = "";
 
         // ============== Get AdditionalField ============ //
@@ -708,6 +900,50 @@ public class ServiceDailyStockByLOC {
         String fullName = dataInfoUser.getFullName();
 //        String fullName = "Deka Rizky";
         // =============================================== //
+        List<String> listArea = new ArrayList<>();
+        listArea = getListJsonReport.areaGeneral();
+
+        String namearea = "";
+        int nomorurutarea = 0;
+        boolean cekAngkaArea = CekNumber(area);
+        if (cekAngkaArea == true) {
+            int i = Integer.parseInt(area) - 1;
+            namearea = listArea.get(i);
+            nomorurutarea = Integer.parseInt(area);
+
+        } else {
+            int lengArea = listArea.size();
+            for (int i = 0; i < lengArea; i++) {
+                String areaName = listArea.get(i);
+                if (areaName.equalsIgnoreCase(area)) {
+                    namearea = areaName;
+                    nomorurutarea = i + 1;
+
+                    break;
+                }
+            }
+        }
+        List<String> listRegionCode = new ArrayList<>();
+        listRegionCode = getListJsonReport.regionGeneral(namearea);
+        int nomorurutregion = 0;
+        boolean cekAngka = CekNumber(regionCode);
+        if (cekAngka == true) {
+            int i = Integer.parseInt(regionCode) - 1;
+            nomorurutregion = Integer.parseInt(regionCode);
+
+        } else {
+            int lengRegion = listRegionCode.size();
+            for (int i = 0; i < lengRegion; i++) {
+                String regionName = listRegionCode.get(i);
+                if (regionName.equalsIgnoreCase(regionCode)) {
+                    nomorurutregion = i + 1;
+
+                    break;
+                }
+            }
+        }
+        String kodereport = appProp.getGARUDAFOOD_SHORTCUT_dailystockbyloc();
+        String shortcutReport = kodereport + " " + nomorurutarea + " " + nomorurutregion + " " + sku;
         ReportRequest reportRequest = new ReportRequest();
         List<EasyParam> easyparam = new ArrayList<>();
         List<LoopParam> loopparam = new ArrayList<>();
@@ -719,33 +955,45 @@ public class ServiceDailyStockByLOC {
         int lengList = 0;
         int index = 0;
         String dialog1 = "";
+        if (status_code.equals("")) {
+            status_code = "0";
+        }
         switch (status_code) {
             case "0":
+                String dialog = "";
+
                 if (summaryReport.equalsIgnoreCase("yes")) {
-                    if (sku.equalsIgnoreCase("all")) {
-                        List<Region> listRegion = paramJSON.getListRegionfromFileJson(regionJson);
-                        List<Region> listByRegion = listRegion.stream()
-                                .filter(region -> region.area.equalsIgnoreCase(area) && region.region.equalsIgnoreCase(regionCode))
-                                .collect(Collectors.toList());
-                        lengList = listByRegion.size();
-                        for (int i = index; i < lengList;) {
-                            Region regionArray = listByRegion.get(i);
-                            String skuRegion = regionArray.loc;
-                            if (i < 1) {
-                                parameterValue = skuRegion;
-                            } else {
-                                parameterValue = parameterValue + "|" + skuRegion;
-                            }
-                            i++;
-                            index = i;
-                        }
+                    if (intention.equalsIgnoreCase(kodereport)) {
+                        clearEntities.put("report", "bypass");
+                        clearEntities.put("before_final", "SKIP");
+
                     } else {
-                        parameterValue = sku.toUpperCase();
+                        if (sku.equalsIgnoreCase("all")) {
+                            List<Region> listRegion = paramJSON.getListRegionfromFileJson(regionJson);
+                            List<Region> listByRegion = listRegion.stream()
+                                    .filter(region -> region.area.equalsIgnoreCase(area) && region.region.equalsIgnoreCase(regionCode))
+                                    .collect(Collectors.toList());
+                            lengList = listByRegion.size();
+                            for (int i = index; i < lengList;) {
+                                Region regionArray = listByRegion.get(i);
+                                String skuRegion = regionArray.loc;
+                                if (i < 1) {
+                                    parameterValue = skuRegion;
+                                } else {
+                                    parameterValue = parameterValue + "|" + skuRegion;
+                                }
+                                i++;
+                                index = i;
+                            }
+                        } else {
+                            parameterValue = sku.toUpperCase();
+                        }
+                        EasyParam easyParam = new EasyParam();
+                        easyParam.setSzKey(parameterKey);
+                        easyParam.setSzValue(parameterValue);
+                        easyparam.add(easyParam);
                     }
-                    EasyParam easyParam = new EasyParam();
-                    easyParam.setSzKey(parameterKey);
-                    easyParam.setSzValue(parameterValue);
-                    easyparam.add(easyParam);
+
                 } else {
                     if (sku.equalsIgnoreCase("all")) {
                         List<Region> listRegion = paramJSON.getListRegionfromFileJson(regionJson);
@@ -823,13 +1071,18 @@ public class ServiceDailyStockByLOC {
                             dialog1 = "Berikut adalah Report yang Bapak/Ibu " + fullName + " ingin lihat. ";
                         }
                         if (lengList > 5 && summary.equalsIgnoreCase("no")) {
-                            QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Next\" untuk Report Selanjutnya. Klik \"Ganti SKU\" jika Anda ingin cek SKU lainnya. Atau klik \"Menu\" untuk Menu Utama")
-                                    .add("Next", "next").add("Ganti SKU", "ganti sku").add("Menu", "menu").build();
+                            dialog = "Tips : Jika ingin melihat kembali Report ini. Saat berada di Menu Utama atau Menu Report, Anda dapat langsung menggunakan keyword berikut:\n" + shortcutReport;
+                            sb.append(dialog).append(SPLIT);
+
+                            QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Next\" untuk Report Selanjutnya. Klik \"Ganti LOC\" jika Anda ingin cek LOC lainnya. Atau klik \"Menu\" untuk Menu Utama")
+                                    .add("Next", "next").add("Ganti LOC", "ganti loc").add("Menu", "menu").build();
 
                             output.put(OUTPUT, dialog1 + SPLIT + sb.toString() + quickReplyBuilder.string());
                         } else {
-                            QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Ganti SKU\" jika Anda ingin cek SKU lainnya. Atau klik \"Menu\" untuk Menu Utama")
-                                    .add("Ganti SKU", "ganti sku").add("Menu", "menu").build();
+                            dialog = "Tips : Jika ingin melihat kembali Report ini. Saat berada di Menu Utama atau Menu Report, Anda dapat langsung menggunakan keyword berikut:\n" + shortcutReport;
+                            sb.append(dialog).append(SPLIT);
+                            QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Ganti LOC\" jika Anda ingin cek LOC lainnya. Atau klik \"Menu\" untuk Menu Utama")
+                                    .add("Ganti LOC", "ganti loc").add("Menu", "menu").build();
 
                             output.put(OUTPUT, dialog1 + SPLIT + sb.toString() + quickReplyBuilder.string());
                         }
@@ -951,14 +1204,17 @@ public class ServiceDailyStockByLOC {
                             dialog1 = "Berikut adalah Report yang Bapak/Ibu " + fullName + " ingin lihat. ";
                         }
                         if (lengList < 5 || lengList == index) {
-                            QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Ganti SKU\" jika Anda ingin cek SKU lainnya. Atau klik \"Menu\" untuk Menu Utama")
-                                    .add("Ganti SKU", "ganti sku").add("Menu", "menu").build();
+                            dialog = "Tips : Jika ingin melihat kembali Report ini. Saat berada di Menu Utama atau Menu Report, Anda dapat langsung menggunakan keyword berikut:\n" + shortcutReport;
+                            sb.append(dialog).append(SPLIT);
+                            QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Ganti LOC\" jika Anda ingin cek LOC lainnya. Atau klik \"Menu\" untuk Menu Utama")
+                                    .add("Ganti LOC", "ganti loc").add("Menu", "menu").build();
 
                             output.put(OUTPUT, dialog1 + SPLIT + sb.toString() + quickReplyBuilder.string());
                         } else if (lengList > 5 && summary.equalsIgnoreCase("no")) {
-
-                            QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Next\" untuk Report Selanjutnya. Klik \"Ganti SKU\" jika Anda ingin cek SKU lainnya. Atau klik \"Menu\" untuk Menu Utama")
-                                    .add("Next", "next").add("Ganti SKU", "ganti sku").add("Menu", "menu").build();
+                            dialog = "Tips : Jika ingin melihat kembali Report ini. Saat berada di Menu Utama atau Menu Report, Anda dapat langsung menggunakan keyword berikut:\n" + shortcutReport;
+                            sb.append(dialog).append(SPLIT);
+                            QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Next\" untuk Report Selanjutnya. Klik \"Ganti LOC\" jika Anda ingin cek LOC lainnya. Atau klik \"Menu\" untuk Menu Utama")
+                                    .add("Next", "next").add("Ganti LOC", "ganti loc").add("Menu", "menu").build();
 
                             output.put(OUTPUT, dialog1 + SPLIT + sb.toString() + quickReplyBuilder.string());
                         }
@@ -992,13 +1248,13 @@ public class ServiceDailyStockByLOC {
                     newleng = lengList;
                 }
                 if (newleng < 5 || newleng == index) {
-                    QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Ganti SKU\" jika Anda ingin cek SKU lainnya. Atau klik \"Menu\" untuk Menu Utama")
-                            .add("Ganti SKU", "ganti sku").add("Menu", "menu").build();
+                    QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Ganti LOC\" jika Anda ingin cek LOC lainnya. Atau klik \"Menu\" untuk Menu Utama")
+                            .add("Ganti LOC", "ganti loc").add("Menu", "menu").build();
 
                     output.put(OUTPUT, quickReplyBuilder.string());
                 } else if (newleng > 5) {
-                    QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Next\" untuk Report Selanjutnya. Klik \"Ganti SKU\" jika Anda ingin cek SKU lainnya. Atau klik \"Menu\" untuk Menu Utama")
-                            .add("Next", "next").add("Ganti SKU", "ganti sku").add("Menu", "menu").build();
+                    QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Next\" untuk Report Selanjutnya. Klik \"Ganti LOC\" jika Anda ingin cek LOC lainnya. Atau klik \"Menu\" untuk Menu Utama")
+                            .add("Next", "next").add("Ganti LOC", "ganti loc").add("Menu", "menu").build();
 
                     output.put(OUTPUT, quickReplyBuilder.string());
                 }
@@ -1012,6 +1268,8 @@ public class ServiceDailyStockByLOC {
         extensionResult.setRepeat(false);
         extensionResult.setSuccess(true);
         extensionResult.setNext(true);
+        log.debug("dailyStockByLOC_getReport() extensionResult: {}", new Gson().toJson(extensionResult));
+
         return extensionResult;
     }
 
@@ -1025,7 +1283,7 @@ public class ServiceDailyStockByLOC {
         if (report.equalsIgnoreCase("next")) {
             clearEntities.put("report", "");
             clearEntities.put("status_code", "1");
-        } else if (report.equalsIgnoreCase("ganti sku")) {
+        } else if (report.equalsIgnoreCase("ganti loc")) {
             clearEntities.put("tanya_sku", "");
             clearEntities.put("sku", "");
             clearEntities.put("summary", "");
@@ -1041,7 +1299,220 @@ public class ServiceDailyStockByLOC {
         extensionResult.setRepeat(false);
         extensionResult.setSuccess(true);
         extensionResult.setNext(true);
+        log.debug("dailyStockByLOC_validasiReport() extensionResult: {}", new Gson().toJson(extensionResult));
+
         return extensionResult;
     }
 
+    public ExtensionResult dailyStockByLOC_bypassReport(ExtensionRequest extensionRequest) {
+        log.debug("dailyStockByLOC_bypassReport() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        Map<String, String> output = new HashMap<>();
+        ExtensionResult extensionResult = new ExtensionResult();
+        Map<String, String> clearEntities = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+
+        String reportUser = sdkUtil.getEasyMapValueByName(extensionRequest, "report");
+        String status_code = sdkUtil.getEasyMapValueByName(extensionRequest, "status_code");
+        String regionCode = sdkUtil.getEasyMapValueByName(extensionRequest, "region");
+        String area = sdkUtil.getEasyMapValueByName(extensionRequest, "area");
+        String summary = sdkUtil.getEasyMapValueByName(extensionRequest, "summary");
+        String sku = sdkUtil.getEasyMapValueByName(extensionRequest, "sku");
+        String indexReport = "";
+
+        // ============== Get AdditionalField ============ //
+        userToken = svcDolphinService.getUserToken(userToken);
+        String contactId = extensionRequest.getIntent().getTicket().getContactId();
+        Contact contact = svcDolphinService.getCustomer(userToken, contactId);
+        log.debug("getDolphinResponse() extension request: {} user token: {}", extensionRequest, new Gson().toJson(userToken));
+        log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, contactId);
+        log.debug("getDolphinResponse() extension request: {} Contact: {}", extensionRequest, new Gson().toJson(contact));
+        String b = contact.getAdditionalField().get(0);
+        InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
+        String fullName = dataInfoUser.getFullName();
+//        String fullName = "Deka Rizky";
+        // =============================================== //
+        List<String> listArea = new ArrayList<>();
+        listArea = getListJsonReport.areaGeneral();
+
+        String namearea = "";
+        int nomorurutarea = 0;
+        boolean cekAngkaArea = CekNumber(area);
+        if (cekAngkaArea == true) {
+            nomorurutarea = Integer.parseInt(area);
+
+        } else {
+            int lengArea = listArea.size();
+            for (int i = 0; i < lengArea; i++) {
+                String areaName = listArea.get(i);
+                if (areaName.equalsIgnoreCase(area)) {
+                    nomorurutarea = i + 1;
+
+                    break;
+                }
+            }
+        }
+        List<String> listRegionCode = new ArrayList<>();
+        listRegionCode = getListJsonReport.regionGeneral(namearea);
+        int nomorurutregion = 0;
+        boolean cekAngka = CekNumber(regionCode);
+        if (cekAngka == true) {
+            nomorurutregion = Integer.parseInt(regionCode);
+
+        } else {
+            int lengRegion = listRegionCode.size();
+            for (int i = 0; i < lengRegion; i++) {
+                String regionName = listRegionCode.get(i);
+                if (regionName.equalsIgnoreCase(regionCode)) {
+                    nomorurutregion = i + 1;
+
+                    break;
+                }
+            }
+        }
+        String kodereport = appProp.getGARUDAFOOD_SHORTCUT_dailystockbyloc();
+        String shortcutReport = kodereport + " " + nomorurutarea + " " + nomorurutregion + " " + sku;
+        ReportRequest reportRequest = new ReportRequest();
+        List<EasyParam> easyparam = new ArrayList<>();
+        List<LoopParam> loopparam = new ArrayList<>();
+        String text = fullName;
+        String parameterKey = "SKU";
+        String parameterValue = "";
+        String reportname = appProp.getGARUDAFOOD_REPORTCODE_dailystockbyloc();
+        String summaryReport = summary;
+        int lengList = 0;
+        int index = 0;
+        String dialog1 = "";
+        String dialog = "";
+
+        if (summaryReport.equalsIgnoreCase("yes")) {
+            if (sku.equalsIgnoreCase("all")) {
+                List<Region> listRegion = paramJSON.getListRegionfromFileJson(regionJson);
+                List<Region> listByRegion = listRegion.stream()
+                        .filter(region -> region.area.equalsIgnoreCase(area) && region.region.equalsIgnoreCase(regionCode))
+                        .collect(Collectors.toList());
+                lengList = listByRegion.size();
+                for (int i = index; i < lengList;) {
+                    Region regionArray = listByRegion.get(i);
+                    String skuRegion = regionArray.loc;
+                    if (i < 1) {
+                        parameterValue = skuRegion;
+                    } else {
+                        parameterValue = parameterValue + "|" + skuRegion;
+                    }
+                    i++;
+                    index = i;
+                }
+            } else {
+                parameterValue = sku.toUpperCase();
+            }
+            EasyParam easyParam = new EasyParam();
+            easyParam.setSzKey(parameterKey);
+            easyParam.setSzValue(parameterValue);
+            easyparam.add(easyParam);
+        } else {
+            if (sku.equalsIgnoreCase("all")) {
+                List<Region> listRegion = paramJSON.getListRegionfromFileJson(regionJson);
+                List<Region> listByRegion = listRegion.stream()
+                        .filter(region -> region.area.equalsIgnoreCase(area) && region.region.equalsIgnoreCase(regionCode))
+                        .collect(Collectors.toList());
+                lengList = listByRegion.size();
+                int newleng;
+                if (lengList >= 5) {
+                    newleng = 5;
+                } else {
+                    newleng = lengList;
+                }
+                for (int i = index; i < newleng;) {
+                    Region regionArray = listByRegion.get(i);
+                    String skuRegion = regionArray.loc;
+                    LoopParam loopParam = new LoopParam();
+                    loopParam.setSzKey(parameterKey);
+                    loopParam.setSzValue(skuRegion);
+
+                    loopparam.add(loopParam);
+                    i++;
+                    index = i;
+                }
+            } else {
+                LoopParam loopParam = new LoopParam();
+                parameterValue = sku.toUpperCase();
+                loopParam.setSzKey(parameterKey);
+                loopParam.setSzValue(parameterValue);
+                loopparam.add(loopParam);
+            }
+        }
+        // Set Param
+        reportRequest.setSzReportName(reportname);
+        reportRequest.setLoopParam(loopparam);
+        reportRequest.setSummary(summary);
+        reportRequest.setParam(easyparam);
+        JSONObject jsonReport = new JSONObject(reportRequest);
+        String report = jsonReport.toString();
+        dialog1 = "";
+        try {
+            OkHttpUtil okHttpUtil = new OkHttpUtil();
+            okHttpUtil.init(true);
+            String apiReport = appProp.getGARUDAFOOD_API_REPORT();
+            System.out.println(report);
+            RequestBody body = RequestBody.create(JSON, report);
+            Request request = new Request.Builder().url(apiReport).post(body).addHeader("Content-Type", "application/json").build();
+            Response response = okHttpUtil.getClient().newCall(request).execute();
+            JSONObject jsonobj = new JSONObject(response.body().string());
+
+            if (jsonobj.getString("error").equalsIgnoreCase("")) {
+                JSONArray arrayReport = jsonobj.getJSONArray("path");
+                int lengReport = arrayReport.length();
+
+                for (int i = 0; i < lengReport; i++) {
+                    JSONObject jObj = arrayReport.getJSONObject(i);
+                    String url = jObj.getString("url");
+                    System.out.println(url);
+                    URL input = new URL(url);
+                    String reportAfterWatermark = generateWatermark.WatermarkImageReport(text, input);
+                    System.out.println(reportAfterWatermark);
+                    ButtonTemplate image = new ButtonTemplate();
+                    image.setPictureLink(reportAfterWatermark);
+                    image.setPicturePath(reportAfterWatermark);
+
+                    DocumentBuilder documentBuilder = new DocumentBuilder(image);
+                    String btnBuilder = documentBuilder.build();
+                    sb.append(btnBuilder).append(SPLIT);
+
+                }
+                String pagereport = "(" + index + "/" + lengList + ")";
+                if (lengReport > 1) {
+                    dialog1 = "Berikut adalah Report yang Bapak/Ibu " + fullName + " ingin lihat. " + pagereport;
+                } else {
+                    dialog1 = "Berikut adalah Report yang Bapak/Ibu " + fullName + " ingin lihat. ";
+                }
+
+                dialog = "Tips : Jika ingin melihat kembali Report ini. Saat berada di Menu Utama atau Menu Report, Anda dapat langsung menggunakan keyword berikut:\n" + shortcutReport;
+                sb.append(dialog).append(SPLIT);
+                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Klik \"Menu\" untuk melihat Menu Utama")
+                        .add("Menu", "menu").build();
+
+                output.put(OUTPUT, dialog1 + SPLIT + sb.toString() + quickReplyBuilder.string());
+                clearEntities.put("index", index + "");
+            } else {
+                dialog = "Maaf. File tidak ditemukan atau sedang terjadi kesalahan. Silakan klik \"Menu\" untuk melihat Menu Utama.";
+                sb.append(dialog).append(SPLIT);
+                QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("")
+                        .add("Menu", "menu").build();
+
+                output.put(OUTPUT, dialog1 + SPLIT + sb.toString() + quickReplyBuilder.string());
+            }
+        } catch (Exception e) {
+            log.debug("Response getReport Exception() extension request : {} ", e);
+        }
+
+        extensionResult.setEntities(clearEntities);
+        extensionResult.setValue(output);
+
+        extensionResult.setAgent(false);
+        extensionResult.setRepeat(false);
+        extensionResult.setSuccess(true);
+        extensionResult.setNext(true);
+        log.debug("dailyStockByLOC_bypassReport() extensionResult: {}", new Gson().toJson(extensionResult));
+        return extensionResult;
+    }
 }

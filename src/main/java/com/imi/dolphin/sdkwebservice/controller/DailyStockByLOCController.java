@@ -65,4 +65,10 @@ public class DailyStockByLOCController {
     public ExtensionResult dailyStockByLOC_validasiReport(@RequestBody ExtensionRequest extensionRequest) {
         return serviceDailyStockByLOC.dailyStockByLOC_validasiReport(extensionRequest);
     }
+
+    @RequestMapping("/dailyStockByLOC_bypassReport")
+    @PostMapping
+    public ExtensionResult dailyStockByLOC_bypassReport(@RequestBody ExtensionRequest extensionRequest) {
+        return serviceDailyStockByLOC.dailyStockByLOC_bypassReport(extensionRequest);
+    }
 }
