@@ -54,12 +54,12 @@ public class MailServiceImp implements IMailService {
             message.setText(mailModel.getText());
 //            message.setContent(mailModel.getText(), "text/html; charset=utf-8");
             Transport.send(message);
-            log.debug("============== Send OTP to Mail : SUCCESS ============");
+            log.debug("============== Send to Mail : SUCCESS ============");
 
             return "success";
         } catch (MessagingException e) {
             System.out.println(e.getMessage());
-            log.debug("============== Send OTP to Mail : FAILED ============", new Gson().toJson(e));
+            log.debug("============== Send to Mail : FAILED ============", new Gson().toJson(e));
         }
         return "failed";
 

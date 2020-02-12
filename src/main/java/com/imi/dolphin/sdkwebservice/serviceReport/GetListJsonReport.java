@@ -8,6 +8,7 @@ package com.imi.dolphin.sdkwebservice.serviceReport;
 import com.imi.dolphin.sdkwebservice.GarudafoodModel.Product;
 import com.imi.dolphin.sdkwebservice.GarudafoodModel.Region;
 import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportName;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.RoleBroadcast;
 import com.imi.dolphin.sdkwebservice.GarudafoodModel.SOP;
 import com.imi.dolphin.sdkwebservice.param.ParamJSONReport;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class GetListJsonReport {
     private static final String regionJson = "fileJson/report/region.json";
     private static final String productJson = "fileJson/report/product.json";
     private static final String reportnameJson = "fileJson/report/report_name.json";
+    private static final String rolebroadcastJson = "fileJson/report/role_broadcast.json";
 
     @Autowired
     private ParamJSONReport paramJSON;
@@ -43,12 +45,33 @@ public class GetListJsonReport {
         for (int i = 0; i < lengRegion; i++) {
             ReportName reportnameArray = listReportNameSorted.get(i);
             String reportname = reportnameArray.report_name;
-            if (listNameReport.contains(reportname)) {
+            String reportcode = reportnameArray.report_code;
+            String reportcodename = reportcode + reportname;
+            if (listNameReport.contains(reportcodename)) {
             } else {
-                listNameReport.add(reportname);
+                listNameReport.add(reportcodename);
             }
         }
         return listNameReport;
+    }
+
+    public List<String> roleBroadcastMessage() {
+        List<RoleBroadcast> listRoleBroadcastname = paramJSON.getListRoleBroadcastfromFileJson(rolebroadcastJson);
+        List<RoleBroadcast> listRoleBroadcastSorted = listRoleBroadcastname.stream()
+                //                .sorted(Comparator.comparing(ReportName::getReport_name))
+                .collect(Collectors.toList());
+
+        List<String> listRoleBroadcast = new ArrayList<>();
+        int lengRegion = listRoleBroadcastSorted.size();
+        for (int i = 0; i < lengRegion; i++) {
+            RoleBroadcast rolebroadcastArray = listRoleBroadcastSorted.get(i);
+            String username = rolebroadcastArray.getUsername();
+            if (listRoleBroadcast.contains(username)) {
+            } else {
+                listRoleBroadcast.add(username);
+            }
+        }
+        return listRoleBroadcast;
     }
 
     // ===============//

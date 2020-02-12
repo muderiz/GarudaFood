@@ -1,0 +1,275 @@
+[
+    {
+        "Step": "dialogParamSKU_KategoriGroupProduct",
+        "Index": "1",
+        "Dialog": "Baiklah, Bapak/Ibu #fullname# sudah berada di Report #namareport#.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_KategoriGroupProduct",
+        "Index": "2",
+        "Dialog": "Bapak/Ibu #fullname# ingin melihat report dari Group apa?\\n",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_KategoriGroupProduct",
+        "Index": "3",
+        "Dialog": "Silakan pilih angka yang Anda inginkan. Klik \"Next\" untuk melihat Group lainnya.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_KategoriGroupProduct",
+        "Index": "4",
+        "Dialog": "Silakan pilih angka yang Anda inginkan.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_KategoriGroupProduct",
+        "Index": "5",
+        "Dialog": "Maaf {bot_name} tidak dapat menemukan Group yang Bapak/Ibu #fullname# inginkan.\\n",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_tanyaSKU",
+        "Index": "1",
+        "Dialog": "Baiklah, Bapak/Ibu #fullname# telah memilih #namegroup#. Selanjutnya ingin melihat report dari SKU apa?\\n",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_tanyaSKU",
+        "Index": "2",
+        "Dialog": "Silakan pilih angka yang Anda inginkan. Atau ketik \"All\" untuk semua SKU berdasarkan Group.\\n-Klik \"Next\" untuk melihat SKU lainnya.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_tanyaSKU",
+        "Index": "3",
+        "Dialog": "Silakan pilih angka yang Anda inginkan. Atau ketik \"All\" untuk semua SKU berdasarkan Group.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_tanyaSKU",
+        "Index": "4",
+        "Dialog": "Maaf, {bot_name} tidak dapat menemukan SKU tersebut.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_tanyaSKU",
+        "Index": "5",
+        "Dialog": "Apakah kode SKU berikut yang Anda maksud?\\n",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_tanyaSKU",
+        "Index": "6",
+        "Dialog": "Silakan ketikan kode SKU yang Bapak/Ibu #fullname# inginkan.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_Summary",
+        "Index": "1",
+        "Dialog": "Apakah Bapak/Ibu #fullname# ingin report dalam bentuk summary?",
+        "Action": "QR",
+        "Map": "Ya,Yes#Tidak,No"
+    },
+    {
+        "Step": "dialogParamSKU_getReport",
+        "Index": "1",
+        "Dialog": "Berikut adalah Report yang Bapak/Ibu #fullname# ingin lihat, berdasarkan Group #finalgroupname#. #pagereport#",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_getReport",
+        "Index": "2",
+        "Dialog": "Berikut adalah Report yang Bapak/Ibu #fullname# ingin lihat, berdasarkan Group #finalgroupname#.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_getReport",
+        "Index": "3",
+        "Dialog": "Tips : Jika ingin melihat kembali Report ini. Saat berada di Menu Utama atau Menu Report, Anda dapat langsung menggunakan keyword berikut:\\n #shortcutreport#",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_getReport",
+        "Index": "4",
+        "Dialog": "Klik \"Next\" untuk Report Selanjutnya. Klik \"Ganti SKU\" jika Anda ingin cek SKU lainnya. Atau klik \"Menu\" untuk Menu Utama.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_getReport",
+        "Index": "5",
+        "Dialog": "Klik \"Ganti SKU\" jika Anda ingin cek SKU lainnya. Atau klik \"Menu\" untuk Menu Utama.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_getReport",
+        "Index": "6",
+        "Dialog": "Maaf. File tidak ditemukan atau sedang terjadi kesalahan. Silakan klik \"Menu\" untuk melihat Menu Utama.",
+        "Action": "QR",
+        "Map": "Menu,menu"
+    },
+    {
+        "Step": "dialogParamSKU_bypassReport",
+        "Index": "1",
+        "Dialog": "Berikut adalah Report yang Bapak/Ibu #fullname# ingin lihat. #pagereport#",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_bypassReport",
+        "Index": "2",
+        "Dialog": "Berikut adalah Report yang Bapak/Ibu #fullname# ingin lihat.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_bypassReport",
+        "Index": "3",
+        "Dialog": "Tips : Jika ingin melihat kembali Report ini. Saat berada di Menu Utama atau Menu Report, Anda dapat langsung menggunakan keyword berikut:\\n #shortcutreport#",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamSKU_bypassReport",
+        "Index": "4",
+        "Dialog": "Klik \"Menu\" untuk melihat Menu Utama.",
+        "Action": "QR",
+        "Map": "Menu,menu"
+    },
+    {
+        "Step": "dialogParamSKU_bypassReport",
+        "Index": "5",
+        "Dialog": "Maaf. File tidak ditemukan atau sedang terjadi kesalahan. Silakan klik \"Menu\" untuk melihat Menu Utama.",
+        "Action": "QR",
+        "Map": "Menu,menu"
+    },
+    {
+        "Step": "dialogParamLOC_KategoriArea",
+        "Index": "1",
+        "Dialog": "Baiklah, Bapak/Ibu #fullName# sudah berada di Report #namareport#.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_KategoriArea",
+        "Index": "2",
+        "Dialog": "Bapak/Ibu #fullname# ingin melihat report dari Area apa?\\n",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_KategoriArea",
+        "Index": "3",
+        "Dialog": "Silakan pilih angka yang Anda inginkan. Klik \"Next\" untuk melihat Area lainnya.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_KategoriArea",
+        "Index": "4",
+        "Dialog": "Silakan pilih angka yang Anda inginkan.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_KategoriArea",
+        "Index": "5",
+        "Dialog": "Maaf {bot_name} tidak dapat menemukan Area yang Bapak/Ibu #fullname# inginkan.\\n",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_KategoriRegion",
+        "Index": "1",
+        "Dialog": "Bapak/Ibu #fullname# telah memilih #namearea#. Selanjutnya ingin melihat report dari Region apa?\\n",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_KategoriRegion",
+        "Index": "2",
+        "Dialog": "Silakan pilih angka yang Anda inginkan. Klik \"Next\" untuk melihat Region lainnya.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_KategoriRegion",
+        "Index": "3",
+        "Dialog": "Silakan pilih angka yang Anda inginkan.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_KategoriRegion",
+        "Index": "4",
+        "Dialog": "Maaf {bot_name} tidak dapat menemukan Region yang Bapak/Ibu #fullname# inginkan.\\n",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_tanyaSKU",
+        "Index": "1",
+        "Dialog": "Baiklah, Bapak/Ibu #fullname# telah memilih #nameregion#. Selanjutnya ingin melihat report dari LOC apa?\\n",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_tanyaSKU",
+        "Index": "2",
+        "Dialog": "Silakan pilih angka yang Anda inginkan. Atau ketik \"All\" untuk semua LOC berdasarkan Region.\\n-Klik \"Next\" untuk melihat LOC lainnya.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_tanyaSKU",
+        "Index": "3",
+        "Dialog": "Silakan pilih angka yang Anda inginkan. Atau ketik \"All\" untuk semua LOC berdasarkan Region.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_tanyaSKU",
+        "Index": "4",
+        "Dialog": "Maaf, {bot_name} tidak dapat menemukan SKU tersebut.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_tanyaSKU",
+        "Index": "5",
+        "Dialog": "Apakah kode SKU berikut yang Anda maksud?\\n",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_tanyaSKU",
+        "Index": "6",
+        "Dialog": "Silakan ketikan kode SKU yang Bapak/Ibu #fullname# inginkan.",
+        "Action": "",
+        "Map": ""
+    },
+    {
+        "Step": "dialogParamLOC_Summary",
+        "Index": "1",
+        "Dialog": "Apakah Bapak/Ibu #fullname# ingin report dalam bentuk summary?",
+        "Action": "QR",
+        "Map": "Ya,Yes#Tidak,No"
+    }
+] 

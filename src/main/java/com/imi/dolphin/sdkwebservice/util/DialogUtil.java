@@ -38,7 +38,7 @@ public class DialogUtil {
 
     private final String tagParam = "#";
     private final String path = System.getProperty("user.dir");
-    private String fileJSON = "dialog.json";
+    private String fileJSON = "fileJson/dialog.json";
     private String fileJSON_location = "location.json";
     private static final Logger log = LogManager.getLogger(ServiceImp.class);
 

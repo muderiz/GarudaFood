@@ -860,7 +860,7 @@ public class ServiceImpSOP {
                     + "- Klik \"Dokumen Lain\" untuk melihat Dokumen " + jenisdokumen + " lainnya\n"
                     + "- Klik \"Menu\" untuk melihat Menu yang ada.";
             QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("")
-                    .add("Detail", linkDoc).add("Dokumen Lain", "dokumen lain").add("Menu", "menu utama").build();
+                    .add("Dokumen Lain", "dokumen lain").add("Menu", "menu utama").build();
 
             output.put(OUTPUT, dialog1 + SPLIT + sb.toString() + title + SPLIT + quickReplyBuilder.string());
 //            output.put(OUTPUT, dialog2);
@@ -968,7 +968,7 @@ public class ServiceImpSOP {
                         + "- Klik \"Dokumen Lain\" untuk melihat Dokumen " + jenisdokumen + " lainnya\n"
                         + "- Klik \"Menu\" untuk melihat Menu yang ada.";
                 QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("")
-                        .add("Detail", linkDoc).add("Dokumen Lain", "dokumen lain").add("Menu", "menu utama").build();
+                        .add("Dokumen Lain", "dokumen lain").add("Menu", "menu utama").build();
 
                 output.put(OUTPUT, title + SPLIT + quickReplyBuilder.string());
                 clearEntities.put("sop", "");

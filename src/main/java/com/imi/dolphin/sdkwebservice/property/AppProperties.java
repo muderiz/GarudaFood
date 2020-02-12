@@ -181,7 +181,29 @@ public class AppProperties {
     @Value("${garudafood.shortcut.dailytrend3m}")
     String GARUDAFOOD_SHORTCUT_dailytrend3m;
 
+    @Value("${garudafood.reportcode.dailyautoclaims}")
+    String GARUDAFOOD_REPORTCODE_DAILYAUTOCLAIMS;
+
+    @Value("${garudafood.shortcut.dailyautoclaims}")
+    String GARUDAFOOD_SHORTCUT_DAILYAUTOCLAIMS;
+
     //=======================//
+    public String getGARUDAFOOD_REPORTCODE_DAILYAUTOCLAIMS() {
+        return GARUDAFOOD_REPORTCODE_DAILYAUTOCLAIMS;
+    }
+
+    public void setGARUDAFOOD_REPORTCODE_DAILYAUTOCLAIMS(String GARUDAFOOD_REPORTCODE_DAILYAUTOCLAIMS) {
+        this.GARUDAFOOD_REPORTCODE_DAILYAUTOCLAIMS = GARUDAFOOD_REPORTCODE_DAILYAUTOCLAIMS;
+    }
+
+    public String getGARUDAFOOD_SHORTCUT_DAILYAUTOCLAIMS() {
+        return GARUDAFOOD_SHORTCUT_DAILYAUTOCLAIMS;
+    }
+
+    public void setGARUDAFOOD_SHORTCUT_DAILYAUTOCLAIMS(String GARUDAFOOD_SHORTCUT_DAILYAUTOCLAIMS) {
+        this.GARUDAFOOD_SHORTCUT_DAILYAUTOCLAIMS = GARUDAFOOD_SHORTCUT_DAILYAUTOCLAIMS;
+    }
+
     public String getGARUDAFOOD_BASE_URL() {
         return GARUDAFOOD_BASE_URL;
     }

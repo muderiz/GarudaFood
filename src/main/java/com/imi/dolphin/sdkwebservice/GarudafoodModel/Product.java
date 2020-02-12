@@ -15,9 +15,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class Product {
 
     public String group_category;
-    public String lob;
-    public String product_category;
-    public String sub_product_category;
+    public String konversizak;
+    public String umur;
+    public String kelompok;
     public String sku;
     public String principal;
 
@@ -30,27 +30,27 @@ public class Product {
     }
 
     public String getLob() {
-        return lob;
+        return konversizak;
     }
 
     public void setLob(String lob) {
-        this.lob = lob;
+        this.konversizak = lob;
     }
 
     public String getProduct_category() {
-        return product_category;
+        return umur;
     }
 
     public void setProduct_category(String product_category) {
-        this.product_category = product_category;
+        this.umur = product_category;
     }
 
     public String getSub_product_category() {
-        return sub_product_category;
+        return kelompok;
     }
 
     public void setSub_product_category(String sub_product_category) {
-        this.sub_product_category = sub_product_category;
+        this.kelompok = sub_product_category;
     }
 
     public String getSku() {

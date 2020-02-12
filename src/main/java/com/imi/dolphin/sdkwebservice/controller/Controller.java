@@ -26,6 +26,7 @@ import com.imi.dolphin.sdkwebservice.property.AppProperties;
 import com.imi.dolphin.sdkwebservice.service.IMailService;
 import com.imi.dolphin.sdkwebservice.service.IService;
 import com.imi.dolphin.sdkwebservice.service.ServiceImp;
+import com.imi.dolphin.sdkwebservice.service.ServiceRatingFeedback;
 
 /**
  *
@@ -45,6 +46,9 @@ public class Controller {
 
     @Autowired
     ServiceImp svcServiceGeneral;
+
+    @Autowired
+    ServiceRatingFeedback serviceRatingFeedback;
 
     @Autowired
     IMailService svcMailService;
@@ -174,6 +178,12 @@ public class Controller {
     @PostMapping
     public ExtensionResult menuUtamaGeneral(@RequestBody ExtensionRequest extensionRequest) {
         return svcServiceGeneral.menuUtamaGeneral(extensionRequest);
+    }
+
+    @RequestMapping("/SendFeedback")
+    @PostMapping
+    public ExtensionResult SendFeedback(@RequestBody ExtensionRequest extensionRequest) {
+        return serviceRatingFeedback.SendFeedback(extensionRequest);
     }
 
 }

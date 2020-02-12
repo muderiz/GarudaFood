@@ -147,8 +147,9 @@ public class DolphinServiceImp implements IDolphinService {
      * Refresh User Token
      *
      * Token akan handle hardcode user dan auth sdk user
+     *
      * @param userToken
-     * @return 
+     * @return
      */
     @Override
     public UserToken getUserToken(UserToken userToken) {
@@ -240,6 +241,33 @@ public class DolphinServiceImp implements IDolphinService {
             JSONObject data = jsonObject.getJSONObject("data");
 
             return new Gson().fromJson(data.toString(), Contact.class);
+        } catch (Exception e) {
+            log.debug("getCustomer() error: {}", e.getMessage(), e);
+        }
+        return null;
+    }
+
+    @Override
+    public JSONObject getAllCustomer(UserToken userToken, String contactId) {
+        log.debug("getCustomer() userToken: {} contactid: {}", userToken, contactId);
+        try {
+            okHttpUtil.init(true);
+
+            HttpUrl.Builder urlBuilder = HttpUrl
+                    .parse(appProperties.getSdkDolphinBaseUrl() + appProperties.getSdkDolphinGraphContacts())
+                    .newBuilder();
+            urlBuilder.addQueryParameter("contactId", contactId);
+
+            Request.Builder builder = okHttpUtil.getBuilder();
+            okHttpUtil.addHeaders(builder, userToken.getAuth());
+            Request request = builder.url(urlBuilder.build().toString()).build();
+            Response response = okHttpUtil.getClient().newCall(request).execute();
+            String jsonData = response.body().string();
+            JSONObject jsonObject = new JSONObject(jsonData);
+//            JSONArray jsonArray = jsonObject.getJSONArray("data");
+//            JSONObject data = jsonArray.getJSONObject(0);
+
+            return jsonObject;
         } catch (Exception e) {
             log.debug("getCustomer() error: {}", e.getMessage(), e);
         }

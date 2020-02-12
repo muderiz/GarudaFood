@@ -144,6 +144,9 @@ public class ServiceSOP {
         String fullName = "";
         List<String> listCompany = new ArrayList<>();
         listCompany = getListJsonSOP.companyGeneral();
+        if (status_code.equals("")) {
+            status_code = "0";
+        }
         switch (status_code) {
             case "0":
                 try {

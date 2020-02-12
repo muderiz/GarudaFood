@@ -109,7 +109,7 @@ public class GenerateWatermark {
 
     public String WatermarkImageReport(String text, URL pathImageFrom) {
         String pathPdfTo = "";
-        SimpleDateFormat formatter = new SimpleDateFormat("ddMMyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
         Date date = new Date();
         String datenow = formatter.format(date);
         text = text.toUpperCase();
@@ -117,13 +117,14 @@ public class GenerateWatermark {
             BufferedImage image = ImageIO.read(pathImageFrom);
             String[] spliturlreport = pathImageFrom.toString().split("/GeneratedFiles/");
             String reportname = spliturlreport[1];
-//            String text2 = "DOKUMEN TIDAK TERKENDALI";
+            String text2 = datenow;
             String type = "jpg";
             // determine image type and handle correct transparency
             int imageType = "png".equalsIgnoreCase(type) ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB;
             BufferedImage watermarked = new BufferedImage(image.getWidth(), image.getHeight(), imageType);
 
             // initializes necessary graphic properties
+            // TEXT 1
             Graphics2D w = (Graphics2D) watermarked.getGraphics();
             w.drawImage(image, 0, 0, null);
             AlphaComposite alphaChannel = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
@@ -131,32 +132,53 @@ public class GenerateWatermark {
             w.setColor(Color.GRAY);
             w.setFont(new java.awt.Font(java.awt.Font.MONOSPACED, java.awt.Font.BOLD, 120));
             FontMetrics fontMetrics = w.getFontMetrics();
+
+            // TEXT 2
+            Graphics2D w2 = (Graphics2D) watermarked.getGraphics();
+            w2.drawImage(image, 0, 0, null);
+            AlphaComposite alphaChannel2 = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
+            w2.setComposite(alphaChannel2);
+            w2.setColor(Color.black);
+            w2.setFont(new java.awt.Font(java.awt.Font.MONOSPACED, java.awt.Font.BOLD, 40));
+            FontMetrics fontMetrics2 = w2.getFontMetrics();
+
             Rectangle2D rect = fontMetrics.getStringBounds(text, w);
-//            Rectangle2D rect2 = fontMetrics.getStringBounds(text2, w);
+            Rectangle2D rect2 = fontMetrics2.getStringBounds(text2, w2);
+
+            // Text 1
             AffineTransform orig = w.getTransform();
             float width = image.getWidth() / 2;
             float height = image.getHeight() / 2;
             orig.rotate(Math.toRadians(-30), width, height);
             w.setTransform(orig);
 
+            // Text 2
+            AffineTransform orig2 = w2.getTransform();
+            float width2 = image.getWidth() / 2;
+            float height2 = image.getHeight() / 2;
+            orig2.rotate(Math.toRadians(0), width2, height2);
+            w2.setTransform(orig2);
+
             // calculate center of the image
             // Text 1
             float centerX = (image.getWidth() - (int) rect.getWidth()) / 2;
             float centerY = image.getHeight() / 2;
-            w.drawString(text, centerX, centerY);
+            w.drawString(text, centerX, centerY - 35);
 
             // Text 2
 //            float centerX2 = (image.getWidth() - (int) rect2.getWidth()) / 2;
-//            float centerY2 = image.getHeight() / 2;
-//            w.drawString(text2, centerX2, centerY2 + 35);
-            String pathImageGenerate = appProperties.getGARUDAFOOD_PATH_GENERATEDFILES() + appProperties.getGARUDAFOOD_WATERMARK_REPORT()
-                    + datenow + UNDERLINE + reportname;
+            float centerX2 = image.getWidth() / 12;
+            float centerY2 = image.getHeight() / 36;
+//            float centerY2 = image.getHeight();
+            w2.drawString(text2, centerX2, centerY2);
+
+            String pathImageGenerate = appProperties.getGARUDAFOOD_PATH_GENERATEDFILES() + appProperties.getGARUDAFOOD_WATERMARK_REPORT() + reportname;
 
             ImageIO.write(watermarked, type, new File(pathImageGenerate));
-            pathPdfTo = appProperties.getGARUDAFOOD_URL_GENERATEDFILES() + appProperties.getGARUDAFOOD_WATERMARK_REPORT()
-                    + datenow + UNDERLINE + reportname;
+            pathPdfTo = appProperties.getGARUDAFOOD_URL_GENERATEDFILES() + appProperties.getGARUDAFOOD_WATERMARK_REPORT() + reportname;
             image.flush();
             w.dispose();
+            w2.dispose();
         } catch (IOException e) {
             log.debug("WatermarkImageEx() : {}", e.getMessage());
         }
@@ -165,17 +187,16 @@ public class GenerateWatermark {
 
     }
 
-    public String WatermarkImageSOP(String text2, URL pathImageFrom, String sopname) {
+    public String WatermarkImageSOP(String text1, URL pathImageFrom, String sopname) {
         String pathPdfTo = "";
-//        SimpleDateFormat formatter = new SimpleDateFormat("ddMMyy");
-//        Date date = new Date();
-//        String datenow = formatter.format(date);
-
-
-        text2 = text2.toUpperCase();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
+        Date date = new Date();
+        String datenow = formatter.format(date);
+        text1 = text1.toUpperCase();
         try {
             BufferedImage image = ImageIO.read(pathImageFrom);
             String text = "DOKUMEN TIDAK TERKENDALI";
+            String text2 = datenow;
             String type = "jpg";
             // determine image type and handle correct transparency
             int imageType = "png".equalsIgnoreCase(type) ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB;
@@ -189,30 +210,54 @@ public class GenerateWatermark {
             w.setColor(Color.GRAY);
             w.setFont(new java.awt.Font(java.awt.Font.MONOSPACED, java.awt.Font.BOLD, 60));
             FontMetrics fontMetrics = w.getFontMetrics();
+
+            // TEXT 2
+            Graphics2D w2 = (Graphics2D) watermarked.getGraphics();
+            w2.drawImage(image, 0, 0, null);
+            AlphaComposite alphaChannel2 = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f);
+            w2.setComposite(alphaChannel2);
+            w2.setColor(Color.BLACK);
+            w2.setFont(new java.awt.Font(java.awt.Font.MONOSPACED, java.awt.Font.BOLD, 15));
+            FontMetrics fontMetrics2 = w2.getFontMetrics();
+
             Rectangle2D rect = fontMetrics.getStringBounds(text, w);
-            Rectangle2D rect2 = fontMetrics.getStringBounds(text2, w);
+            Rectangle2D rect2 = fontMetrics.getStringBounds(text1, w);
+
             AffineTransform orig = w.getTransform();
             float width = image.getWidth() / 2;
             float height = image.getHeight() / 2;
             orig.rotate(Math.toRadians(-30), width, height);
             w.setTransform(orig);
 
+            // Text 2
+            AffineTransform orig2 = w2.getTransform();
+            float width2 = image.getWidth() / 2;
+            float height2 = image.getHeight() / 2;
+            orig2.rotate(Math.toRadians(0), width2, height2);
+            w2.setTransform(orig2);
+
             // calculate center of the image
             // Text 1
             float centerX = (image.getWidth() - (int) rect.getWidth()) / 2;
             float centerY = image.getHeight() / 2;
             w.drawString(text, centerX, centerY - 30);
+            // Text 1.2
+            float centerX1 = (image.getWidth() - (int) rect2.getWidth()) / 2;
+            float centerY1 = image.getHeight() / 2;
+            w.drawString(text1, centerX1, centerY1 + 30);
 
             // Text 2
-            float centerX2 = (image.getWidth() - (int) rect2.getWidth()) / 2;
-            float centerY2 = image.getHeight() / 2;
-            w.drawString(text2, centerX2, centerY2 + 30);
+            float centerX2 = image.getWidth() / -12;
+            float centerY2 = image.getHeight() / -38;
+            w2.drawString(text2, centerX2, centerY2);
+
             String pathImageGenerate = appProperties.getGARUDAFOOD_PATH_GENERATEDFILES() + appProperties.getGARUDAFOOD_WATERMARK_SOP() + sopname;
 
             ImageIO.write(watermarked, type, new File(pathImageGenerate));
             pathPdfTo = appProperties.getGARUDAFOOD_URL_GENERATEDFILES() + appProperties.getGARUDAFOOD_WATERMARK_SOP() + sopname;
             image.flush();
             w.dispose();
+            w2.dispose();
         } catch (IOException e) {
             log.debug("WatermarkImageEx() : {}", e.getMessage());
         }

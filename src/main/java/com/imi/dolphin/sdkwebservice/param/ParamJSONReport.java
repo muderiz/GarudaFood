@@ -15,6 +15,7 @@ import com.imi.dolphin.sdkwebservice.GarudafoodModel.MasterGroupProduct;
 import com.imi.dolphin.sdkwebservice.GarudafoodModel.Region;
 import com.imi.dolphin.sdkwebservice.GarudafoodModel.Role;
 import com.imi.dolphin.sdkwebservice.GarudafoodModel.Product;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.RoleBroadcast;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -119,6 +120,15 @@ public class ParamJSONReport {
         Gson gson = new Gson();
 
         List<ReportName> list = gson.fromJson(strJson.toString(), new TypeToken<List<ReportName>>() {
+        }.getType());
+        return list;
+    }
+
+    public List<RoleBroadcast> getListRoleBroadcastfromFileJson(String fileJson) {
+        String strJson = getJSONStringfromFile(fileJson);
+        Gson gson = new Gson();
+
+        List<RoleBroadcast> list = gson.fromJson(strJson.toString(), new TypeToken<List<RoleBroadcast>>() {
         }.getType());
         return list;
     }

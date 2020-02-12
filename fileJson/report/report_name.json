@@ -46,7 +46,7 @@
   },
   {
     "department": "All",
-    "report_name": "Daily Trend 3M (Demand-Stock-Supply-Production)",
-    "report_code": "R_10"
+    "report_name": "Daily Trend 3M Demand-Stock-Supply-Production",
+    "report_code": "R10_M"
   }
 ]

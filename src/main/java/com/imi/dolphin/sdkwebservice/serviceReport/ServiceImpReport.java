@@ -260,11 +260,14 @@ public class ServiceImpReport {
                         }
                         for (i = 0; i < newlengReportName; i++) {
                             String NameReport = listReportNamebyFilter.get(i);
-                            sb.append(urutan + ". " + NameReport + "\n");
+                            String[] splitname = NameReport.split("_M");
+                            String reportcode = splitname[0];
+                            String reportname = splitname[1];
+                            sb.append(urutan + ". " + reportname + "\n");
 
                             EasyMap bookAction = new EasyMap();
                             bookAction.setName(urutan + "");
-                            bookAction.setValue(NameReport.toLowerCase());
+                            bookAction.setValue(reportcode.toLowerCase());
                             actions.add(bookAction);
                             urutan++;
                         }
@@ -356,12 +359,16 @@ public class ServiceImpReport {
                     newlengReportName = lengReportName;
                 }
                 for (i = i; i < newlengReportName; i++) {
+
                     String NameReport = listReportNamebyFilter.get(i);
-                    sb.append(urutan + ". " + NameReport + "\n");
+                    String[] splitname = NameReport.split("_M");
+                    String reportcode = splitname[0];
+                    String reportname = splitname[1];
+                    sb.append(urutan + ". " + reportname + "\n");
 
                     EasyMap bookAction = new EasyMap();
                     bookAction.setName(urutan + "");
-                    bookAction.setValue(NameReport.toLowerCase());
+                    bookAction.setValue(reportcode.toLowerCase());
                     actions.add(bookAction);
                     urutan++;
                 }
@@ -422,11 +429,14 @@ public class ServiceImpReport {
                 }
                 for (i = 0; i < newlengReportName; i++) {
                     String NameReport = listReportNamebyFilter.get(i);
-                    sb.append(urutan + ". " + NameReport + "\n");
+                    String[] splitname = NameReport.split("_M");
+                    String reportcode = splitname[0];
+                    String reportname = splitname[1];
+                    sb.append(urutan + ". " + reportname + "\n");
 
                     EasyMap bookAction = new EasyMap();
                     bookAction.setName(urutan + "");
-                    bookAction.setValue(NameReport.toLowerCase());
+                    bookAction.setValue(reportcode.toLowerCase());
                     actions.add(bookAction);
                     urutan++;
                 }

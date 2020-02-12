@@ -52,6 +52,8 @@ import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportRequest;
 import com.imi.dolphin.sdkwebservice.GarudafoodModel.ReportResult;
 import com.imi.dolphin.sdkwebservice.GarudafoodModel.Role;
 import com.imi.dolphin.sdkwebservice.GarudafoodModel.Product;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.SendDocumentTelegram;
+import com.imi.dolphin.sdkwebservice.GarudafoodModel.SendMessageTelegram;
 import com.imi.dolphin.sdkwebservice.builder.DocumentBuilder;
 import com.imi.dolphin.sdkwebservice.model.UserToken;
 import com.imi.dolphin.sdkwebservice.param.ParamSdk;
@@ -390,7 +392,7 @@ public class ServiceImp implements IService {
         log.debug("getButtons() extension request: {}", extensionRequest);
         Map<String, String> output = new HashMap<>();
         String dialog1 = "Berikut adalah nama-nama spesialisasi yang ada di RS Siloam. Silahkan menggeser menu dari kiri ke kanan untuk menampilkan semua opsi.  ";
-        
+
         ButtonTemplate button = new ButtonTemplate();
         button.setTitle("");
         button.setSubTitle(" ");
@@ -528,43 +530,58 @@ public class ServiceImp implements IService {
     public ExtensionResult getImage(ExtensionRequest extensionRequest) {
         log.debug("getImage() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
         Map<String, String> output = new HashMap<>();
-        String url = "https://autobot.garudafood.co.id/GeneratedFiles/watermarkReport/10102019_174110629.jpeg";
-        ServiceImpSOP sOP = new ServiceImpSOP();
-        StringBuilder sb = new StringBuilder();
+//        String url = "https://autobot.garudafood.co.id/GeneratedFiles/watermarkReport/103735347.jpeg";
+        String url = "https://cybertron.garudafood.co.id/GeneratedFiles/watermarkReport/84424992.jpeg";
+//        ServiceImpSOP sOP = new ServiceImpSOP();
+//        StringBuilder sb = new StringBuilder();
+//
+//        ButtonTemplate button = new ButtonTemplate();
+//        button.setTitle("");
+//        button.setSubTitle(" ");
+//        List<EasyMap> actions = sOP.actionEasyMaps();
+//        int i = 0;
+//        for (i = 0; i < 5; i++) {
+//            EasyMap bookAction = new EasyMap();
+//            bookAction.setName(i + 1 + "");
+//            bookAction.setValue(i + 1 + "");
+//            actions.add(bookAction);
+//        }
+//        if (i == 5) {
+//            EasyMap bookAction = new EasyMap();
+//            bookAction.setName("Next");
+//            bookAction.setValue("next");
+//            actions.add(bookAction);
+//
+//            EasyMap bookAction2 = new EasyMap();
+//            bookAction2.setName("Menu");
+//            bookAction2.setValue("Menu");
+//            actions.add(bookAction2);
+//
+//        }
+//        button.setButtonValues(actions);
+//        ButtonBuilder buttonBuilder = new ButtonBuilder(button);
+//        sb.append(buttonBuilder.build()).append(SPLIT);
+//
+//        String dialog = "Test Button with 5 Action";
+//        output.put(OUTPUT, dialog + SPLIT + sb.toString());
 
-        ButtonTemplate button = new ButtonTemplate();
-        button.setTitle("");
-        button.setSubTitle(" ");
-        List<EasyMap> actions = sOP.actionEasyMaps();
-        int i = 0;
-        for (i = 0; i < 5; i++) {
-            EasyMap bookAction = new EasyMap();
-            bookAction.setName(i + 1 + "");
-            bookAction.setValue(i + 1 + "");
-            actions.add(bookAction);
-        }
-        if (i == 5) {
-            EasyMap bookAction = new EasyMap();
-            bookAction.setName("Next");
-            bookAction.setValue("next");
-            actions.add(bookAction);
+//        ButtonTemplate image = new ButtonTemplate();
+////        image.setPictureLink("https://github.com/muderiz/image/blob/master/Siloam%20Logo.png?raw=true");
+//        image.setPictureLink(url);
+//        image.setPicturePath(url);
+////        image.setTitle(""");
+////        image.setSubTitle("Test");
+//        ImageBuilder imageBuilder = new ImageBuilder(image);
+//        output.put(OUTPUT, imageBuilder.build());
+        ButtonTemplate image = new ButtonTemplate();
+        image.setPictureLink(url);
+        image.setPicturePath(url);
 
-            EasyMap bookAction2 = new EasyMap();
-            bookAction2.setName("Menu");
-            bookAction2.setValue("Menu");
-            actions.add(bookAction2);
+        DocumentBuilder documentBuilder = new DocumentBuilder(image);
+        String btnBuilder = documentBuilder.build();
+//        sb.append(btnBuilder).append(SPLIT);
+        output.put(OUTPUT, btnBuilder);
 
-        }
-        button.setButtonValues(actions);
-        ButtonBuilder buttonBuilder = new ButtonBuilder(button);
-        sb.append(buttonBuilder.build()).append(SPLIT);
-
-        String dialog = "Test Button with 5 Action";
-        output.put(OUTPUT, dialog + SPLIT + sb.toString());
-//        String dialog = "Test Dialog";
-//        QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("")
-//                .add("Location", "test").add("Location", "test").add("Location", "test").build();
-//        output.put(OUTPUT, dialog + SPLIT + quickReplyBuilder.string());
         System.out.println(output);
         ExtensionResult extensionResult = new ExtensionResult();
         extensionResult.setAgent(false);
@@ -780,7 +797,7 @@ public class ServiceImp implements IService {
                 randomNumber = random.nextInt(max + 1 - min) + min;
 
                 System.out.println(randomNumber);
-                String subject = "Chatbot OTP Konfirmasi Akun";
+                String subject = "Chatbot | OTP From Chatbot";
                 String pesan = "Untuk mengkonfirmasi email Anda, silahkan gunakan kode verifikasi(OTP) berikut : \n\n" + randomNumber;
 //
 //                MailModel mailModel = new MailModel(mail, subject, pesan);
@@ -958,13 +975,15 @@ public class ServiceImp implements IService {
         log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, contactId);
         log.debug("getDolphinResponse() extension request: {} Contact: {}", extensionRequest, new Gson().toJson(contact));
         // ============== Get AdditionalField ============ //
+
         String b = contact.getAdditionalField().get(0);
         InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
         String fullName = dataInfoUser.getFullName();
         String dialog1 = "Hai " + fullName + ". Anda sudah berhasil melakukan konfirmasi akun.";
         QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Sekarang silahkan pilih Menu berikut yang Anda inginkan.")
-                .add("Report", "report").add("SOP", "sop").add("Konsumsi Bahan Bakar", "fuel").build();
+                .add("Report", "report").add("SOP", "sop").build();
         output.put(OUTPUT, dialog1 + SPLIT + quickReplyBuilder.string());
+
         ExtensionResult extensionResult = new ExtensionResult();
         extensionResult.setAgent(false);
         extensionResult.setRepeat(false);
@@ -975,7 +994,7 @@ public class ServiceImp implements IService {
     }
 
     public ExtensionResult menuUtamaGeneral(ExtensionRequest extensionRequest) {
-        log.debug("menuUtama() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
+        log.debug("menuUtamaGeneral() extension request: {}", new Gson().toJson(extensionRequest, ExtensionRequest.class));
         Map<String, String> output = new HashMap<>();
         userToken = svcDolphinService.getUserToken(userToken);
         String contactId = extensionRequest.getIntent().getTicket().getContactId();
@@ -984,12 +1003,12 @@ public class ServiceImp implements IService {
         log.debug("getDolphinResponse() extension request: {} contact id: {}", extensionRequest, contactId);
         log.debug("getDolphinResponse() extension request: {} Contact: {}", extensionRequest, new Gson().toJson(contact));
         // ============== Get AdditionalField ============ //
-        String b = contact.getAdditionalField().get(0);
         try {
+            String b = contact.getAdditionalField().get(0);
             if (!b.equalsIgnoreCase("")) {
 
                 QuickReplyBuilder quickReplyBuilder = new QuickReplyBuilder.Builder("Sekarang silahkan pilih Menu berikut yang Anda inginkan.")
-                        .add("Report", "report").add("SOP", "sop").add("Konsumsi Bahan Bakar", "fuel").build();
+                        .add("Report", "report").add("SOP", "sop").build();
                 output.put(OUTPUT, quickReplyBuilder.string());
                 InfoUser dataInfoUser = new Gson().fromJson(b, InfoUser.class);
                 String usernameUser = dataInfoUser.getAccountName();
@@ -1040,4 +1059,5 @@ public class ServiceImp implements IService {
         extensionResult.setValue(output);
         return extensionResult;
     }
+
 }
